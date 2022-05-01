@@ -1,0 +1,26 @@
+{
+  "name": "@bubojs/core",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/owliehq/buboJS"
+  },
+  "private": true,
+  "scripts": {
+    "prepare": "husky install",
+    "test": ""
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^16.2.4",
+    "@commitlint/config-conventional": "^16.2.4",
+    "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "3.3.0",
+    "husky": "^7.0.4",
+    "lerna": "^4.0.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
