@@ -8,15 +8,18 @@
   "private": true,
   "scripts": {
     "prepare": "husky install",
-    "test": ""
+    "test": "yarn jest"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.2.4",
     "@commitlint/config-conventional": "^16.2.4",
+    "@types/jest": "^27.4.1",
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "3.3.0",
     "husky": "^7.0.4",
-    "lerna": "^4.0.0"
+    "jest": "27.4.1",
+    "lerna": "^4.0.0",
+    "ts-jest": "^27.1.4"
   },
   "config": {
     "commitizen": {
