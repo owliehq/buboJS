@@ -1,5 +1,6 @@
 export * from './app';
-export * from './ServerConfig';
+export * from './decorators';
+export * from './interfaces';
 
 import { App } from './app';
 

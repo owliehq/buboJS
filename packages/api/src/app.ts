@@ -1,4 +1,4 @@
-import { HttpFrameworkEnum, ServerConfig } from './ServerConfig';
+import { HttpFrameworkEnum, ServerConfig } from './interfaces';
 import { AdapterHttpModule, FastifyImplement } from '@bubojs/fastify';
 import { FastifyRequest, FastifyReply } from 'fastify';
 import { TinyHttpImplement } from '@bubojs/tinyhttp';
