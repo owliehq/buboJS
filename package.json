@@ -11,21 +11,23 @@
   "private": true,
   "scripts": {
     "prepare": "husky install",
-    "test": "yarn jest --detectOpenHandles",
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
     "setup": "yarn && yarn run bootstrap",
-    "bootstrap": "lerna bootstrap"
+    "bootstrap": "lerna bootstrap",
+    "build": "lerna exec -- rimraf ./dist && lerna exec -- yarn build"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.2.4",
     "@commitlint/config-conventional": "^16.2.4",
-    "@types/jest": "^27.4.1",
+    "@types/jest": "^27.5.0",
     "@types/node": "^17.0.31",
     "commitizen": "^4.2.4",
-    "cz-conventional-changelog": "3.3.0",
-    "husky": "^7.0.0",
-    "jest": "27.4.1",
+    "cross-env": "^7.0.3",
+    "cz-conventional-changelog": "^3.3.0",
+    "husky": "^7.0.4",
+    "jest": "28.0.3",
     "lerna": "^4.0.0",
-    "ts-jest": "^27.1.4",
+    "ts-jest": "^28.0.1",
     "ts-node": "^10.7.0",
     "typescript": "^4.6.4"
   },
@@ -35,18 +37,33 @@
     }
   },
   "jest": {
-    "collectCoverage": true,
-    "coverageDirectory": "<rootDir>/coverage/",
-    "collectCoverageFrom": [
-      "packages/**/src/*.{js,ts}",
-      "!/node_modules/"
-    ],
-    "coverageProvider": "v8",
-    "testRegex": "(/tests/.*|\\.(test))\\.(ts|tsx|js)$",
     "testEnvironment": "node",
     "extensionsToTreatAsEsm": [
       ".ts"
     ],
-    "preset": "ts-jest/presets/js-with-ts"
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "packages/**/src/*.{js,ts}",
+      "!/node_modules/"
+    ],
+    "preset": "ts-jest/presets/default-esm",
+    "globals": {
+      "ts-jest": {
+        "useESM": true
+      }
+    },
+    "transform": {
+      "^.+\\.(t|j)sx?$": "ts-jest"
+    },
+    "testRegex": "(/tests/.*|\\.(test))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "js",
+      "json"
+    ],
+    "modulePathIgnorePatterns": [
+      "tests/wares/rate-limit/rate-limit.test.ts",
+      "examples"
+    ]
   }
 }
