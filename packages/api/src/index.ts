@@ -1,9 +1,9 @@
-export * from './app';
-export * from './MetadataManager';
-export * from './adapters';
-export * from './decorators';
-export * from './interfaces';
+export * from './app'
+export * from './MetadataManager'
+export * from './adapters'
+export * from './decorators'
+export * from './interfaces'
 
-import { App } from './app';
+import { App } from './app'
 
-export const app = new App();
+export const app = new App()

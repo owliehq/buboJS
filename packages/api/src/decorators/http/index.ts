@@ -1,2 +1,2 @@
-export * from './controller.decorator';
-export * from './methods.decorator';
+export * from './controller.decorator'
+export * from './methods.decorator'

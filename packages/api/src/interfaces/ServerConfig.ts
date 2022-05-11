@@ -1,8 +1,8 @@
 export interface ServerConfig {
-  httpFramework: HttpFrameworkEnum;
+  httpFramework: HttpFrameworkEnum
 }
 
 export enum HttpFrameworkEnum {
   FASTIFY = 'fastify',
-  TINY_HTTP = 'tiny_http',
+  TINY_HTTP = 'tiny_http'
 }

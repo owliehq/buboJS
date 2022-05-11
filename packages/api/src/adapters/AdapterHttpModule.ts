@@ -1,14 +1,14 @@
-import { Server } from 'http';
+import { Server } from 'http'
 
 export interface AdapterHttpModule {
-  app: any;
+  app: any
 
-  init(): any;
+  init(): any
 
-  startServer(): Server;
-  stopServer(): void;
+  startServer(): Server
+  stopServer(): void
 
-  get(path: string, handler: Function);
+  get(path: string, handler: Function)
   // post(path: string, handler: Function);
   // route(method: RouteMethod, path: string, handler: Function);
 }

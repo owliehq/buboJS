@@ -1,5 +1,5 @@
-import { RouteMethod } from '../../enums';
-import { MetadataManager } from '../../MetadataManager';
+import { RouteMethod } from '../../enums'
+import { MetadataManager } from '../../MetadataManager'
 
 /**
  * build method of route decorators
@@ -11,40 +11,40 @@ const buildMethod =
   (method: RouteMethod) =>
   (subRoute: string = '/') =>
   (target: any, propertyKey: string, descriptor: PropertyDescriptor): any => {
-    let handler;
+    let handler
 
     handler = async function (this: any, req: any, res: any) {
-      descriptor.value.apply(this, {});
+      descriptor.value.apply(this, {})
       //
-      return res.status(200).json({ hello: 'world' });
-    };
+      return res.status(200).json({ hello: 'world' })
+    }
 
     MetadataManager.setRouteMetadata(target.constructor.name, propertyKey, {
       path: subRoute,
       method,
-      handler,
-    });
-  };
+      handler
+    })
+  }
 
 /**
  * decorator that generate custom GET route
  */
-export const Get = buildMethod(RouteMethod.GET);
+export const Get = buildMethod(RouteMethod.GET)
 /**
  * decorator that generate custom POST route
  */
-export const Post = buildMethod(RouteMethod.POST);
+export const Post = buildMethod(RouteMethod.POST)
 /**
  * decorator that generate custom PUT route
  */
-export const Put = buildMethod(RouteMethod.PUT);
+export const Put = buildMethod(RouteMethod.PUT)
 /**
  * decorator that generate custom PATCH route
  */
-export const Patch = buildMethod(RouteMethod.PATCH);
+export const Patch = buildMethod(RouteMethod.PATCH)
 /**
  * decorator that generate custom DELETE route
  */
-export const Delete = buildMethod(RouteMethod.DELETE);
+export const Delete = buildMethod(RouteMethod.DELETE)
 
 export interface MethodOptions {}

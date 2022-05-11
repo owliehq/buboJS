@@ -1,6 +1,6 @@
-import { ServerConfig } from './interfaces';
-import { App as AppTiny } from '@tinyhttp/app';
-import { Server } from 'http';
+import { ServerConfig } from './interfaces'
+import { App as AppTiny } from '@tinyhttp/app'
+import { Server } from 'http'
 export class App {
   constructor() {}
 
@@ -39,19 +39,19 @@ export class App {
     // return this.httpInstance.startServer();
   }
 
-  private controllers = [];
+  private controllers = []
 
   public registerController(controller: any) {
-    this.controllers.push(controller);
+    this.controllers.push(controller)
   }
 
   public initHttpModule(): Server {
-    const app = new AppTiny();
+    const app = new AppTiny()
 
-    this.controllers.map((controller) => {
-      app.use(controller.path, controller.router);
-    });
+    this.controllers.map(controller => {
+      app.use(controller.path, controller.router)
+    })
 
-    return app.listen(3000);
+    return app.listen(3000)
   }
 }

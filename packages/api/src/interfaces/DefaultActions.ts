@@ -8,5 +8,5 @@ export enum DefaultActions {
   CREATE_BULK = 'defaultCreateBulk',
   UPDATE_ONE = 'defaultUpdateOne',
   UPDATE_BULK = 'defaultUpdateBulk',
-  DELETE_ONE = 'defaultDeleteOne',
+  DELETE_ONE = 'defaultDeleteOne'
 }

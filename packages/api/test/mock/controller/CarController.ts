@@ -1,4 +1,4 @@
-import { Controller, DefaultActions, Get } from '../../../src';
+import { Controller, DefaultActions, Get } from '../../../src'
 
 @Controller('cars')
 export class CarController {
@@ -12,6 +12,6 @@ export class CarController {
 
   @Get('/recent')
   findAllRecentCars() {
-    return ['car1', 'car2', 'car3'];
+    return ['car1', 'car2', 'car3']
   }
 }

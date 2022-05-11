@@ -1,15 +1,15 @@
-import { RouteMethod } from '../enums';
+import { RouteMethod } from '../enums'
 
 export interface RouteMetadata {
-  path: string;
-  method: RouteMethod;
-  handler: (this: any, req: any, res: any) => any;
+  path: string
+  method: RouteMethod
+  handler: (this: any, req: any, res: any) => any
 }
 
 export interface ListMetadata {
-  controllers: { [id: string]: ControllerMetadata };
+  controllers: { [id: string]: ControllerMetadata }
 }
 
 export interface ControllerMetadata {
-  routes: { [id: string]: RouteMetadata };
+  routes: { [id: string]: RouteMetadata }
 }

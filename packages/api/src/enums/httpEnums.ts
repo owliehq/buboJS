@@ -3,7 +3,7 @@ export enum RouteMethod {
   POST = 'POST',
   PUT = 'PUT',
   PATCH = 'PATCH',
-  DELETE = 'DELETE',
+  DELETE = 'DELETE'
 }
 
 export enum HttpStatus {
@@ -13,5 +13,5 @@ export enum HttpStatus {
   FORBIDDEN = 403,
   NOT_FOUND = 404,
   UNPROCESSABLE_ENTITY = 422,
-  INTERNAL_SERVER_ERROR = 500,
+  INTERNAL_SERVER_ERROR = 500
 }
