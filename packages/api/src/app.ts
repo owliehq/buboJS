@@ -1,12 +1,7 @@
 import { ServerConfig } from './interfaces';
-import { AdapterHttpModule } from './adapters';
-import { TinyHttpAdapter } from '@bubojs/tinyhttp';
-import { MetadataManager } from './MetadataManager';
-
-console.log('app');
+import { App as AppTiny } from '@tinyhttp/app';
+import { Server } from 'http';
 export class App {
-  httpInstance: AdapterHttpModule;
-
   constructor() {}
 
   public async startServer(config: ServerConfig) {
@@ -28,26 +23,35 @@ export class App {
     //   await this.httpInstance.startServer();
     //   return this.httpInstance;
     // }
-
-    console.log('startServer');
-    //this.httpInstance = new TinyHttpAdapter();
-    console.log(MetadataManager.meta);
-
-    MetadataManager.meta.controllers.map(
-      (controllerMetadata, controllerKey) => {
-        controllerMetadata.routes.map((routeMetadata, routeKey) => {
-          this.httpInstance.get(
-            `${controllerMetadata.path}/${routeMetadata.path}`,
-            routeMetadata.handler
-          );
-        });
-      }
-    );
-
-    return this.httpInstance.startServer();
+    // console.log('startServer');
+    // this.httpInstance = new TinyHttpAdapter();
+    // console.log(MetadataManager.meta);
+    // MetadataManager.meta.controllers.map(
+    //   (controllerMetadata, controllerKey) => {
+    //     controllerMetadata.routes.map((routeMetadata, routeKey) => {
+    //       this.httpInstance.get(
+    //         `${controllerMetadata.path}/${routeMetadata.path}`,
+    //         routeMetadata.handler
+    //       );
+    //     });
+    //   }
+    // );
+    // return this.httpInstance.startServer();
   }
 
-  public async stopServer() {
-    await this.httpInstance.stopServer();
+  private controllers = [];
+
+  public registerController(controller: any) {
+    this.controllers.push(controller);
+  }
+
+  public initHttpModule(): Server {
+    const app = new AppTiny();
+
+    this.controllers.map((controller) => {
+      app.use(controller.path, controller.router);
+    });
+
+    return app.listen(3000);
   }
 }

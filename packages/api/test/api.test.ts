@@ -1,5 +1,5 @@
 import request from 'supertest';
-import { startServer, stopServer } from './mock/server';
+import { startServer } from './mock/server';
 
 let app;
 
@@ -14,15 +14,12 @@ describe('APIModule', () => {
 
   it('should return cars', async () => {
     await request(app)
-      .get('/recent')
+      .get('/cars/recent')
       .expect(200)
       .then((response) => {
-        console.log(response.body);
         expect(response.body).toBeTruthy();
       });
   });
 });
 
-afterAll(async () => {
-  await stopServer();
-});
+afterAll(async () => {});

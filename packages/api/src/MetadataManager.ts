@@ -5,31 +5,29 @@ import { ControllerMetadata, ListMetadata, RouteMetadata } from './interfaces';
  * Metadata Manager save metadata of controllers and routes
  */
 export class MetadataManager {
-  public static meta: ListMetadata = { controllers: [] };
+  public static meta: ListMetadata = { controllers: {} };
 
   public static setControllerMetadata(controllerName: string): void {
     this.meta.controllers[controllerName] = this.meta.controllers[
       controllerName
-    ] || { routes: [] };
+    ] || { routes: {} };
   }
 
   public static getControllerMetadata(
     controllerName: string
   ): ControllerMetadata {
+    this.setControllerMetadata(controllerName);
     return this.meta.controllers[controllerName];
   }
 
-  public static SetRouteMetadata(
+  public static setRouteMetadata(
     controllerName: string,
     routeName: string,
     value: RouteMetadata
   ): void {
     this.setControllerMetadata(controllerName);
-    setProperty(
-      this.meta,
-      `controllers.${controllerName}.routes.${routeName}`,
-      value
-    );
+
+    this.meta.controllers[controllerName].routes[routeName] = value;
   }
 
   public static getRoutesMetadata(

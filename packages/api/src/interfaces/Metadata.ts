@@ -7,10 +7,9 @@ export interface RouteMetadata {
 }
 
 export interface ListMetadata {
-  controllers: ControllerMetadata[];
+  controllers: { [id: string]: ControllerMetadata };
 }
 
 export interface ControllerMetadata {
-  routes: RouteMetadata[];
-  path: string;
+  routes: { [id: string]: RouteMetadata };
 }

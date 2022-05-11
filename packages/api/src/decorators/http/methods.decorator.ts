@@ -19,13 +19,11 @@ const buildMethod =
       return res.status(200).json({ hello: 'world' });
     };
 
-    MetadataManager.SetRouteMetadata(target.constructor.name, propertyKey, {
+    MetadataManager.setRouteMetadata(target.constructor.name, propertyKey, {
       path: subRoute,
       method,
       handler,
     });
-
-    return;
   };
 
 /**

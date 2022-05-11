@@ -1,3 +1,7 @@
+import { App } from '@tinyhttp/app';
+import { app } from '../..';
+import { RouteMethod } from '../../enums';
+import { RouteMetadata } from '../../interfaces';
 import { MetadataManager } from '../../MetadataManager';
 
 /**
@@ -12,7 +16,8 @@ export const Controller =
     params: ControllerParams = {}
   ) =>
   (constructor: T) => {
-    const currentControllerClass: any = class extends constructor {
+    const CurrentControllerClass: any = class extends constructor {
+      public static router = undefined;
       public static controllerName = controllerName;
       public static path = `/${controllerName}`;
 
@@ -20,14 +25,36 @@ export const Controller =
     };
 
     const { name } = constructor;
-    MetadataManager.setControllerMetadata(name);
 
-    //generate routes that depend of fastify or tinyhttp
+    const controllerMetadata = MetadataManager.getControllerMetadata(name);
+    const routes = generateRoutes(controllerMetadata.routes);
+    CurrentControllerClass.router = routes;
 
-    //register right controller
+    app.registerController(CurrentControllerClass);
 
-    return currentControllerClass;
+    return CurrentControllerClass;
   };
+
+function generateRoutes(routesMetadata: { [id: string]: RouteMetadata }): App {
+  const router = new App();
+  Object.entries(routesMetadata).map(([key, routeMetadata]) => {
+    if (routeMetadata.method === RouteMethod.GET)
+      router.get(routeMetadata.path, routeMetadata.handler);
+
+    if (routeMetadata.method === RouteMethod.POST)
+      router.post(routeMetadata.path, routeMetadata.handler);
+
+    if (routeMetadata.method === RouteMethod.PUT)
+      router.put(routeMetadata.path, routeMetadata.handler);
+
+    if (routeMetadata.method === RouteMethod.PATCH)
+      router.patch(routeMetadata.path, routeMetadata.handler);
+
+    if (routeMetadata.method === RouteMethod.DELETE)
+      router.delete(routeMetadata.path, routeMetadata.handler);
+  });
+  return router;
+}
 
 /**
  * controller params
