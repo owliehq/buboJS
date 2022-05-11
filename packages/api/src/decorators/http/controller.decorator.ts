@@ -1,3 +1,5 @@
+import { MetadataManager } from '../../MetadataManager';
+
 /**
  * Controller decorator
  * @param controllerName controller's name
@@ -10,8 +12,21 @@ export const Controller =
     params: ControllerParams = {}
   ) =>
   (constructor: T) => {
-    //save into metadataManager
-    //generate routes
+    const currentControllerClass: any = class extends constructor {
+      public static controllerName = controllerName;
+      public static path = `/${controllerName}`;
+
+      // public static instance = new constructor();
+    };
+
+    const { name } = constructor;
+    MetadataManager.setControllerMetadata(name);
+
+    //generate routes that depend of fastify or tinyhttp
+
+    //register right controller
+
+    return currentControllerClass;
   };
 
 /**

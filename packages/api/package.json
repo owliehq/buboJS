@@ -14,16 +14,19 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "tsc -p tsconfig.build.json",
     "test": "yarn jest"
   },
   "dependencies": {
-    "@bubojs/tinyhttp": "0.0.1",
     "@bubojs/fastify": "0.0.1",
-    "@tinyhttp/app": "^2.0.20"
+    "@bubojs/tinyhttp": "0.0.1",
+    "@tinyhttp/app": "^2.0.20",
+    "dot-prop": "^7.2.0",
+    "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
     "@types/node": "^17.0.31",
+    "supertest": "^6.2.3",
     "ts-node": "^10.7.0",
     "typescript": "^4.6.4"
   }

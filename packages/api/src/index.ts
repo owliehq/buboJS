@@ -1,4 +1,6 @@
 export * from './app';
+export * from './MetadataManager';
+export * from './adapters';
 export * from './decorators';
 export * from './interfaces';
 

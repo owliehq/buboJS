@@ -1,6 +1,11 @@
 import { app, HttpFrameworkEnum } from '../../src';
+import { CarController } from './controller';
 
 export const startServer = async (port: number) => {
-  await app.startServer({ httpFramework: HttpFrameworkEnum.TINY_HTTP });
-  return app;
+  CarController.name;
+  return await app.startServer({ httpFramework: HttpFrameworkEnum.TINY_HTTP });
+};
+
+export const stopServer = async () => {
+  await app.stopServer();
 };

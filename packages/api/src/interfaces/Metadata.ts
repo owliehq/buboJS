@@ -1,14 +1,9 @@
-export enum RouteMethod {
-  GET = 'GET',
-  POST = 'POST',
-  PUT = 'PUT',
-  PATCH = 'PATCH',
-  DELETE = 'DELETE',
-}
+import { RouteMethod } from '../enums';
 
 export interface RouteMetadata {
   path: string;
   method: RouteMethod;
+  handler: (this: any, req: any, res: any) => any;
 }
 
 export interface ListMetadata {
@@ -17,4 +12,5 @@ export interface ListMetadata {
 
 export interface ControllerMetadata {
   routes: RouteMetadata[];
+  path: string;
 }

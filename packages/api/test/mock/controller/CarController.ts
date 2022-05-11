@@ -1,7 +1,7 @@
 import { Controller, DefaultActions, Get } from '../../../src';
 
 @Controller('cars')
-class CarController {
+export class CarController {
   [DefaultActions.GET_ONE]() {}
 
   [DefaultActions.GET_MANY]() {}

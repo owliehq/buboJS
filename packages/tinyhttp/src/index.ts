@@ -1,1 +1,1 @@
-export * from './tinyHttpImplement';
+export * from './TinyHttpAdapter';

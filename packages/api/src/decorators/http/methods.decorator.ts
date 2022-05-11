@@ -1,4 +1,5 @@
-import { RouteMethod } from '../../interfaces';
+import { RouteMethod } from '../../enums';
+import { MetadataManager } from '../../MetadataManager';
 
 /**
  * build method of route decorators
@@ -10,10 +11,21 @@ const buildMethod =
   (method: RouteMethod) =>
   (subRoute: string = '/') =>
   (target: any, propertyKey: string, descriptor: PropertyDescriptor): any => {
-    console.log('target', target);
-    console.log('propertyKey', propertyKey);
-    console.log('descriptor', descriptor);
-    //save into metadataManager metadataManager.meta.controller[idController].routes[idRoute] faire une route dans metadataManager saveRoute ou saveMetadata(Route|Controller)
+    let handler;
+
+    handler = async function (this: any, req: any, res: any) {
+      descriptor.value.apply(this, {});
+      //
+      return res.status(200).json({ hello: 'world' });
+    };
+
+    MetadataManager.SetRouteMetadata(target.constructor.name, propertyKey, {
+      path: subRoute,
+      method,
+      handler,
+    });
+
+    return;
   };
 
 /**
