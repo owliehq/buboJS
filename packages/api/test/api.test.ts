@@ -18,6 +18,7 @@ describe('APIModule', () => {
       .expect(200)
       .then(response => {
         expect(response.body).toBeTruthy()
+        expect(response.body.length).toBe(3)
       })
   })
 })

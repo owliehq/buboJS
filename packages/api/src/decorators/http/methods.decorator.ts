@@ -14,9 +14,10 @@ const buildMethod =
     let handler
 
     handler = async function (this: any, req: any, res: any) {
-      descriptor.value.apply(this, {})
-      //
-      return res.status(200).json({ hello: 'world' })
+      //apply parameters decorator on function
+      const result = descriptor.value.apply(this, {})
+
+      return res.status(200).json(result)
     }
 
     MetadataManager.setRouteMetadata(target.constructor.name, propertyKey, {
