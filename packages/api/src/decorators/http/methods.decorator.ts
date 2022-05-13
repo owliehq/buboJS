@@ -13,16 +13,22 @@ const buildMethod =
   (target: any, propertyKey: string, descriptor: PropertyDescriptor): any => {
     let handler
 
+    const parameters = MetadataManager.getParametersMetadata(target.constructor.name, propertyKey)
+
     handler = async function (this: any, req: any, res: any) {
       //apply parameters decorator on function
-      const result = descriptor.value.apply(this, {})
+      const result = descriptor.value.apply(
+        this,
+        parameters ? Object.values(parameters).map((param: any) => param.getValue(req)) : []
+      )
 
-      return res.status(200).json(result)
+      return res.status(200).send(result)
     }
 
     MetadataManager.setRouteMetadata(target.constructor.name, propertyKey, {
       path: subRoute,
       method,
+      parameters,
       handler
     })
   }

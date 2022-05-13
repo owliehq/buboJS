@@ -21,6 +21,36 @@ describe('APIModule', () => {
         expect(response.body.length).toBe(3)
       })
   })
+
+  it('should return one car', async () => {
+    await request(app)
+      .get('/cars/2')
+      .expect(200)
+      .then(response => {
+        expect(response.text).toBeTruthy()
+        expect(response.text).toEqual('car2')
+      })
+  })
+
+  it('should not return one car', async () => {
+    await request(app)
+      .get('/cars/5')
+      .expect(200)
+      .then(response => {
+        expect(response.body).toBeTruthy()
+        expect(response.body).toEqual({ error: 123, message: 'Invalid Id' })
+      })
+  })
+
+  it('should return one wheel', async () => {
+    await request(app)
+      .get('/cars/2/wheels/4')
+      .expect(200)
+      .then(response => {
+        expect(response.text).toBeTruthy()
+        expect(response.text).toEqual('Wheel 4 of Car 2')
+      })
+  })
 })
 
 afterAll(async () => {})

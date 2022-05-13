@@ -1,5 +1,5 @@
 import { getProperty, setProperty } from 'dot-prop'
-import { ControllerMetadata, ListMetadata, RouteMetadata } from './interfaces'
+import { ControllerMetadata, ListMetadata, RouteMetadata, ParameterMetadata } from './interfaces'
 
 /**
  * Metadata Manager save metadata of controllers and routes
@@ -8,21 +8,37 @@ export class MetadataManager {
   public static meta: ListMetadata = { controllers: {} }
 
   public static setControllerMetadata(controllerName: string): void {
-    this.meta.controllers[controllerName] = this.meta.controllers[controllerName] || { routes: {} }
+    setProperty(
+      this.meta,
+      `controllers.${controllerName}`,
+      this.getControllerMetadata(controllerName) || { routes: {} }
+    )
+    this.meta.controllers[controllerName] = this.meta.controllers[controllerName]
   }
 
   public static getControllerMetadata(controllerName: string): ControllerMetadata {
-    this.setControllerMetadata(controllerName)
-    return this.meta.controllers[controllerName]
+    return getProperty(this.meta, `controllers.${controllerName}`)
   }
 
   public static setRouteMetadata(controllerName: string, routeName: string, value: RouteMetadata): void {
     this.setControllerMetadata(controllerName)
-
-    this.meta.controllers[controllerName].routes[routeName] = value
+    setProperty(this.meta, `controllers.${controllerName}.routes.${routeName}`, value)
   }
 
   public static getRoutesMetadata(controllerName: string, routeName: string): RouteMetadata {
     return getProperty(this.meta, `controllers.${controllerName}.routes.${routeName}`)
+  }
+
+  public static setParametersMetadata(
+    controllerName: string,
+    routeName: string,
+    index: number,
+    value: ParameterMetadata
+  ): void {
+    setProperty(this.meta, `controllers.${controllerName}.routes.${routeName}.parameters.${index}`, value)
+  }
+
+  public static getParametersMetadata(controllerName: string, routeName: string): ParameterMetadata[] {
+    return getProperty(this.meta, `controllers.${controllerName}.routes.${routeName}.parameters`)
   }
 }
