@@ -1,7 +1,12 @@
 import { ServerConfig } from './interfaces'
-import { App as AppTiny } from '@tinyhttp/app'
 import { Server } from 'http'
+import { AdapterHttpModule } from './adapters'
+import { MetadataManager } from './MetadataManager'
+import { RouteMethod } from './enums'
+import { HttpResolver } from './HttpResolver'
 export class App {
+  public server: AdapterHttpModule<any>
+
   constructor() {}
 
   public async startServer(config: ServerConfig) {
@@ -39,19 +44,12 @@ export class App {
     // return this.httpInstance.startServer();
   }
 
-  private controllers = []
+  public initHttpModule(adapter: AdapterHttpModule<any>): Server {
+    this.server = adapter
 
-  public registerController(controller: any) {
-    this.controllers.push(controller)
-  }
+    const controllerResolver = new HttpResolver(adapter)
+    controllerResolver.controllerRevolve(MetadataManager.meta)
 
-  public initHttpModule(): Server {
-    const app = new AppTiny()
-
-    this.controllers.map(controller => {
-      app.use(controller.path, controller.router)
-    })
-
-    return app.listen(3000)
+    return this.server.listen(3000)
   }
 }

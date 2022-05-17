@@ -1,4 +1,3 @@
-import { App } from '@tinyhttp/app'
 import { app } from '../..'
 import { RouteMethod } from '../../enums'
 import { RouteMetadata } from '../../interfaces'
@@ -23,17 +22,18 @@ export const Controller =
 
     const { name } = constructor
 
-    const controllerMetadata = MetadataManager.getControllerMetadata(name)
-    const routes = generateRoutes(controllerMetadata.routes)
-    CurrentControllerClass.router = routes
+    //const controllerMetadata = MetadataManager.getControllerMetadata(name)
+    MetadataManager.setControllerMetadata(name, { path: `/${controllerName}` })
+    //const routes = generateRoutes(controllerMetadata.routes)
+    // CurrentControllerClass.router = routes
 
-    app.registerController(CurrentControllerClass)
+    //app.registerController(CurrentControllerClass)
 
     return CurrentControllerClass
   }
 
-function generateRoutes(routesMetadata: { [id: string]: RouteMetadata }): App {
-  const router = new App()
+function generateRoutes(routesMetadata: { [id: string]: RouteMetadata }): any {
+  const router = app.server.initRouter()
   Object.entries(routesMetadata).map(([key, routeMetadata]) => {
     if (routeMetadata.method === RouteMethod.GET) router.get(routeMetadata.path, routeMetadata.handler)
 

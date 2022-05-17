@@ -12,4 +12,5 @@ export interface ListMetadata {
 
 export interface ControllerMetadata {
   routes: { [id: string]: RouteMetadata }
+  path: string
 }

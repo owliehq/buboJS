@@ -14,4 +14,9 @@ export class CarController {
   findAllRecentCars() {
     return ['car1', 'car2', 'car3']
   }
+
+  @Get('/text')
+  sendText() {
+    return 'plop'
+  }
 }

@@ -8,10 +8,6 @@ beforeAll(async () => {
 })
 
 describe('APIModule', () => {
-  it('should be true', async () => {
-    expect(true).toBeTruthy()
-  })
-
   it('should return cars', async () => {
     await request(app)
       .get('/cars/recent')
@@ -19,6 +15,15 @@ describe('APIModule', () => {
       .then(response => {
         expect(response.body).toBeTruthy()
         expect(response.body.length).toBe(3)
+      })
+  })
+
+  it('should return text', async () => {
+    await request(app)
+      .get('/cars/text')
+      .expect(200)
+      .then(response => {
+        expect(response.text).toBe('plop')
       })
   })
 })

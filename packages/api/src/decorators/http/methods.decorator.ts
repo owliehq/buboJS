@@ -17,7 +17,7 @@ const buildMethod =
       //apply parameters decorator on function
       const result = descriptor.value.apply(this, {})
 
-      return res.status(200).json(result)
+      return res.status(200).send(result)
     }
 
     MetadataManager.setRouteMetadata(target.constructor.name, propertyKey, {

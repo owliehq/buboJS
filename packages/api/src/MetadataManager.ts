@@ -7,19 +7,24 @@ import { ControllerMetadata, ListMetadata, RouteMetadata } from './interfaces'
 export class MetadataManager {
   public static meta: ListMetadata = { controllers: {} }
 
-  public static setControllerMetadata(controllerName: string): void {
-    this.meta.controllers[controllerName] = this.meta.controllers[controllerName] || { routes: {} }
+  public static setControllerMetadata(controllerName: string, controllerMetadata: any): void {
+    setProperty(
+      this.meta,
+      `controllers.${controllerName}`,
+      Object.assign({ routes: {} }, getProperty(this.meta, `controllers.${controllerName}`), controllerMetadata)
+    )
   }
 
   public static getControllerMetadata(controllerName: string): ControllerMetadata {
-    this.setControllerMetadata(controllerName)
-    return this.meta.controllers[controllerName]
+    return getProperty(this.meta, `controllers.${controllerName}`)
   }
 
-  public static setRouteMetadata(controllerName: string, routeName: string, value: RouteMetadata): void {
-    this.setControllerMetadata(controllerName)
-
-    this.meta.controllers[controllerName].routes[routeName] = value
+  public static setRouteMetadata(controllerName: string, routeName: string, routeMetadata: RouteMetadata): void {
+    setProperty(
+      this.meta,
+      `controllers.${controllerName}.routes.${routeName}`,
+      Object.assign({}, getProperty(this.meta, `controllers.${controllerName}.routes.${routeName}`), routeMetadata)
+    )
   }
 
   public static getRoutesMetadata(controllerName: string, routeName: string): RouteMetadata {
