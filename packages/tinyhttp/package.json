@@ -13,8 +13,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
-    "test": "yarn jest"
+    "build": "rimraf ./dist && tsc -p tsconfig.build.json"
   },
   "dependencies": {
     "@tinyhttp/app": "^2.0.20",

@@ -13,8 +13,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
-    "test": "yarn jest"
+    "build": "rimraf ./dist && tsc -p tsconfig.build.json"
   },
   "dependencies": {
     "fastify": "^3.29.0"

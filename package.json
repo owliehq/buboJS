@@ -14,7 +14,7 @@
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
     "setup": "yarn && yarn run bootstrap",
     "bootstrap": "lerna bootstrap",
-    "build": "lerna exec -- rimraf ./dist && lerna exec -- yarn build"
+    "build": "lerna exec -- yarn build"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.2.4",
