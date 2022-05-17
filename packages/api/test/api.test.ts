@@ -18,14 +18,47 @@ describe('APIModule', () => {
       })
   })
 
-  it('should return text', async () => {
+  it('should return one car', async () => {
     await request(app)
-      .get('/cars/text')
+      .get('/cars/2')
       .expect(200)
       .then(response => {
-        expect(response.text).toBe('plop')
+        expect(response.text).toBeTruthy()
+        expect(response.text).toEqual('car2')
       })
   })
+
+  it('should not return one car', async () => {
+    await request(app)
+      .get('/cars/5')
+      .expect(200)
+      .then(response => {
+        expect(response.body).toBeTruthy()
+        expect(response.body).toEqual({ error: 123, message: 'Invalid Id' })
+      })
+  })
+
+  it('should return one wheel', async () => {
+    await request(app)
+      .get('/cars/2/wheels/4')
+      .expect(200)
+      .then(response => {
+        expect(response.text).toBeTruthy()
+        expect(response.text).toEqual('Wheel 4 of Car 2')
+      })
+  })
+
+  // it('should return created car', async () => {
+  //   await request(app)
+  //     .post('/cars')
+  //     .send({ name: 'Clio', brand: 'Renault' })
+  //     .set('Accept', 'application/json')
+  //     .expect(200)
+  //     .then(response => {
+  //       expect(response.body).toBeTruthy()
+  //       expect(response.body).toEqual({ brand: 'Renault', id: 100, name: 'Clio' })
+  //     })
+  // })
 })
 
 afterAll(async () => {})

@@ -1,5 +1,5 @@
 import { getProperty, setProperty } from 'dot-prop'
-import { ControllerMetadata, ListMetadata, RouteMetadata } from './interfaces'
+import { ControllerMetadata, ListMetadata, RouteMetadata, ParameterMetadata } from './interfaces'
 
 /**
  * Metadata Manager save metadata of controllers and routes
@@ -29,5 +29,18 @@ export class MetadataManager {
 
   public static getRoutesMetadata(controllerName: string, routeName: string): RouteMetadata {
     return getProperty(this.meta, `controllers.${controllerName}.routes.${routeName}`)
+  }
+
+  public static setParametersMetadata(
+    controllerName: string,
+    routeName: string,
+    index: number,
+    value: ParameterMetadata
+  ): void {
+    setProperty(this.meta, `controllers.${controllerName}.routes.${routeName}.parameters.${index}`, value)
+  }
+
+  public static getParametersMetadata(controllerName: string, routeName: string): ParameterMetadata[] {
+    return getProperty(this.meta, `controllers.${controllerName}.routes.${routeName}.parameters`)
   }
 }

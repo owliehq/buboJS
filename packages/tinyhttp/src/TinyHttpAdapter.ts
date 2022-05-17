@@ -1,6 +1,8 @@
 import { App } from '@tinyhttp/app'
 import { AdapterHttpModule } from '@bubojs/api'
 import { Server } from 'http'
+import { BodyFormat } from '@bubojs/api/src/interfaces/DecoratorOptions'
+import { raw, json, text } from 'milliparsec'
 
 export class TinyHttpAdapter implements AdapterHttpModule<App> {
   public app: App
@@ -43,11 +45,21 @@ export class TinyHttpAdapter implements AdapterHttpModule<App> {
     return this.app.delete(path, handler)
   }
 
-  public use(path: string, router: App) {
-    return this.app.use(path, router)
-  }
-
   public listen(port: number): Server {
     return this.app.listen(port)
+  }
+
+  public use(path: string, bodyFormat: BodyFormat) {
+    console.log('bodyFormat', bodyFormat)
+    switch (bodyFormat) {
+      case BodyFormat.RAW:
+        this.app.use(path, raw())
+        break
+      case BodyFormat.TEXT:
+        this.app.use(path, text())
+        break
+      default:
+        this.app.use(path, json())
+    }
   }
 }
