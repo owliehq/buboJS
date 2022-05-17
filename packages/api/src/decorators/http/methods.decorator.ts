@@ -1,4 +1,5 @@
 import { RouteMethod } from '../../enums'
+import { BodyFormat, MethodOptions } from '../../interfaces/DecoratorOptions'
 import { MetadataManager } from '../../MetadataManager'
 
 /**
@@ -9,9 +10,11 @@ import { MetadataManager } from '../../MetadataManager'
  */
 const buildMethod =
   (method: RouteMethod) =>
-  (subRoute: string = '/') =>
+  (subRoute: string = '/', options?: MethodOptions) =>
   (target: any, propertyKey: string, descriptor: PropertyDescriptor): any => {
     let handler
+
+    const { bodyFormat } = options ? options : { bodyFormat: BodyFormat.JSON }
 
     const parameters = MetadataManager.getParametersMetadata(target.constructor.name, propertyKey)
 
@@ -29,7 +32,8 @@ const buildMethod =
       path: subRoute,
       method,
       parameters,
-      handler
+      handler,
+      bodyFormat
     })
   }
 
@@ -53,5 +57,3 @@ export const Patch = buildMethod(RouteMethod.PATCH)
  * decorator that generate custom DELETE route
  */
 export const Delete = buildMethod(RouteMethod.DELETE)
-
-export interface MethodOptions {}

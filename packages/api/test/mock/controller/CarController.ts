@@ -1,5 +1,6 @@
-import { Controller, DefaultActions, Get, MetadataManager } from '../../../src'
-import { Params } from '../../../src/decorators/http/parameters.decorator'
+import { Controller, DefaultActions, Get, MetadataManager, Post } from '../../../src'
+import { Body, Params } from '../../../src/decorators/http/parameters.decorator'
+import { BodyFormat } from '../../../src/interfaces/DecoratorOptions'
 
 @Controller('cars')
 export class CarController {
@@ -34,4 +35,13 @@ export class CarController {
   findWheel(@Params('wheelId') wheelId: string, @Params('id') id: string) {
     return `Wheel ${wheelId} of Car ${id}`
   }
+
+  @Post('/', { bodyFormat: BodyFormat.JSON })
+  createCarJson(@Body body: any) {
+    console.log('Body', body)
+    const name = { body }
+    return { ...body, id: 100 }
+  }
+
+  //TODO test with response.text
 }

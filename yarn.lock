@@ -4946,6 +4946,11 @@ micromatch@^4.0.2, micromatch@^4.0.4:
     braces "^3.0.2"
     picomatch "^2.3.1"
 
+milliparsec@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.npmjs.org/milliparsec/-/milliparsec-2.2.1.tgz#618a33e98dc05a7f44de72afa2c6febdeec8929b"
+  integrity sha512-eLVRBxVWfm85fLuFf0LJfaQeZKdWfVgH5W3L7aFl1eMGv6dbFBTcClFY+zvgK7/XnrynmXq8U3CVloznj5QEoQ==
+
 mime-db@1.52.0, mime-db@^1.50.0:
   version "1.52.0"
   resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.52.0.tgz#bbabcdc02859f4987301c856e3387ce5ec43bf70"

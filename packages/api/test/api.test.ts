@@ -51,6 +51,18 @@ describe('APIModule', () => {
         expect(response.text).toEqual('Wheel 4 of Car 2')
       })
   })
+
+  // it('should return created car', async () => {
+  //   await request(app)
+  //     .post('/cars')
+  //     .send({ name: 'Clio', brand: 'Renault' })
+  //     .set('Accept', 'application/json')
+  //     .expect(200)
+  //     .then(response => {
+  //       expect(response.body).toBeTruthy()
+  //       expect(response.body).toEqual({ brand: 'Renault', id: 100, name: 'Clio' })
+  //     })
+  // })
 })
 
 afterAll(async () => {})

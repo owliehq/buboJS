@@ -34,7 +34,11 @@ export const Controller =
 
 function generateRoutes(routesMetadata: { [id: string]: RouteMetadata }): App {
   const router = new App()
+  // TODO use json by default but we need to manage other type like urlencoded... Check milliparsec documentation
   Object.entries(routesMetadata).map(([key, routeMetadata]) => {
+    console.log('routeMetadata.bodyFormat', routeMetadata.bodyFormat)
+    // router.use(routeMetadata.path, routeMetadata.bodyFormat)
+
     if (routeMetadata.method === RouteMethod.GET) router.get(routeMetadata.path, routeMetadata.handler)
 
     if (routeMetadata.method === RouteMethod.POST) router.post(routeMetadata.path, routeMetadata.handler)
