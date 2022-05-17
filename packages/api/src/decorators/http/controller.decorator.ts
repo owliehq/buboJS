@@ -32,22 +32,6 @@ export const Controller =
     return CurrentControllerClass
   }
 
-function generateRoutes(routesMetadata: { [id: string]: RouteMetadata }): any {
-  const router = app.server.initRouter()
-  Object.entries(routesMetadata).map(([key, routeMetadata]) => {
-    if (routeMetadata.method === RouteMethod.GET) router.get(routeMetadata.path, routeMetadata.handler)
-
-    if (routeMetadata.method === RouteMethod.POST) router.post(routeMetadata.path, routeMetadata.handler)
-
-    if (routeMetadata.method === RouteMethod.PUT) router.put(routeMetadata.path, routeMetadata.handler)
-
-    if (routeMetadata.method === RouteMethod.PATCH) router.patch(routeMetadata.path, routeMetadata.handler)
-
-    if (routeMetadata.method === RouteMethod.DELETE) router.delete(routeMetadata.path, routeMetadata.handler)
-  })
-  return router
-}
-
 /**
  * controller params
  */

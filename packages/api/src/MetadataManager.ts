@@ -8,10 +8,11 @@ export class MetadataManager {
   public static meta: ListMetadata = { controllers: {} }
 
   public static setControllerMetadata(controllerName: string, controllerMetadata: any): void {
+    const pathControllerMetadata = `controllers.${controllerName}`
     setProperty(
       this.meta,
-      `controllers.${controllerName}`,
-      Object.assign({ routes: {} }, getProperty(this.meta, `controllers.${controllerName}`), controllerMetadata)
+      pathControllerMetadata,
+      Object.assign({ routes: {} }, getProperty(this.meta, pathControllerMetadata), controllerMetadata)
     )
   }
 
@@ -20,10 +21,11 @@ export class MetadataManager {
   }
 
   public static setRouteMetadata(controllerName: string, routeName: string, routeMetadata: RouteMetadata): void {
+    const pathRouteMetadata = `controllers.${controllerName}.routes.${routeName}`
     setProperty(
       this.meta,
-      `controllers.${controllerName}.routes.${routeName}`,
-      Object.assign({}, getProperty(this.meta, `controllers.${controllerName}.routes.${routeName}`), routeMetadata)
+      pathRouteMetadata,
+      Object.assign({}, getProperty(this.meta, pathRouteMetadata), routeMetadata)
     )
   }
 
@@ -37,7 +39,12 @@ export class MetadataManager {
     index: number,
     value: ParameterMetadata
   ): void {
-    setProperty(this.meta, `controllers.${controllerName}.routes.${routeName}.parameters.${index}`, value)
+    const pathParameterMetadata = `controllers.${controllerName}.routes.${routeName}.parameters.${index}`
+    setProperty(
+      this.meta,
+      pathParameterMetadata,
+      Object.assign({}, getProperty(this.meta, pathParameterMetadata), value)
+    )
   }
 
   public static getParametersMetadata(controllerName: string, routeName: string): ParameterMetadata[] {

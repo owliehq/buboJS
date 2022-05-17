@@ -17,10 +17,10 @@
     "build": "lerna exec -- yarn build"
   },
   "devDependencies": {
-    "@commitlint/cli": "^16.2.4",
-    "@commitlint/config-conventional": "^16.2.4",
-    "@types/jest": "^27.5.0",
-    "@types/node": "^17.0.31",
+    "@commitlint/cli": "^17.0.0",
+    "@commitlint/config-conventional": "^17.0.0",
+    "@types/jest": "^27.5.1",
+    "@types/node": "^17.0.34",
     "commitizen": "^4.2.4",
     "cross-env": "^7.0.3",
     "cz-conventional-changelog": "^3.3.0",
