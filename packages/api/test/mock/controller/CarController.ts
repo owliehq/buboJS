@@ -1,5 +1,5 @@
 import { BodyFormat, Controller, DefaultActions, Get, MetadataManager, Post } from '../../../src'
-import { Body, Params } from '../../../src/decorators/http/parameters.decorator'
+import { Body, Header, Params, Query } from '../../../src/decorators/http/parameters.decorator'
 @Controller('cars')
 export class CarController {
   [DefaultActions.GET_ONE]() {}
@@ -18,6 +18,16 @@ export class CarController {
   @Get('/text')
   sendText() {
     return 'plop'
+  }
+
+  @Get('/header')
+  sendHeader(@Header('Accept') acceptHeader: string) {
+    return acceptHeader
+  }
+
+  @Get('/query')
+  sendQuery(@Query('code') code: string) {
+    return code
   }
 
   @Get('/:id')

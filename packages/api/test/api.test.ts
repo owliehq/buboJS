@@ -18,6 +18,28 @@ describe('APIModule', () => {
       })
   })
 
+  it('should return header', async () => {
+    await request(app)
+      .get('/cars/header')
+      .set('Accept', 'text/html')
+      .expect(200)
+      .then(response => {
+        expect(response.text).toBeTruthy()
+        expect(response.text).toBe('text/html')
+      })
+  })
+
+  it('should return query', async () => {
+    await request(app)
+      .get('/cars/query?code=abc')
+      .set('Accept', 'text/html')
+      .expect(200)
+      .then(response => {
+        expect(response.text).toBeTruthy()
+        expect(response.text).toBe('abc')
+      })
+  })
+
   it('should return one car', async () => {
     await request(app)
       .get('/cars/2')
@@ -71,18 +93,6 @@ describe('APIModule', () => {
         expect(response.text).toEqual('good year 17 pouces')
       })
   })
-
-  // it('should return created fsf', async () => {
-  //   await request(app)
-  //     .post('/cars/2/wheels')
-  //     .send('17 pouces')
-  //     .set('Accept', 'text/html')
-  //     .expect(200)
-  //     .then(response => {
-  //       expect(response.text).toBeTruthy()
-  //       expect(response.text).toEqual('good year 17 pouces')
-  //     })
-  // })
 })
 
 afterAll(async () => {})
