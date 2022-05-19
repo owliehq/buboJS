@@ -25,6 +25,7 @@ const buildMethod =
         parameters ? Object.values(parameters).map((param: any) => param.getValue(req)) : []
       )
 
+      //TODO check Content-Type of response
       return res.status(200).send(result)
     }
 

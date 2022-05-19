@@ -22,9 +22,9 @@ export const Controller =
 
     const { name } = constructor
 
-    //const controllerMetadata = MetadataManager.getControllerMetadata(name)
+    // const controllerMetadata = MetadataManager.getControllerMetadata(name)
     MetadataManager.setControllerMetadata(name, { path: `/${controllerName}` })
-    //const routes = generateRoutes(controllerMetadata.routes)
+    // const routes = generateRoutes(controllerMetadata.routes)
     // CurrentControllerClass.router = routes
 
     //app.registerController(CurrentControllerClass)

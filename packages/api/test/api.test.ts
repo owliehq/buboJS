@@ -48,15 +48,39 @@ describe('APIModule', () => {
       })
   })
 
-  // it('should return created car', async () => {
+  it('should return created car', async () => {
+    await request(app)
+      .post('/cars')
+      .send({ name: 'Clio', brand: 'Renault' })
+      .set('Accept', 'application/json')
+      .expect(200)
+      .then(response => {
+        expect(response.body).toBeTruthy()
+        expect(response.body).toEqual({ brand: 'Renault', id: 100, name: 'Clio' })
+      })
+  })
+
+  it('should return created wheel', async () => {
+    await request(app)
+      .post('/cars/2/wheels')
+      .set('Content-Type', 'text/html')
+      .send('17 pouces')
+      .expect(200)
+      .then(response => {
+        expect(response.text).toBeTruthy()
+        expect(response.text).toEqual('good year 17 pouces')
+      })
+  })
+
+  // it('should return created fsf', async () => {
   //   await request(app)
-  //     .post('/cars')
-  //     .send({ name: 'Clio', brand: 'Renault' })
-  //     .set('Accept', 'application/json')
+  //     .post('/cars/2/wheels')
+  //     .send('17 pouces')
+  //     .set('Accept', 'text/html')
   //     .expect(200)
   //     .then(response => {
-  //       expect(response.body).toBeTruthy()
-  //       expect(response.body).toEqual({ brand: 'Renault', id: 100, name: 'Clio' })
+  //       expect(response.text).toBeTruthy()
+  //       expect(response.text).toEqual('good year 17 pouces')
   //     })
   // })
 })

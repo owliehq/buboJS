@@ -4,6 +4,7 @@ export * from './MetadataManager'
 export * from './adapters'
 export * from './decorators'
 export * from './interfaces'
+export * from './libs'
 
 import { App } from './app'
 

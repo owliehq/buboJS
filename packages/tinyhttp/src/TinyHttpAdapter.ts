@@ -1,13 +1,14 @@
-import { App } from '@tinyhttp/app'
-import { AdapterHttpModule } from '@bubojs/api'
+import { App, Handler, Request, Response } from '@tinyhttp/app'
+import { AdapterHttpModule, BodyFormat, raw, json, text } from '@bubojs/api'
 import { Server } from 'http'
-import { BodyFormat } from '@bubojs/api/src/interfaces/DecoratorOptions'
-import { raw, json, text } from 'milliparsec'
 
 export class TinyHttpAdapter implements AdapterHttpModule<App> {
   public app: App
   constructor() {
     this.app = new App()
+  }
+  public use(path: string, router: TinyHttpAdapter) {
+    this.app.use(path, router.app)
   }
 
   public init() {
@@ -15,7 +16,7 @@ export class TinyHttpAdapter implements AdapterHttpModule<App> {
   }
 
   public initRouter() {
-    return new App()
+    return new TinyHttpAdapter()
   }
 
   public startServer() {
@@ -29,19 +30,23 @@ export class TinyHttpAdapter implements AdapterHttpModule<App> {
     return this.app.get(path, handler)
   }
 
-  public post(path: string, handler: any) {
+  public post(path: string, bodyFormat: BodyFormat, handler: any) {
+    this.app.use(path, this.useBodyFormat(path, bodyFormat))
     return this.app.post(path, handler)
   }
 
-  public put(path: string, handler: any) {
+  public put(path: string, bodyFormat: BodyFormat, handler: any) {
+    this.app.use(path, this.useBodyFormat(path, bodyFormat))
     return this.app.put(path, handler)
   }
 
-  public patch(path: string, handler: any) {
+  public patch(path: string, bodyFormat: BodyFormat, handler: any) {
+    this.app.use(path, this.useBodyFormat(path, bodyFormat))
     return this.app.patch(path, handler)
   }
 
-  public delete(path: string, handler: any) {
+  public delete(path: string, bodyFormat: BodyFormat, handler: any) {
+    this.app.use(path, this.useBodyFormat(path, bodyFormat))
     return this.app.delete(path, handler)
   }
 
@@ -49,17 +54,14 @@ export class TinyHttpAdapter implements AdapterHttpModule<App> {
     return this.app.listen(port)
   }
 
-  public use(path: string, bodyFormat: BodyFormat) {
-    console.log('bodyFormat', bodyFormat)
+  public useBodyFormat(path: string, bodyFormat: BodyFormat): Handler {
     switch (bodyFormat) {
       case BodyFormat.RAW:
-        this.app.use(path, raw())
-        break
+        return raw()
       case BodyFormat.TEXT:
-        this.app.use(path, text())
-        break
+        return text()
       default:
-        this.app.use(path, json())
+        return json()
     }
   }
 }

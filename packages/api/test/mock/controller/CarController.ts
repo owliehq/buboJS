@@ -1,7 +1,5 @@
-import { Controller, DefaultActions, Get, MetadataManager, Post } from '../../../src'
+import { BodyFormat, Controller, DefaultActions, Get, MetadataManager, Post } from '../../../src'
 import { Body, Params } from '../../../src/decorators/http/parameters.decorator'
-import { BodyFormat } from '../../../src/interfaces/DecoratorOptions'
-
 @Controller('cars')
 export class CarController {
   [DefaultActions.GET_ONE]() {}
@@ -21,7 +19,7 @@ export class CarController {
   sendText() {
     return 'plop'
   }
-  
+
   @Get('/:id')
   findOneCar(@Params('id') id: string) {
     switch (id) {
@@ -41,10 +39,13 @@ export class CarController {
     return `Wheel ${wheelId} of Car ${id}`
   }
 
+  @Post('/:id/wheels', { bodyFormat: BodyFormat.RAW })
+  createWheel(@Body body: any) {
+    return 'good year ' + body
+  }
+
   @Post('/', { bodyFormat: BodyFormat.JSON })
   createCarJson(@Body body: any) {
-    console.log('Body', body)
-    const name = { body }
     return { ...body, id: 100 }
   }
 
