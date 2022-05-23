@@ -1,4 +1,5 @@
 import { RouteMethod } from '../../enums'
+import { MiddlewarePosition } from '../../interfaces'
 import { BodyFormat, MethodOptions } from '../../interfaces/DecoratorOptions'
 import { MetadataManager } from '../../MetadataManager'
 
@@ -17,15 +18,30 @@ const buildMethod =
     const { bodyFormat } = options ? options : { bodyFormat: BodyFormat.JSON }
 
     const parameters = MetadataManager.getParametersMetadata(target.constructor.name, propertyKey)
+    // Get middlewares to run before the method handler
+    const beforeMiddlewares = MetadataManager.getMiddlewaresMetadata(
+      MiddlewarePosition.BEFORE,
+      target.constructor.name,
+      propertyKey
+    )
+    // Get middlewares to run after the method handler
+    const afterMiddlewares = MetadataManager.getMiddlewaresMetadata(
+      MiddlewarePosition.AFTER,
+      target.constructor.name,
+      propertyKey
+    )
 
-    handler = async function (this: any, req: any, res: any) {
+    handler = async function (this: any, req: any, res: any, next: Function) {
       //apply parameters decorator on function
       const result = descriptor.value.apply(
         this,
         parameters ? Object.values(parameters).map((param: any) => param.getValue(req)) : []
       )
 
-      return res.status(200).send(result)
+      // We save result in result property of req
+      // This result will be send in response() method. See AdapterHttpModule.ts
+      req.result = result
+      next()
     }
 
     MetadataManager.setRouteMetadata(target.constructor.name, propertyKey, {
@@ -33,7 +49,9 @@ const buildMethod =
       method,
       parameters,
       handler,
-      bodyFormat
+      bodyFormat,
+      beforeMiddlewares,
+      afterMiddlewares
     })
   }
 
