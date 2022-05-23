@@ -26,6 +26,8 @@ export class DefaultRouteBuilder {
     const metadata: RouteMetadata = {
       path: '/:id',
       method: RouteMethod.GET,
+      beforeMiddlewares: [],
+      afterMiddlewares: [],
       handler: async (req, res) => {
         //findById
         // return findById
@@ -40,6 +42,8 @@ export class DefaultRouteBuilder {
     const metadata: RouteMetadata = {
       path: '/',
       method: RouteMethod.GET,
+      beforeMiddlewares: [],
+      afterMiddlewares: [],
       handler: async (req, res) => {
         //find
         // return find
@@ -54,6 +58,8 @@ export class DefaultRouteBuilder {
     const metadata: RouteMetadata = {
       path: '/',
       method: RouteMethod.POST,
+      beforeMiddlewares: [],
+      afterMiddlewares: [],
       handler: async (req, res) => {
         // create
         // return create
@@ -68,6 +74,8 @@ export class DefaultRouteBuilder {
     const metadata: RouteMetadata = {
       path: '/:id',
       method: RouteMethod.DELETE,
+      beforeMiddlewares: [],
+      afterMiddlewares: [],
       handler: async (req, res) => {
         //delete
         return { message: 'deleted' }
