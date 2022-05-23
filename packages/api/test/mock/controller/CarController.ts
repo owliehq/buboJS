@@ -1,4 +1,5 @@
 import { BodyFormat, Controller, DefaultActions, Get, MetadataManager, Post } from '../../../src'
+import { AfterMiddleware, BeforeMiddleware } from '../../../src/decorators/http/middleware.decorator'
 import { Body, Header, Params, Query } from '../../../src/decorators/http/parameters.decorator'
 @Controller('cars')
 export class CarController {
@@ -30,6 +31,48 @@ export class CarController {
     return code
   }
 
+  @BeforeMiddleware((req: any, res: any, next: Function): void => {
+    if (!req.body) req.body = {}
+    req.body.test = 'middleware added value'
+    next()
+  })
+  @Get('/beforeMiddleware')
+  sendBeforeMiddleware(@Body body: any) {
+    const { test } = body
+    return test
+  }
+
+  @BeforeMiddleware((req: any, res: any, next: Function): void => {
+    if (!req.body) req.body = {}
+    req.body.test = 'middleware added value'
+    next()
+  })
+  @BeforeMiddleware((req: any, res: any, next: Function): void => {
+    if (!req.body) req.body = {}
+    req.body.test = req.body.test + ' twice'
+    next()
+  })
+  @Get('/beforeMiddlewares')
+  sendBeforeMiddlewares(@Body body: any) {
+    const { test } = body
+    return test
+  }
+
+  @BeforeMiddleware((req: any, res: any, next: Function): void => {
+    if (!req.body) req.body = {}
+    req.body.test = 'middleware added value'
+    next()
+  })
+  @AfterMiddleware((req: any, res: any, next: Function): void => {
+    req.result = req.result + ' after'
+    next()
+  })
+  @Get('/middlewares')
+  sendMiddlewares(@Body body: any) {
+    const { test } = body
+    return test + ' content'
+  }
+
   @Get('/:id')
   findOneCar(@Params('id') id: string) {
     switch (id) {
@@ -58,6 +101,4 @@ export class CarController {
   createCarJson(@Body body: any) {
     return { ...body, id: 100 }
   }
-
-  //TODO test with response.text
 }
