@@ -6,8 +6,8 @@ export interface RouteMetadata {
   method: RouteMethod
   parameters: ParameterMetadata[]
   bodyFormat?: BodyFormat
-  beforeMiddlewares: MiddlewareMetadata[]
-  afterMiddlewares: MiddlewareMetadata[]
+  beforeMiddlewares?: MiddlewareMetadata[]
+  afterMiddlewares?: MiddlewareMetadata[]
   handler: (this: any, req: any, res: any) => any
 }
 

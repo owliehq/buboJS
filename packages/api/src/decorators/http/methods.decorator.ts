@@ -20,15 +20,15 @@ const buildMethod =
     const parameters = MetadataManager.getParametersMetadata(target.constructor.name, propertyKey)
     // Get middlewares to run before the method handler
     const beforeMiddlewares = MetadataManager.getMiddlewaresMetadata(
-      MiddlewarePosition.BEFORE,
       target.constructor.name,
-      propertyKey
+      propertyKey,
+      MiddlewarePosition.BEFORE
     )
     // Get middlewares to run after the method handler
     const afterMiddlewares = MetadataManager.getMiddlewaresMetadata(
-      MiddlewarePosition.AFTER,
       target.constructor.name,
-      propertyKey
+      propertyKey,
+      MiddlewarePosition.AFTER
     )
 
     handler = async function (this: any, req: any, res: any, next: Function) {

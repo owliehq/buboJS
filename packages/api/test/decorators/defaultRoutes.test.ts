@@ -16,22 +16,22 @@ describe('controllers decorator', () => {
   }
 
   it('should create get_one route', () => {
-    const routeMetadata = MetadataManager.getRoutesMetadata(CONTROLLER_NAME, DefaultActions.GET_ONE)
+    const routeMetadata = MetadataManager.getRouteMetadata(CONTROLLER_NAME, DefaultActions.GET_ONE)
     expect(routeMetadata).toBeTruthy()
   })
 
   it("shouldn't create get_many route", () => {
-    const routeMetadata = MetadataManager.getRoutesMetadata(CONTROLLER_NAME, DefaultActions.GET_MANY)
+    const routeMetadata = MetadataManager.getRouteMetadata(CONTROLLER_NAME, DefaultActions.GET_MANY)
     expect(routeMetadata).toBeTruthy()
   })
 
   it('should create create_one route', () => {
-    const routeMetadata = MetadataManager.getRoutesMetadata(CONTROLLER_NAME, DefaultActions.CREATE_ONE)
+    const routeMetadata = MetadataManager.getRouteMetadata(CONTROLLER_NAME, DefaultActions.CREATE_ONE)
     expect(routeMetadata).toBeTruthy()
   })
 
   it('should create delete_one route', () => {
-    const routeMetadata = MetadataManager.getRoutesMetadata(CONTROLLER_NAME, DefaultActions.DELETE_ONE)
+    const routeMetadata = MetadataManager.getRouteMetadata(CONTROLLER_NAME, DefaultActions.DELETE_ONE)
     expect(routeMetadata).toBeTruthy()
   })
 })
@@ -53,8 +53,8 @@ describe('controller default and custom routes', () => {
   }
 
   it('should register route test but not GET_MANY default route', () => {
-    const routeTestMetadata = MetadataManager.getRoutesMetadata(CONTROLLER_NAME, ROUTE_TEST_NAME)
-    const defaultRouteMetadata = MetadataManager.getRoutesMetadata(CONTROLLER_NAME, DefaultActions.GET_MANY)
+    const routeTestMetadata = MetadataManager.getRouteMetadata(CONTROLLER_NAME, ROUTE_TEST_NAME)
+    const defaultRouteMetadata = MetadataManager.getRouteMetadata(CONTROLLER_NAME, DefaultActions.GET_MANY)
     expect(routeTestMetadata).toBeTruthy()
     expect(defaultRouteMetadata).toBeFalsy()
   })

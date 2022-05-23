@@ -17,7 +17,6 @@
     "build": "rimraf ./dist && tsc -p tsconfig.build.json"
   },
   "dependencies": {
-    "@bubojs/tinyhttp": "0.0.1",
     "dot-prop": "^7.2.0",
     "reflect-metadata": "^0.1.13"
   },

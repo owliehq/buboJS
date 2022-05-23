@@ -7,7 +7,7 @@ import { MetadataManager } from '../../MetadataManager'
  * @returns
  */
 export const BeforeMiddleware = (middleware: MiddlewareMetadata) => (target: any, propertyKey: string) => {
-  MetadataManager.setMiddlewareMetadata(MiddlewarePosition.BEFORE, target.constructor.name, propertyKey, middleware)
+  MetadataManager.setMiddlewareMetadata(target.constructor.name, propertyKey, MiddlewarePosition.BEFORE, middleware)
 }
 
 /**
@@ -16,5 +16,5 @@ export const BeforeMiddleware = (middleware: MiddlewareMetadata) => (target: any
  * @returns
  */
 export const AfterMiddleware = (middleware: MiddlewareMetadata) => (target: any, propertyKey: string) => {
-  MetadataManager.setMiddlewareMetadata(MiddlewarePosition.AFTER, target.constructor.name, propertyKey, middleware)
+  MetadataManager.setMiddlewareMetadata(target.constructor.name, propertyKey, MiddlewarePosition.AFTER, middleware)
 }

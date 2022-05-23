@@ -1,6 +1,6 @@
 import { TinyHttpAdapter } from '@bubojs/tinyhttp'
 import { CarController } from './controller'
-import { app } from '../../src'
+import { app } from '@bubojs/api'
 
 export const startServer = async (port: number) => {
   CarController.name

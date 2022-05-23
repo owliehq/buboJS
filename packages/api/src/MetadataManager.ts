@@ -96,15 +96,15 @@ export class MetadataManager {
 
   /**
    * Set middlewares according to the route of the controller
-   * @param position before or after the method handler
    * @param controllerName name of the controller
    * @param routeName name of the route
+   * @param position before or after the method handler
    * @param value the middleware to register
    */
   public static setMiddlewareMetadata(
-    position: MiddlewarePosition,
     controllerName: string,
     routeName: string,
+    position: MiddlewarePosition,
     value: MiddlewareMetadata
   ): void {
     const pathMiddlewareMetadata = `controllers.${controllerName}.routes.${routeName}.middlewares.${position}`
@@ -119,15 +119,15 @@ export class MetadataManager {
 
   /**
    * Get middlewares according to the route of the controller
-   * @param position before or after the method handler
    * @param controllerName name of the controller
    * @param routeName name of the route
+   * @param position before or after the method handler
    * @returns List of middlewares
    */
   public static getMiddlewaresMetadata(
-    position: MiddlewarePosition,
     controllerName: string,
-    routeName: string
+    routeName: string,
+    position: MiddlewarePosition
   ): MiddlewareMetadata[] {
     return getProperty(this.meta, `controllers.${controllerName}.routes.${routeName}.middlewares.${position}`)
   }

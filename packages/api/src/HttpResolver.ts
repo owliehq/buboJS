@@ -18,14 +18,14 @@ export class HttpResolver {
       const router = this.httpAdapter.initRouter()
       Object.entries(controllerMetadata.routes).map(([routeKey, routeMetadata]) => {
         const beforeMiddlewares = MetadataManager.getMiddlewaresMetadata(
-          MiddlewarePosition.BEFORE,
           controllerKey,
-          routeKey
+          routeKey,
+          MiddlewarePosition.BEFORE
         )
         const afterMiddlewares = MetadataManager.getMiddlewaresMetadata(
-          MiddlewarePosition.AFTER,
           controllerKey,
-          routeKey
+          routeKey,
+          MiddlewarePosition.AFTER
         )
         const { bodyFormat } = routeMetadata
         // router.useBodyFormat(routeMetadata.path, bodyFormat)

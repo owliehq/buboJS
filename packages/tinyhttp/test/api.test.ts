@@ -40,36 +40,6 @@ describe('APIModule', () => {
       })
   })
 
-  it('should return one before middleware', async () => {
-    await request(app)
-      .get('/cars/beforeMiddleware')
-      .expect(200)
-      .then(response => {
-        expect(response.text).toBeTruthy()
-        expect(response.text).toBe('middleware added value')
-      })
-  })
-
-  it('should return before middlewares', async () => {
-    await request(app)
-      .get('/cars/beforeMiddlewares')
-      .expect(200)
-      .then(response => {
-        expect(response.text).toBeTruthy()
-        expect(response.text).toBe('middleware added value twice')
-      })
-  })
-
-  it('should return middlewares', async () => {
-    await request(app)
-      .get('/cars/middlewares')
-      .expect(200)
-      .then(response => {
-        expect(response.text).toBeTruthy()
-        expect(response.text).toBe('middleware added value content after')
-      })
-  })
-
   it('should return one car', async () => {
     await request(app)
       .get('/cars/2')
