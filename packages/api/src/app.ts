@@ -1,9 +1,8 @@
-import { ServerConfig } from './interfaces'
 import { Server } from 'http'
 import { AdapterHttpModule } from './adapters'
-import { MetadataManager } from './MetadataManager'
-import { RouteMethod } from './enums'
 import { HttpResolver } from './HttpResolver'
+import { ServerConfig } from './interfaces'
+import { MetadataManager } from './MetadataManager'
 export class App {
   public server: AdapterHttpModule<any>
 

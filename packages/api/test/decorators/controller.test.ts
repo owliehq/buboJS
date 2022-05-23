@@ -10,9 +10,14 @@ describe('controllers decorator', () => {
     public routeTest() {}
   }
 
-  it('should save metadata controller decorator', () => {
-    const path = MetadataManager.getControllerMetadata(CONTROLLER_NAME)
-    expect(path).toBeTruthy()
-    expect(Object.entries(path.routes).length).toBeGreaterThanOrEqual(1)
+  it('should have saved data in the metadataManager', () => {
+    const controllerMetadata = MetadataManager.getControllerMetadata(CONTROLLER_NAME)
+    expect(controllerMetadata).toBeTruthy()
+  })
+
+  it('should have saved routes data in the metadataManager', () => {
+    const controllerMetadata = MetadataManager.getControllerMetadata(CONTROLLER_NAME)
+    expect(controllerMetadata.routes).toBeTruthy()
+    expect(Object.entries(controllerMetadata.routes).length).toBeGreaterThanOrEqual(1)
   })
 })

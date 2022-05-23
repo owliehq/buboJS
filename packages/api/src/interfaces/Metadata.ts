@@ -5,7 +5,7 @@ export interface RouteMetadata {
   path: string
   method: RouteMethod
   parameters: ParameterMetadata[]
-  bodyFormat: BodyFormat
+  bodyFormat?: BodyFormat
   handler: (this: any, req: any, res: any) => any
 }
 
