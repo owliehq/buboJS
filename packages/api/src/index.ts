@@ -5,6 +5,7 @@ export * from './adapters'
 export * from './decorators'
 export * from './interfaces'
 export * from './libs'
+export * from './models'
 
 import { App } from './app'
 
