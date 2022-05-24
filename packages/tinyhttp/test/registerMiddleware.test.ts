@@ -38,15 +38,16 @@ describe('middlewares controller', () => {
       })
   })
 
-  // it('should be array instead of simple object as a result', async () => {
-  //   await request(app)
-  //     .get('/middlewares/1')
-  //     .expect(200)
-  //     .then(response => {
-  //       console.log(response)
-  //       expect(response).toBeTruthy()
-  //     })
-  // })
+  it('should be array instead of simple object as a result', async () => {
+    await request(app)
+      .get('/middlewares/1')
+      .expect(200)
+      .then(response => {
+        expect(response.body).toBeTruthy()
+        expect(response.body.id).toBe(1)
+        expect(response.body.model).toBe('voiture')
+      })
+  })
 })
 
 afterAll(async () => {})

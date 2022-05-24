@@ -8,7 +8,7 @@ export interface RouteMetadata {
   bodyFormat?: BodyFormat
   beforeMiddlewares?: MiddlewareMetadata[]
   afterMiddlewares?: MiddlewareMetadata[]
-  handler: (this: any, req: any, res: any) => any
+  handler: (this: any, req: any, res: any, next: Function) => any
 }
 
 export interface ListMetadata {

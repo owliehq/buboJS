@@ -13,8 +13,6 @@ const buildMethod =
   (method: RouteMethod) =>
   (subRoute: string = '/', options?: MethodOptions) =>
   (target: any, propertyKey: string, descriptor: PropertyDescriptor): any => {
-    let handler
-
     const { bodyFormat } = options ? options : { bodyFormat: BodyFormat.JSON }
 
     const parameters = MetadataManager.getParametersMetadata(target.constructor.name, propertyKey)
@@ -31,7 +29,7 @@ const buildMethod =
       MiddlewarePosition.AFTER
     )
 
-    handler = async function (this: any, req: any, res: any, next: Function) {
+    const handler = async function (this: any, req: any, res: any, next: Function) {
       //apply parameters decorator on function
       const result = descriptor.value.apply(
         this,

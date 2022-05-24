@@ -9,9 +9,7 @@ describe('controllers decorator', () => {
   @Controller('routes')
   class ControllerRoutesDecoratorTest {
     @Get()
-    public testGet() {
-      console.log('api test get')
-    }
+    public testGet() {}
 
     @Post()
     public testPost() {}

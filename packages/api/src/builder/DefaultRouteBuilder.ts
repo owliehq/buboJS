@@ -29,6 +29,13 @@ export class DefaultRouteBuilder {
     }
   }
 
+  private createWrapper = (handler: Function) => {
+    return async function (this: any, req: any, res: any, next: Function) {
+      req.result = handler(req, res, next)
+      next()
+    }
+  }
+
   /**
    * register GET_ONE route into metadata manager
    */
@@ -36,12 +43,10 @@ export class DefaultRouteBuilder {
     const metadata: RouteMetadata = {
       path: '/:id',
       method: RouteMethod.GET,
-      handler: async function (this: any, req: any, res: any) {
-        //findById
-        // return findById
-        console.log('findOne')
+      handler: this.createWrapper((req: any, res: any, next: Function) => {
+        //find one
         return { id: 1, model: 'voiture' }
-      },
+      }),
       parameters: []
     }
     MetadataManager.setRouteMetadata(this.controllerName, DefaultActions.GET_ONE, metadata)
@@ -54,11 +59,11 @@ export class DefaultRouteBuilder {
     const metadata: RouteMetadata = {
       path: '/',
       method: RouteMethod.GET,
-      handler: async function (this: any, req: any, res: any) {
+      handler: this.createWrapper((req: any, res: any, next: Function) => {
         //find
         // return find
         return [{ id: 1, model: 'voiture' }]
-      },
+      }),
       parameters: []
     }
     MetadataManager.setRouteMetadata(this.controllerName, DefaultActions.GET_MANY, metadata)
@@ -71,12 +76,11 @@ export class DefaultRouteBuilder {
     const metadata: RouteMetadata = {
       path: '/',
       method: RouteMethod.POST,
-      handler: async function (this: any, req: any, res: any) {
-        // create
-        // return create
+      handler: this.createWrapper((req: any, res: any, next: Function) => {
         return { id: 2, model: 'car' }
-      },
-      parameters: []
+      }),
+      parameters: [],
+      bodyFormat: BodyFormat.JSON
     }
     MetadataManager.setRouteMetadata(this.controllerName, DefaultActions.CREATE_ONE, metadata)
   }
@@ -88,10 +92,10 @@ export class DefaultRouteBuilder {
     const metadata: RouteMetadata = {
       path: '/:id',
       method: RouteMethod.DELETE,
-      handler: async function (this: any, req: any, res: any) {
+      handler: this.createWrapper((req: any, res: any, next: Function) => {
         //delete
         return { message: 'deleted' }
-      },
+      }),
       parameters: []
     }
     MetadataManager.setRouteMetadata(this.controllerName, DefaultActions.DELETE_ONE, metadata)
