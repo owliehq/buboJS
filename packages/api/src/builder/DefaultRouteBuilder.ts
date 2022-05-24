@@ -39,6 +39,7 @@ export class DefaultRouteBuilder {
       handler: async function (this: any, req: any, res: any) {
         //findById
         // return findById
+        console.log('findOne')
         return { id: 1, model: 'voiture' }
       },
       parameters: []
