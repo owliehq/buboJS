@@ -3,12 +3,14 @@ import { AdapterHttpModule } from './adapters'
 import { HttpResolver } from './HttpResolver'
 import { ServerConfig } from './interfaces'
 import { MetadataManager } from './MetadataManager'
+import { ServiceResolver } from './ServiceResolver'
 export class App {
   public server: AdapterHttpModule<any>
 
   constructor() {}
 
   public async startServer(config: ServerConfig) {
+    console.log('APP')
     // if (config.httpFramework === HttpFrameworkEnum.TINY_HTTP) {
     //   this.httpInstance = new TinyHttpAdapter();
     //   this.httpInstance.app.get(
@@ -48,6 +50,11 @@ export class App {
 
     const controllerResolver = new HttpResolver(adapter)
     controllerResolver.controllerRevolve(MetadataManager.meta)
+
+    const serviceResolver = new ServiceResolver(adapter)
+    serviceResolver.serviceResolve(MetadataManager.meta)
+
+    // TODO one last boucle on service to instanciate service
 
     return this.server.listen(3000)
   }

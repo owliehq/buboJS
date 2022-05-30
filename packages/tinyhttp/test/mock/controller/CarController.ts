@@ -1,9 +1,33 @@
-import { Body, BodyFormat, Controller, Get, Header, Params, Post, Query } from '@bubojs/api'
+console.log('INIT CarController')
+
+import { Body, BodyFormat, Controller, Get, Header, Inject, MetadataManager, Params, Post, Query } from '@bubojs/api'
+import { CarsService, WheelsService } from '../services'
 @Controller('cars')
 export class CarController {
+  @Inject public carsService: CarsService
+  @Inject public wheelsService: WheelsService
+  test: string = 'coucou'
+
   @Get('/recent')
   findAllRecentCars() {
     return ['car1', 'car2', 'car3']
+  }
+
+  @Get('/all')
+  findAllCars() {
+    return this.carsService.getAllCars()
+  }
+
+  @Get('/wheels/all')
+  findAllWheels() {
+    console.log('meta', MetadataManager.meta.controllers)
+    return this.wheelsService.getAllWheels()
+  }
+
+  @Get('/:id/owners')
+  findOwnersByCar(@Params('id') id: string) {
+    console.log('XXX', MetadataManager.meta.injections)
+    return this.carsService.getAllCarsByUser(id)
   }
 
   @Get('/text')

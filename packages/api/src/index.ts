@@ -1,5 +1,6 @@
 export * from './app'
 export * from './HttpResolver'
+export * from './ServiceResolver'
 export * from './MetadataManager'
 export * from './adapters'
 export * from './decorators'
