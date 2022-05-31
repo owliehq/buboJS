@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+  postgres-bubo:
+    image: 'postgres'
+    container_name: 'postgres-bubo'
+    expose:
+      - '5432'
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: 'Bubo'
+      POSTGRES_PASSWORD: 'Bubo'
+      POSTGRES_DB: 'BuboMockDb'
