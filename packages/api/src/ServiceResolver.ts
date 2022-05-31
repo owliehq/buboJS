@@ -6,29 +6,17 @@ export class ServiceResolver {
   constructor(private httpAdapter: AdapterHttpModule<any>) {}
 
   public serviceResolve(metadatas: ListMetadata) {
-    console.log('meta before', MetadataManager.meta)
-    // for each controller
+    // for each injections
     Object.entries(metadatas.injections).map(([injectionKey, injectionMetadata]) => {
-      // Get list of injection links
-      const controller = MetadataManager.getControllerMetadata(injectionKey)
+      const controller =
+        MetadataManager.getControllerMetadata(injectionKey) || MetadataManager.getServiceMetadata(injectionKey)
       Object.entries(injectionMetadata.services).map(([serviceKey, serviceMetadata]) => {
         const service = MetadataManager.getServiceMetadata(serviceMetadata as string)
         // Set the service inside controller
-        controller.instance[serviceKey] = service
+        // TODO Refacto this
+        if (controller.instance) controller.instance[serviceKey] = service
+        else controller[serviceKey] = service
       })
     })
-
-    // for each services
-    Object.entries(metadatas.services).map(([injectionKey, injectionMetadata]) => {
-      // Get list of injection links
-      const serviceParent = MetadataManager.getServiceMetadata(injectionKey)
-      Object.entries(injectionMetadata.services).map(([serviceKey, serviceMetadata]) => {
-        const service = MetadataManager.getServiceMetadata(serviceMetadata as string)
-        // Set the service inside service
-        serviceParent.instance[serviceKey] = service
-      })
-    })
-
-    console.log('meta after', MetadataManager.meta)
   }
 }

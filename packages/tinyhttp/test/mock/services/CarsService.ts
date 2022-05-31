@@ -1,11 +1,9 @@
-console.log('INIT CarsService')
-
-import { Inject, Service } from '@bubojs/api'
+import { Inject, Service, ObjectType } from '@bubojs/api'
 import { UsersService } from './UsersService'
 
 @Service()
 export class CarsService {
-  @Inject public usersService: UsersService
+  @Inject('UsersService') public usersService: ObjectType<UsersService>
 
   getAllCars() {
     return ['car1', 'car2', 'car3', 'car4', 'car5']

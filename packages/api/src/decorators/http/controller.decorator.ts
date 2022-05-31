@@ -13,7 +13,6 @@ export const Controller =
   (constructor: T) => {
     const { name } = constructor
 
-    console.log('CONTROLLER')
     // TODO faire un getter qui retourne le constructeur si besoin de l'instancier plus tard dans le bind
     const instance = new constructor()
 

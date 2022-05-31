@@ -171,6 +171,15 @@ export class MetadataManager {
   }
 
   /**
+   * get link between the parent class and service wich need to be injected
+   * @param parentName name of the parent wich contains injection
+   * @param serviceName the service name
+   */
+  public static getInjectionMetadata(parentName: string, serviceName: string): any {
+    return getProperty(this.meta, `injections.${parentName}.services.${serviceName}`)
+  }
+
+  /**
    * Get all injections metadata
    * @returns the metadata of the service
    */

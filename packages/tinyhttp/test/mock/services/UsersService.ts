@@ -1,11 +1,9 @@
-console.log('INIT UsersService')
-
-import { Inject, Service } from '@bubojs/api'
+import { Inject, Service, ObjectType } from '@bubojs/api'
 import { CarsService } from './CarsService'
 
 @Service()
 export class UsersService {
-  @Inject public carsService: CarsService
+  @Inject('CarsService') public carsService: ObjectType<CarsService>
 
   generatePassword() {
     return '123Azert456#@%789'

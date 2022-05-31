@@ -114,13 +114,13 @@ describe('APIModule', () => {
       })
   })
 
-  it('should return owners', async () => {
+  it('should return cars by user', async () => {
     await request(app)
-      .get('/cars/:id/owners')
+      .get('/cars/users/2')
       .expect(200)
       .then(response => {
         expect(response.body).toBeTruthy()
-        expect(response.body).toEqual(['user1', 'user2'])
+        expect(response.body).toEqual(['car1', 'car2', 'car3', 'car4'])
       })
   })
 })
