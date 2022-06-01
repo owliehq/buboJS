@@ -1,15 +1,6 @@
-import { BodyFormat, Controller, DefaultActions, Get, MetadataManager, Post } from '../../../src'
-import { Body, Header, Params, Query } from '../../../src/decorators/http/parameters.decorator'
+import { Body, BodyFormat, Controller, Get, Header, Params, Post, Query } from '@bubojs/api'
 @Controller('cars')
 export class CarController {
-  [DefaultActions.GET_ONE]() {}
-
-  [DefaultActions.GET_MANY]() {}
-
-  [DefaultActions.CREATE_ONE]() {}
-
-  [DefaultActions.DELETE_ONE]() {}
-
   @Get('/recent')
   findAllRecentCars() {
     return ['car1', 'car2', 'car3']
@@ -58,6 +49,4 @@ export class CarController {
   createCarJson(@Body body: any) {
     return { ...body, id: 100 }
   }
-
-  //TODO test with response.text
 }

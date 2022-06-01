@@ -8,7 +8,7 @@ import { MetadataManager } from '../../MetadataManager'
 export const Params =
   (name: string) =>
   (target: any, propertyKey: string, index: number): any => {
-    MetadataManager.setParametersMetadata(target.constructor.name, propertyKey, index, {
+    MetadataManager.setParameterMetadata(target.constructor.name, propertyKey, index, {
       getValue: (req: any) => {
         return req.params[name]
       }
@@ -20,7 +20,7 @@ export const Params =
  * @returns
  */
 export const Body = (target: any, propertyKey: string, index: number): any => {
-  MetadataManager.setParametersMetadata(target.constructor.name, propertyKey, index, {
+  MetadataManager.setParameterMetadata(target.constructor.name, propertyKey, index, {
     getValue: (req: any) => {
       return req.body
     }
@@ -35,7 +35,7 @@ export const Body = (target: any, propertyKey: string, index: number): any => {
 export const Header =
   (name: string) =>
   (target: any, propertyKey: string, index: number): any => {
-    MetadataManager.setParametersMetadata(target.constructor.name, propertyKey, index, {
+    MetadataManager.setParameterMetadata(target.constructor.name, propertyKey, index, {
       getValue: (req: any) => {
         return req.get(name)
       }
@@ -50,7 +50,7 @@ export const Header =
 export const Query =
   (name: string) =>
   (target: any, propertyKey: string, index: number): any => {
-    MetadataManager.setParametersMetadata(target.constructor.name, propertyKey, index, {
+    MetadataManager.setParameterMetadata(target.constructor.name, propertyKey, index, {
       getValue: (req: any) => {
         return req.query[name]
       }

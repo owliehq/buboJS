@@ -1,6 +1,5 @@
-import { app } from '../..'
-import { RouteMethod } from '../../enums'
-import { RouteMetadata } from '../../interfaces'
+import { DefaultRouteBuilder } from '../../builder'
+import { DefaultActions } from '../../interfaces'
 import { MetadataManager } from '../../MetadataManager'
 
 /**
@@ -12,24 +11,17 @@ import { MetadataManager } from '../../MetadataManager'
 export const Controller =
   <T extends { new (...args: any[]): any }>(controllerName: string, params: ControllerParams = {}) =>
   (constructor: T) => {
-    const CurrentControllerClass: any = class extends constructor {
-      public static router = undefined
-      public static controllerName = controllerName
-      public static path = `/${controllerName}`
-
-      // public static instance = new constructor();
-    }
-
     const { name } = constructor
 
-    // const controllerMetadata = MetadataManager.getControllerMetadata(name)
     MetadataManager.setControllerMetadata(name, { path: `/${controllerName}` })
-    // const routes = generateRoutes(controllerMetadata.routes)
-    // CurrentControllerClass.router = routes
-
-    //app.registerController(CurrentControllerClass)
-
-    return CurrentControllerClass
+    const defaultRouteBuilder = new DefaultRouteBuilder(name)
+    const defaultActionsRoutes: string[] = Object.values(DefaultActions)
+    const defaultActions = Object.getOwnPropertyNames(constructor.prototype)
+      .filter(routeName => defaultActionsRoutes.includes(routeName))
+      .forEach((routeName: DefaultActions) => {
+        //MetadataManager.setRouteMetadata(name, routeName, {})
+        defaultRouteBuilder.registerDefaultRouteMetadata(routeName)
+      })
   }
 
 /**

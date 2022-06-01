@@ -1,5 +1,5 @@
-import { App, Handler, Request, Response } from '@tinyhttp/app'
-import { AdapterHttpModule, BodyFormat, raw, json, text } from '@bubojs/api'
+import { App } from '@tinyhttp/app'
+import { AdapterHttpModule, BodyFormat, raw, json, text, Handler } from '@bubojs/api'
 import { Server } from 'http'
 
 export class TinyHttpAdapter implements AdapterHttpModule<App> {
@@ -26,34 +26,78 @@ export class TinyHttpAdapter implements AdapterHttpModule<App> {
   }
   public stopServer() {}
 
-  public get(path: string, handler: any) {
-    return this.app.get(path, handler)
+  public get(path: string, beforeMiddlewares: any = [], handler: any, afterMiddlewares: any = []) {
+    return this.app.get(path, beforeMiddlewares, handler, afterMiddlewares, (req: any, res: any, next) => {
+      return res.status(200).send(req.result)
+    })
   }
 
-  public post(path: string, bodyFormat: BodyFormat, handler: any) {
+  public post(
+    path: string,
+    bodyFormat: BodyFormat,
+    beforeMiddlewares: any = [],
+    handler: any,
+    afterMiddlewares: any = []
+  ) {
     this.app.use(path, this.useBodyFormat(path, bodyFormat))
-    return this.app.post(path, handler)
+    return this.app.post(path, beforeMiddlewares, handler, afterMiddlewares, (req: any, res: any, next) => {
+      return res.status(200).send(req.result)
+    })
   }
 
-  public put(path: string, bodyFormat: BodyFormat, handler: any) {
+  public put(
+    path: string,
+    bodyFormat: BodyFormat,
+    beforeMiddlewares: any = [],
+    handler: any,
+    afterMiddlewares: any = []
+  ) {
     this.app.use(path, this.useBodyFormat(path, bodyFormat))
-    return this.app.put(path, handler)
+    return this.app.put(path, beforeMiddlewares, handler, afterMiddlewares, this.response())
   }
 
-  public patch(path: string, bodyFormat: BodyFormat, handler: any) {
+  public patch(
+    path: string,
+    bodyFormat: BodyFormat,
+    beforeMiddlewares: any = [],
+    handler: any,
+    afterMiddlewares: any = []
+  ) {
     this.app.use(path, this.useBodyFormat(path, bodyFormat))
-    return this.app.patch(path, handler)
+    return this.app.patch(path, beforeMiddlewares, handler, afterMiddlewares, this.response())
   }
 
-  public delete(path: string, bodyFormat: BodyFormat, handler: any) {
+  public delete(
+    path: string,
+    bodyFormat: BodyFormat,
+    beforeMiddlewares: any = [],
+    handler: any,
+    afterMiddlewares: any = []
+  ) {
     this.app.use(path, this.useBodyFormat(path, bodyFormat))
-    return this.app.delete(path, handler)
+    return this.app.delete(path, beforeMiddlewares, handler, afterMiddlewares, this.response())
+  }
+
+  /**
+   * Send the response in the end of all process (before middlewares, method handler and after middlewares).
+   * @returns the response of http request
+   */
+  public response(): Handler {
+    return (req, res, next) => {
+      return res.status(200).send(req.result)
+    }
   }
 
   public listen(port: number): Server {
     return this.app.listen(port)
   }
 
+  /**
+   * Use the right body formatter for tinyhttp
+   * @param path of the url request
+   * @param bodyFormat the body format
+   * @returns
+   */
   public useBodyFormat(path: string, bodyFormat: BodyFormat): Handler {
     switch (bodyFormat) {
       case BodyFormat.RAW:

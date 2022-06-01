@@ -1,4 +1,4 @@
-import {initMockDb} from "./mock";
+import {initMockDb, sequelize} from "./mock";
 import {ModelData, SequelizeBaseRepository} from "@bubojs/sequelize";
 import {User} from "./models/models";
 import {randEmail, randFirstName, randLastName, randPassword} from '@ngneat/falso'
@@ -76,4 +76,6 @@ describe('Sequelize Base Service', () => {
     })
 })
 
-//afterAll(async () => {})
+afterAll(async () => {
+    await sequelize.close()
+})

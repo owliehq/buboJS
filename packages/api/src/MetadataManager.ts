@@ -1,12 +1,25 @@
 import { getProperty, setProperty } from 'dot-prop'
-import { ControllerMetadata, ListMetadata, RouteMetadata, ParameterMetadata } from './interfaces'
+import {
+  ControllerMetadata,
+  ListMetadata,
+  RouteMetadata,
+  ParameterMetadata,
+  MiddlewareMetadata,
+  MiddlewarePosition
+} from './interfaces'
 
 /**
  * Metadata Manager save metadata of controllers and routes
  */
 export class MetadataManager {
+  // Root of all metadata of the app
   public static meta: ListMetadata = { controllers: {} }
 
+  /**
+   * Set metadata of the controller
+   * @param controllerName name of the controller
+   * @param controllerMetadata the metadata of the controller
+   */
   public static setControllerMetadata(controllerName: string, controllerMetadata: any): void {
     const pathControllerMetadata = `controllers.${controllerName}`
     setProperty(
@@ -16,10 +29,21 @@ export class MetadataManager {
     )
   }
 
+  /**
+   * Get metadata of the controller
+   * @param controllerName name of the controller
+   * @returns the metadata of the controller
+   */
   public static getControllerMetadata(controllerName: string): ControllerMetadata {
     return getProperty(this.meta, `controllers.${controllerName}`)
   }
 
+  /**
+   * Set metadata of the route of the controller
+   * @param controllerName name of the controller
+   * @param routeName name of the route
+   * @param routeMetadata the metadata of the route
+   */
   public static setRouteMetadata(controllerName: string, routeName: string, routeMetadata: RouteMetadata): void {
     const pathRouteMetadata = `controllers.${controllerName}.routes.${routeName}`
     setProperty(
@@ -29,11 +53,24 @@ export class MetadataManager {
     )
   }
 
-  public static getRoutesMetadata(controllerName: string, routeName: string): RouteMetadata {
+  /**
+   * Get metadata of the route of the controller
+   * @param controllerName name of the controller
+   * @param routeName name of the route
+   * @returns The metadata of the route
+   */
+  public static getRouteMetadata(controllerName: string, routeName: string): RouteMetadata {
     return getProperty(this.meta, `controllers.${controllerName}.routes.${routeName}`)
   }
 
-  public static setParametersMetadata(
+  /**
+   * Set the parameters according to the route of the controller
+   * @param controllerName name of the controller
+   * @param routeName name of the route
+   * @param index index of the parameter
+   * @param value the value of the parameter
+   */
+  public static setParameterMetadata(
     controllerName: string,
     routeName: string,
     index: number,
@@ -47,7 +84,51 @@ export class MetadataManager {
     )
   }
 
+  /**
+   * Get the parameters according to the route of the controller
+   * @param controllerName name of the controller
+   * @param routeName name of the route
+   * @returns List of parameters
+   */
   public static getParametersMetadata(controllerName: string, routeName: string): ParameterMetadata[] {
     return getProperty(this.meta, `controllers.${controllerName}.routes.${routeName}.parameters`)
+  }
+
+  /**
+   * Set middlewares according to the route of the controller
+   * @param controllerName name of the controller
+   * @param routeName name of the route
+   * @param position before or after the method handler
+   * @param value the middleware to register
+   */
+  public static setMiddlewareMetadata(
+    controllerName: string,
+    routeName: string,
+    position: MiddlewarePosition,
+    value: MiddlewareMetadata
+  ): void {
+    const pathMiddlewareMetadata = `controllers.${controllerName}.routes.${routeName}.middlewares.${position}`
+    const registratedMiddlewares: MiddlewareMetadata[] = getProperty(this.meta, pathMiddlewareMetadata)
+    if (!registratedMiddlewares) {
+      setProperty(this.meta, pathMiddlewareMetadata, [value])
+    } else {
+      registratedMiddlewares.unshift(value)
+      setProperty(this.meta, pathMiddlewareMetadata, registratedMiddlewares)
+    }
+  }
+
+  /**
+   * Get middlewares according to the route of the controller
+   * @param controllerName name of the controller
+   * @param routeName name of the route
+   * @param position before or after the method handler
+   * @returns List of middlewares
+   */
+  public static getMiddlewaresMetadata(
+    controllerName: string,
+    routeName: string,
+    position: MiddlewarePosition
+  ): MiddlewareMetadata[] {
+    return getProperty(this.meta, `controllers.${controllerName}.routes.${routeName}.middlewares.${position}`)
   }
 }
