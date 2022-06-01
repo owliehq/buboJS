@@ -11,25 +11,25 @@ import {CircularHelper} from "../TypeUtils";
 })
 export class Task extends Model{
     @Column
-    title: string
+    declare title: string
 
     @Column(DataType.TEXT)
-    body: string
+    declare body: string
 
     @Column
-    completion: number
+    declare completion: number
 
     @ForeignKey(()=> User)
     @Column
-    userId: number
+    declare userId: number
 
     @BelongsTo(()=> User)
-    user: CircularHelper<User>
+    declare user: CircularHelper<User>
 
     @ForeignKey(()=>Project)
     @Column
-    projectId: number
+    declare projectId: number
     @BelongsTo(()=>Project)
-    project: CircularHelper<Project>
+    declare project: CircularHelper<Project>
 
 }

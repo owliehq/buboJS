@@ -11,14 +11,14 @@ import {CircularHelper} from "../TypeUtils";
 export class Project extends Model{
 
     @Column
-    name: string
+    declare name: string
 
     @Column
-    description: string
+    declare description: string
 
     @HasMany(()=> UserProject)
-    userProjects: CircularHelper<UserProject>[]
+    declare userProjects: CircularHelper<UserProject>[]
 
     @HasMany(()=>Task)
-    tasks: CircularHelper<Task>[]
+    declare tasks: CircularHelper<Task>[]
 }

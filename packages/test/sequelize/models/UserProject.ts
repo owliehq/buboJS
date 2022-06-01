@@ -16,18 +16,18 @@ export enum Rights {
 })
 export class UserProject extends Model{
     @Column(DataType.STRING)
-    rights: Rights
+    declare rights: Rights
 
     @ForeignKey(()=>User)
     @Column
-    userId: number
+    declare userId: number
     @BelongsTo(()=> User)
-    user: CircularHelper<User>
+    declare user: CircularHelper<User>
 
     @ForeignKey(()=>Project)
     @Column
-    projectId: number
+    declare projectId: number
 
     @BelongsTo(()=>Project)
-    project: CircularHelper<Project>
+    declare project: CircularHelper<Project>
 }

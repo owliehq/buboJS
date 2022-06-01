@@ -1,6 +1,7 @@
 import {Column, HasMany, Model, Table} from "sequelize-typescript";
 import {Project, Task, UserProject} from './models'
 import {CircularHelper} from "../TypeUtils";
+import {InferAttributes, InferCreationAttributes} from "sequelize";
 
 @Table({
     tableName: 'user',
@@ -11,21 +12,21 @@ import {CircularHelper} from "../TypeUtils";
 export class User extends Model{
 
     @Column
-    firstname: string
+    declare firstname: string
 
     @Column
-    lastname: string
+    declare lastname: string
 
     @Column
-    password: string
+    declare password: string
 
     @Column
-    email: string
+    declare email: string
 
     @HasMany(()=> UserProject)
-    projects: CircularHelper<UserProject>[]
+    declare projects: CircularHelper<UserProject>[]
 
     @HasMany(()=> Task)
-    tasks: CircularHelper<Task>[]
+    declare tasks: CircularHelper<Task>[]
 
 }
