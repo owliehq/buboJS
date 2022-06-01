@@ -1,15 +1,22 @@
-import { Model, FindOptions, Op, CreateOptions, UpdateOptions, DestroyOptions } from 'sequelize'
+import { Model } from 'sequelize-typescript'
+import {FindOptions, Op, CreateOptions, UpdateOptions, DestroyOptions} from 'sequelize'
 //import { NotFoundError } from '@owliehq/http-errors'
 import { BuboRepository } from "@bubojs/api";
 
 export type ModelQuery<Model> = { [K in keyof Model]?: Model[K] }
 
-export class SequelizeBaseRepository<Type extends Model> extends BuboRepository<Type>{
-    private readonly modelGetter: any // TODO add type
+/* Create a Data only type for model by picking only fields that are not model, function or model array
+*  and omit every field that belong to Model itself */
+export type ModelData<Type> = Omit<Pick<Type, {
+        [K in keyof Type]: Type[K] extends Model | Function | Model[] ? never : K
+    }[keyof Type]>, keyof Model>
 
-    constructor(getter: any) {
+export class SequelizeBaseRepository<Type extends Model> extends BuboRepository<Type>{
+    private readonly model: any // TODO add type
+
+    constructor(model: any) {
         super()
-        this.modelGetter = getter
+        this.model = model
     }
 
     /**
@@ -25,7 +32,7 @@ export class SequelizeBaseRepository<Type extends Model> extends BuboRepository<
     ): Promise<Type | null> {
         let opt: FindOptions = options ? options : {}
         opt.where = { [key]: value }
-        return await this.modelGetter().findOne(opt) as Promise<Type | null>
+        return await this.model.findOne(opt) as Promise<Type | null>
     }
 
     /**
@@ -41,10 +48,10 @@ export class SequelizeBaseRepository<Type extends Model> extends BuboRepository<
     ): Promise<Type> {
         let opt: FindOptions = options ? options : {}
         opt.where = { [key]: value }
-        const result = await this.modelGetter().findOne(opt)
+        const result = await this.model.findOne(opt)
         //TODO add errors
         //if (!result) throw new NotFoundError(this.modelGetter().name)
-        if (!result) throw new Error(`${this.modelGetter().name} not found`)
+        if (!result) throw new Error(`${this.model.name} not found`)
         return result as Type
     }
 
@@ -61,10 +68,10 @@ export class SequelizeBaseRepository<Type extends Model> extends BuboRepository<
     ): Promise<Array<Type>> {
         let opt: FindOptions = options ? options : {}
         opt.where = { [key]: value }
-        const result = await this.modelGetter().findAll(opt)
+        const result = await this.model.findAll(opt)
         //TODO add errors
         //if (!result) throw new NotFoundError(this.modelGetter().name)
-        if (!result) throw new Error(`${this.modelGetter().name} not found`)
+        if (!result) throw new Error(`${this.model.name} not found`)
         return result as Array<Type>
     }
 
@@ -77,38 +84,39 @@ export class SequelizeBaseRepository<Type extends Model> extends BuboRepository<
     async deleteBy<Key extends keyof Type>(key: Key, value: Type[Key], options?: Omit<FindOptions, 'where'>): Promise<void> {
         let opt: FindOptions = options ? options: {}
         opt.where = {[key]: value}
-        return await this.modelGetter().destroy(opt)
+        return await this.model.destroy(opt)
     }
 
     async findAllMatching(query: ModelQuery<Type>, options?: Omit<FindOptions, 'where'>): Promise<Array<Type> | undefined> {
         let opt: FindOptions = options ? options : {}
         opt.where = Object.assign({}, query) as any
-        return await this.modelGetter().findAll(opt) as Array<Type> | undefined
+        return await this.model.findAll(opt) as Array<Type> | undefined
     }
 
-    async create(data: { [K in keyof Type]: Type[K] }, options: CreateOptions): Promise<Type> {
-        return await this.modelGetter().create(data, options)
+    async create(data: ModelData<Type>, options?: CreateOptions): Promise<Type> {
+        return await this.model.create(data, options)
     }
 
-    async getOne(pk: string, options: FindOptions): Promise<Type> {
-        const result = await this.modelGetter().findByPk(pk,options)
+    async getOne(pk: string, options?: FindOptions): Promise<Type> {
+        const result = await this.model.findByPk(pk,options)
         //TODO add errors
         //if (!result) throw new NotFoundError(this.modelGetter().name)
-        if (!result) throw new Error(`${this.modelGetter().name} not found`)
+        if (!result) throw new Error(`${this.model.name} not found`)
         return result as Type
     }
 
-    async getMany(options: FindOptions): Promise<Array<Type>> {
-        return await this.modelGetter().findAll(options) as Array<Type>
+    async getMany(options?: FindOptions): Promise<Array<Type>> {
+        return await this.model.findAll(options) as Array<Type>
     }
 
-    async update(pk: string, data: { [K in keyof Type]?: Type[K] }, options: UpdateOptions): Promise<Type> {
+    async update(pk: string, data: Partial<ModelData<Type>>, options?: UpdateOptions): Promise<Type> {
         let findOptions : FindOptions = options ? { transaction: options.transaction } : {}
-        let original = await this.modelGetter().findByPk(pk, findOptions) as Type
+        let original = await this.model.findByPk(pk, findOptions) as Type
         return await original.update(data, options)
     }
 
-    async delete(pk: string, options: DestroyOptions): Promise<void>{
-        await this.modelGetter().destroy(pk, options)
+    async delete(pk: string, options?: DestroyOptions): Promise<void>{
+        const item = await this.getOne(pk, {transaction: options?.transaction})
+        return item.destroy(options)
     }
 }
