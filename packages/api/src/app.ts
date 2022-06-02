@@ -51,11 +51,15 @@ export class App {
     const controllerResolver = new HttpResolver(adapter)
     controllerResolver.controllerRevolve(MetadataManager.meta)
 
-    const serviceResolver = new ServiceResolver(adapter)
-    serviceResolver.serviceResolve(MetadataManager.meta)
+    this.initApiModule()
 
     // TODO one last boucle on service to instanciate service
 
     return this.server.listen(3000)
+  }
+
+  public initApiModule() {
+    const serviceResolver = new ServiceResolver()
+    serviceResolver.serviceResolve(MetadataManager.meta)
   }
 }

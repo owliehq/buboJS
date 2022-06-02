@@ -1,11 +1,15 @@
-import { Controller, Inject, ObjectType, Service } from '../../src'
+import { app, Controller, Inject, ObjectType, Service } from '../../src'
 import { MetadataManager } from '../../src/MetadataManager'
+
+beforeAll(() => {
+  app.initApiModule()
+})
 
 describe('inject decorator', () => {
   const SERVICE_NAME = 'BasicServiceInjected'
   const SERVICE_NAME_PROPERTY = 'basicServiceInjected'
-  const ANOTHER_SERVICE_NAME = 'AnotherBasicServiceInject'
-  const ANOTHER_SERVICE_NAME_PROPERTY = 'anotherBasicServiceInject'
+  const ANOTHER_SERVICE_NAME = 'AnotherBasicServiceInjected'
+  const ANOTHER_SERVICE_NAME_PROPERTY = 'anotherBasicServiceInjected'
   const CLASS_NAME = 'ClassBasicInjectedTest'
 
   @Service()
@@ -45,7 +49,7 @@ describe('inject decorator', () => {
   })
 
   it('should instantiate service inside basic class', () => {
-    const basicClass = new ClassBasicInjectedTest()
+    const basicClass = MetadataManager.getControllerMetadata(CLASS_NAME).instance
 
     expect(basicClass).toBeTruthy()
     expect(basicClass.basicServiceInjected).toBeTruthy()
@@ -53,7 +57,7 @@ describe('inject decorator', () => {
   })
 
   it('should instantiate another service inside basic class', () => {
-    const basicClass = new ClassBasicInjectedTest()
+    const basicClass = MetadataManager.getControllerMetadata(CLASS_NAME).instance
 
     expect(basicClass).toBeTruthy()
     expect(basicClass.anotherBasicServiceInjected).toBeTruthy()
@@ -61,50 +65,50 @@ describe('inject decorator', () => {
   })
 })
 
-// describe('circular injection on inject decorator', () => {
-//   const SERVICE_A = 'ServiceA'
-//   const SERVICE_B = 'ServiceB'
-//   @Service()
-//   class ServiceA {
-//     public value = 1
-//     @Inject('ServiceB') public serviceB: ObjectType<ServiceB>
+describe('circular injection on inject decorator', () => {
+  const SERVICE_A = 'ServiceA'
+  const SERVICE_B = 'ServiceB'
+  @Service()
+  class ServiceA {
+    public value = 1
+    @Inject('ServiceB') public serviceB: ObjectType<ServiceB>
 
-//     public sumWithB() {
-//       return this.value + this.serviceB.value
-//     }
-//   }
+    public sumWithB() {
+      return this.value + this.serviceB.value
+    }
+  }
 
-//   @Service()
-//   class ServiceB {
-//     public value = 2
-//     @Inject('ServiceA') serviceA: ObjectType<ServiceA>
+  @Service()
+  class ServiceB {
+    public value = 2
+    @Inject('ServiceA') serviceA: ObjectType<ServiceA>
 
-//     public sumWithA() {
-//       return this.value + this.serviceA.value
-//     }
-//   }
+    public sumWithA() {
+      return this.value + this.serviceA.value
+    }
+  }
 
-//   it('should save service A', () => {
-//     const serviceMetadata = MetadataManager.getServiceMetadata(SERVICE_A)
-//     expect(serviceMetadata).toBeTruthy()
-//   })
+  it('should save service A', () => {
+    const serviceMetadata = MetadataManager.getServiceMetadata(SERVICE_A)
+    expect(serviceMetadata).toBeTruthy()
+  })
 
-//   it('should save service B', () => {
-//     const serviceMetadata = MetadataManager.getServiceMetadata(SERVICE_B)
-//     expect(serviceMetadata).toBeTruthy()
-//   })
+  it('should save service B', () => {
+    const serviceMetadata = MetadataManager.getServiceMetadata(SERVICE_B)
+    expect(serviceMetadata).toBeTruthy()
+  })
 
-//   it('should instantiate service B inside service A', () => {
-//     const serviceA = new ServiceA()
-//     expect(serviceA).toBeTruthy()
-//     expect(serviceA.serviceB).toBeTruthy()
-//     expect(serviceA.sumWithB()).toBe(3)
-//   })
+  it('should instantiate service B inside service A', () => {
+    const serviceA = MetadataManager.getServiceMetadata(SERVICE_A)
+    expect(serviceA).toBeTruthy()
+    expect(serviceA.serviceB).toBeTruthy()
+    expect(serviceA.sumWithB()).toBe(3)
+  })
 
-//   it('should instantiate service A inside service B', () => {
-//     const serviceB = new ServiceB()
-//     expect(serviceB).toBeTruthy()
-//     expect(serviceB.serviceA).toBeTruthy()
-//     expect(serviceB.sumWithA()).toBe(3)
-//   })
-// })
+  it('should instantiate service A inside service B', () => {
+    const serviceB = MetadataManager.getServiceMetadata(SERVICE_B)
+    expect(serviceB).toBeTruthy()
+    expect(serviceB.serviceA).toBeTruthy()
+    expect(serviceB.sumWithA()).toBe(3)
+  })
+})
