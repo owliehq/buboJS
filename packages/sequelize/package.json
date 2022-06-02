@@ -1,0 +1,12 @@
+{
+  "name": "@bubojs/sequelize",
+  "version": "0.0.1",
+  "main": "src/index.ts",
+  "author": "owlie",
+  "license": "MIT",
+  "dependencies": {
+    "@bubojs/api": "^0.0.1",
+    "sequelize": "^6.19.2",
+    "sequelize-typescript": "^2.1.3"
+  }
+}
