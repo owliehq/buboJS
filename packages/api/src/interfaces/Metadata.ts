@@ -13,11 +13,14 @@ export interface RouteMetadata {
 
 export interface ListMetadata {
   controllers: { [id: string]: ControllerMetadata }
+  services: { [id: string]: any }
+  injections: { [id: string]: any }
 }
 
 export interface ControllerMetadata {
-  routes: { [id: string]: RouteMetadata }
+  routes?: { [id: string]: RouteMetadata }
   path: string
+  instance: any
 }
 
 export interface ParameterMetadata {

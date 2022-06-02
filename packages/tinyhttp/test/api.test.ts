@@ -93,6 +93,38 @@ describe('APIModule', () => {
         expect(response.text).toEqual('good year 17 pouces')
       })
   })
+
+  it('should return all cars', async () => {
+    await request(app)
+      .get('/cars/all')
+      .expect(200)
+      .then(response => {
+        expect(response.body).toBeTruthy()
+        expect(response.body).toEqual(['car1', 'car2', 'car3', 'car4', 'car5'])
+      })
+  })
+
+  it('should return all wheels', async () => {
+    await request(app)
+      .get('/cars/wheels/all')
+      .expect(200)
+      .then(response => {
+        expect(response.body).toBeTruthy()
+        expect(response.body).toEqual(['wheel1', 'wheel2', 'wheel3'])
+      })
+  })
+
+  it('should return cars by user', async () => {
+    await request(app)
+      .get('/cars/users/2')
+      .expect(200)
+      .then(response => {
+        expect(response.body).toBeTruthy()
+        expect(response.body).toEqual(['car1', 'car2', 'car3', 'car4'])
+      })
+  })
 })
 
 afterAll(async () => {})
+
+export default app

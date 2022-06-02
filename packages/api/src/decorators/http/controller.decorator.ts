@@ -13,7 +13,10 @@ export const Controller =
   (constructor: T) => {
     const { name } = constructor
 
-    MetadataManager.setControllerMetadata(name, { path: `/${controllerName}` })
+    // TODO faire un getter qui retourne le constructeur si besoin de l'instancier plus tard dans le bind
+    const instance = new constructor()
+
+    MetadataManager.setControllerMetadata(name, { path: `/${controllerName}`, instance })
     const defaultRouteBuilder = new DefaultRouteBuilder(name)
     const defaultActionsRoutes: string[] = Object.values(DefaultActions)
     const defaultActions = Object.getOwnPropertyNames(constructor.prototype)
@@ -22,6 +25,14 @@ export const Controller =
         //MetadataManager.setRouteMetadata(name, routeName, {})
         defaultRouteBuilder.registerDefaultRouteMetadata(routeName)
       })
+
+    const routes = MetadataManager.getRoutesMetadata(name)
+
+    // We must bind all methods to be able to use the context of controller ("this") in it
+    const metadataRoutes = Object.entries(routes)
+    metadataRoutes.map(([key, metadataRoute]) => {
+      metadataRoute.handler = metadataRoute.handler.bind(instance)
+    })
   }
 
 /**
