@@ -14,21 +14,21 @@
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
     "setup": "yarn && yarn run bootstrap",
     "bootstrap": "lerna bootstrap",
-    "build": "lerna exec -- yarn build"
+    "build": "lerna run build"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.0.0",
-    "@commitlint/config-conventional": "^17.0.0",
-    "@types/jest": "^27.5.1",
-    "@types/node": "^17.0.34",
+    "@commitlint/cli": "^17.0.2",
+    "@commitlint/config-conventional": "^17.0.2",
+    "@types/jest": "^28.1.0",
+    "@types/node": "^17.0.39",
     "commitizen": "^4.2.4",
     "cross-env": "^7.0.3",
     "cz-conventional-changelog": "^3.3.0",
     "husky": "^8.0.1",
     "jest": "28.1.0",
     "lerna": "^5.0.0",
-    "ts-jest": "^28.0.2",
-    "ts-node": "^10.7.0",
+    "ts-jest": "^28.0.4",
+    "ts-node": "^10.8.0",
     "typescript": "^4.7.2"
   },
   "config": {

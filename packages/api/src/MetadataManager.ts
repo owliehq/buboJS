@@ -5,7 +5,8 @@ import {
   RouteMetadata,
   ParameterMetadata,
   MiddlewareMetadata,
-  MiddlewarePosition
+  MiddlewarePosition,
+  Class
 } from './interfaces'
 
 /**
@@ -156,8 +157,9 @@ export class MetadataManager {
    * @param serviceName name of the service
    * @returns the metadata of the service
    */
-  public static getServiceMetadata(serviceName: string): any {
-    return getProperty(this.meta, `services.${serviceName}`)
+  public static getServiceMetadata<T>(serviceName: string | Class<T>): T {
+    const name = typeof serviceName === 'string' ? serviceName : serviceName.name
+    return getProperty(this.meta, `services.${name}`)
   }
 
   /**

@@ -1,6 +1,5 @@
 import 'reflect-metadata'
 import { MetadataManager } from '../../MetadataManager'
-import { ObjectType } from '../../utils'
 
 export function Inject<T = any>(token: string): (target: Object, propertyName: string) => void
 export function Inject(target: Object, propertyName: string): void

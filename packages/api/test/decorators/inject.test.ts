@@ -99,14 +99,14 @@ describe('circular injection on inject decorator', () => {
   })
 
   it('should instantiate service B inside service A', () => {
-    const serviceA = MetadataManager.getServiceMetadata(SERVICE_A)
+    const serviceA = MetadataManager.getServiceMetadata(SERVICE_A) as ServiceA
     expect(serviceA).toBeTruthy()
     expect(serviceA.serviceB).toBeTruthy()
     expect(serviceA.sumWithB()).toBe(3)
   })
 
   it('should instantiate service A inside service B', () => {
-    const serviceB = MetadataManager.getServiceMetadata(SERVICE_B)
+    const serviceB = MetadataManager.getServiceMetadata(ServiceB)
     expect(serviceB).toBeTruthy()
     expect(serviceB.serviceA).toBeTruthy()
     expect(serviceB.sumWithA()).toBe(3)
