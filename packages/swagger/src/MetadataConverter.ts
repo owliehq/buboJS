@@ -1,76 +1,37 @@
-import { ControllerMetadata } from '@bubojs/api'
+import { ListMetadata, MetadataManager } from '@bubojs/api'
+import { App, Request, Response } from '@tinyhttp/app'
+import { readFileSync } from 'fs'
+import { dirname, resolve } from 'path'
+import { fileURLToPath } from 'url'
+import { DocBuilder } from './DocBuilder'
 import { OpenApiJSONType } from './interfaces'
 
 export class MetadataConverter {
-  convertController(controllerMetadata: ControllerMetadata): OpenApiJSONType {
-    return {
-      openapi: '3.0.3',
-      info: {
-        title: 'api sample',
-        version: 'v1'
-      },
-      paths: {
-        '/tasks': {
-          get: {
-            description: 'R',
-            responses: {
-              '200': {
-                description: 'Success',
-                content: {
-                  'text/plain': {
-                    schema: {
-                      $ref: '#/components/schemas/Task'
-                    }
-                  },
-                  'application/json': {
-                    schema: {
-                      $ref: '#/components/schemas/Task'
-                    }
-                  },
-                  'text/json': {
-                    schema: {
-                      $ref: '#/components/schemas/Task'
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      components: {
-        schemas: {
-          Task: {
-            type: 'object',
-            properties: {
-              id: {
-                type: 'string',
-                nullable: true,
-                readOnly: true
-              },
-              content: {
-                type: 'string',
-                nullable: true,
-                readOnly: true
-              }
-            },
-            additionalProperties: false
-          }
-        },
-        securitySchemes: {
-          bearerAuth: {
-            type: 'http',
-            description: 'JWT Authorization header using the Bearer scheme.',
-            scheme: 'bearer',
-            bearerFormat: 'JWT'
-          }
-        }
-      },
-      security: [
-        {
-          bearerAuth: []
-        }
-      ]
-    }
+  public convertController(appMetadata: ListMetadata): OpenApiJSONType {
+    const docBuilder = new DocBuilder()
+    return docBuilder
+      .registerInfo({ title: 'api sample', version: 'v1' })
+      .registerControllers(appMetadata.controllers)
+      .registerModels()
+      .buildDoc()
+  }
+
+  public serveDoc() {
+    const docs = this.convertController(MetadataManager.meta)
+    const strDocs = JSON.stringify(docs)
+
+    const modulePath = fileURLToPath(import.meta.url)
+    const __dirname = dirname(modulePath)
+
+    const template = readFileSync(resolve(__dirname, 'template.html'), 'utf8')
+    const html = template.replace('"##docs##"', strDocs).replace('"##title##"', 'api sample test')
+
+    const app = new App()
+    app.get('/', (_req: Request, res: Response) => {
+      res.status(200).send(html)
+    })
+
+    app.listen(3001)
+    console.log('listen 3001')
   }
 }

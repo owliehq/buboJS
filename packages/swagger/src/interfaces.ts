@@ -11,7 +11,7 @@ export type OpenApiJSONType = {
   externalDocs?: ExternalDocsType
 }
 
-type InfoType = {
+export type InfoType = {
   title: string
   description?: string
   termsOfService?: string
@@ -51,7 +51,7 @@ type ComponentType = {
   callbacks?: { [key: string]: CallbackType | ReferenceType }
 }
 
-type PathType = {
+export type PathType = {
   [path: string]: PathItemType
 }
 
@@ -71,7 +71,7 @@ type PathItemType = {
   parameters?: (ParameterType | ReferenceType)[]
 }
 
-type OperationType = {
+export type OperationType = {
   tags?: string[]
   summary?: string
   description?: string

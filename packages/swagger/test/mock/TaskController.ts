@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Params, Post, Put } from '@bubojs/api'
 
 @Controller('tasks')
-class TaskController {
+export class TaskController {
   @Get('/')
   getTasks() {}
 
