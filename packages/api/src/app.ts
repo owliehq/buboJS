@@ -10,7 +10,6 @@ export class App {
   constructor() {}
 
   public async startServer(config: ServerConfig) {
-    console.log('APP')
     // if (config.httpFramework === HttpFrameworkEnum.TINY_HTTP) {
     //   this.httpInstance = new TinyHttpAdapter();
     //   this.httpInstance.app.get(
@@ -52,8 +51,6 @@ export class App {
     controllerResolver.controllerRevolve(MetadataManager.meta)
 
     this.initApiModule()
-
-    // TODO one last boucle on service to instanciate service
 
     return this.server.listen(3000)
   }

@@ -30,16 +30,22 @@ const buildMethod =
     )
 
     const handler = async function (this: any, req: any, res: any, next: Function) {
-      //apply parameters decorator on function
-      const result = descriptor.value.apply(
-        this,
-        parameters ? Object.values(parameters).map((param: any) => param.getValue(req)) : []
-      )
+      try {
+        //apply parameters decorator on function
+        const result = await descriptor.value.apply(
+          this,
+          parameters ? Object.values(parameters).map((param: any) => param.getValue(req)) : []
+        )
 
-      // We save result in result property of req
-      // This result will be send in response() method. See AdapterHttpModule.ts
-      req.result = result
-      next()
+        // We save result in result property of req
+        // This result will be send in response() method. See AdapterHttpModule.ts
+        req.result = result
+        next()
+      } catch (error) {
+        const statusCode = error.statusCode || 500
+        const { message } = error
+        res.status(statusCode).json({ statusCode, message })
+      }
     }
 
     MetadataManager.setRouteMetadata(target.constructor.name, propertyKey, {

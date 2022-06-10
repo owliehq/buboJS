@@ -12,6 +12,8 @@ describe('controllers decorator', () => {
 
     [DefaultActions.CREATE_ONE]() {}
 
+    [DefaultActions.UPDATE_ONE]() {}
+
     [DefaultActions.DELETE_ONE]() {}
   }
 
@@ -27,6 +29,11 @@ describe('controllers decorator', () => {
 
   it('should create create_one route', () => {
     const routeMetadata = MetadataManager.getRouteMetadata(CONTROLLER_NAME, DefaultActions.CREATE_ONE)
+    expect(routeMetadata).toBeTruthy()
+  })
+
+  it('should create update_one route', () => {
+    const routeMetadata = MetadataManager.getRouteMetadata(CONTROLLER_NAME, DefaultActions.UPDATE_ONE)
     expect(routeMetadata).toBeTruthy()
   })
 

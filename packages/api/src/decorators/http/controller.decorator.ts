@@ -1,6 +1,7 @@
 import { DefaultRouteBuilder } from '../../builder'
 import { DefaultActions } from '../../interfaces'
 import { MetadataManager } from '../../MetadataManager'
+import { BuboRepository } from '../../models'
 
 /**
  * Controller decorator
@@ -13,17 +14,17 @@ export const Controller =
   (constructor: T) => {
     const { name } = constructor
 
-    // TODO faire un getter qui retourne le constructeur si besoin de l'instancier plus tard dans le bind
     const instance = new constructor()
 
     MetadataManager.setControllerMetadata(name, { path: `/${controllerName}`, instance })
-    const defaultRouteBuilder = new DefaultRouteBuilder(name)
+    const defaultRouteBuilder = new DefaultRouteBuilder(name, params.repository)
     const defaultActionsRoutes: string[] = Object.values(DefaultActions)
     const defaultActions = Object.getOwnPropertyNames(constructor.prototype)
       .filter(routeName => defaultActionsRoutes.includes(routeName))
       .forEach((routeName: DefaultActions) => {
         //MetadataManager.setRouteMetadata(name, routeName, {})
-        defaultRouteBuilder.registerDefaultRouteMetadata(routeName)
+        if (params.repository) defaultRouteBuilder.registerDefaultRouteMetadata(routeName)
+        else throw Error('need repository in controller params')
       })
 
     const routes = MetadataManager.getRoutesMetadata(name)
@@ -38,4 +39,6 @@ export const Controller =
 /**
  * controller params
  */
-export interface ControllerParams {}
+export interface ControllerParams {
+  repository?: BuboRepository<unknown>
+}
