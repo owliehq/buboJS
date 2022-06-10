@@ -28,11 +28,7 @@ export class TinyHttpAdapter implements AdapterHttpModule<App> {
   public stopServer() {}
 
   public get(path: string, beforeMiddlewares: any = [], handler: any, afterMiddlewares: any = []) {
-    const log = (req: Request, res: Response, next: Function) => {
-      console.log('get middleware')
-      next()
-    }
-    return this.app.get(path, log, beforeMiddlewares, handler, afterMiddlewares, this.response())
+    return this.app.get(path, beforeMiddlewares, handler, afterMiddlewares, this.response())
   }
 
   public async post(
@@ -42,12 +38,14 @@ export class TinyHttpAdapter implements AdapterHttpModule<App> {
     handler: any,
     afterMiddlewares: any = []
   ) {
-    this.app.use(path, this.useBodyFormat(path, bodyFormat))
-    const log = (req: Request, res: Response, next: Function) => {
-      console.log('post middleware')
-      next()
-    }
-    return this.app.post(path, log, beforeMiddlewares, handler, afterMiddlewares, this.response())
+    return this.app.post(
+      path,
+      this.useBodyFormat(bodyFormat),
+      beforeMiddlewares,
+      handler,
+      afterMiddlewares,
+      this.response()
+    )
   }
 
   public async put(
@@ -57,12 +55,14 @@ export class TinyHttpAdapter implements AdapterHttpModule<App> {
     handler: any,
     afterMiddlewares: any = []
   ) {
-    this.app.use(path, this.useBodyFormat(path, bodyFormat))
-    const log = (req: Request, res: Response, next: Function) => {
-      console.log('put middleware')
-      next()
-    }
-    return this.app.put(path, log, beforeMiddlewares, handler, afterMiddlewares, this.response())
+    return this.app.put(
+      path,
+      this.useBodyFormat(bodyFormat),
+      beforeMiddlewares,
+      handler,
+      afterMiddlewares,
+      this.response()
+    )
   }
 
   public async patch(
@@ -72,12 +72,14 @@ export class TinyHttpAdapter implements AdapterHttpModule<App> {
     handler: any,
     afterMiddlewares: any = []
   ) {
-    this.app.use(path, this.useBodyFormat(path, bodyFormat))
-    const log = (req: Request, res: Response, next: Function) => {
-      console.log('patch middleware')
-      next()
-    }
-    return this.app.patch(path, log, beforeMiddlewares, handler, afterMiddlewares, this.response())
+    return this.app.patch(
+      path,
+      this.useBodyFormat(bodyFormat),
+      beforeMiddlewares,
+      handler,
+      afterMiddlewares,
+      this.response()
+    )
   }
 
   public delete(
@@ -87,12 +89,14 @@ export class TinyHttpAdapter implements AdapterHttpModule<App> {
     handler: any,
     afterMiddlewares: any = []
   ) {
-    // this.app.use(path, this.useBodyFormat(path, bodyFormat)) //updateOne deleteOne
-    const log = (req: Request, res: Response, next: Function) => {
-      console.log('delete middleware')
-      next()
-    }
-    return this.app.delete(path, log, beforeMiddlewares, handler, afterMiddlewares, this.response())
+    return this.app.delete(
+      path,
+      this.useBodyFormat(bodyFormat),
+      beforeMiddlewares,
+      handler,
+      afterMiddlewares,
+      this.response()
+    )
   }
 
   /**
@@ -115,7 +119,7 @@ export class TinyHttpAdapter implements AdapterHttpModule<App> {
    * @param bodyFormat the body format
    * @returns
    */
-  public useBodyFormat(path: string, bodyFormat: BodyFormat): Handler {
+  public useBodyFormat(bodyFormat: BodyFormat): Handler {
     switch (bodyFormat) {
       case BodyFormat.RAW:
         return raw()

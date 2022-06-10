@@ -16,7 +16,6 @@ export class User extends Model {
   @Column
   declare password: string
 
-  @Unique
   @Column
   declare email: string
 }
