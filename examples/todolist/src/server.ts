@@ -1,7 +1,6 @@
 import { app } from '../../../packages/api/src'
 import { TinyHttpAdapter } from '../../../packages/tinyhttp/src'
 import { startDatabase } from './config/database'
-import { UsersController } from './features/users/UsersController'
 
 export const startServer = () =>
   new Promise(async (resolve, reject) => {
@@ -11,7 +10,6 @@ export const startServer = () =>
 
     await startDatabase()
 
-    UsersController.name
     const server = await app.initHttpModule(new TinyHttpAdapter())
 
     console.log(`=========================`)
