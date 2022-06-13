@@ -7,6 +7,7 @@ import { BuboRepository } from '../../models'
  * Controller decorator
  * @param controllerName controller's name
  * @param params controller's params
+ * @param params.repository optional repository used for default routes
  * @returns
  */
 export const Controller =
