@@ -1,0 +1,19 @@
+FROM node:14.17-alpine
+
+# RUN apk add --no-cache make gcc g++ python3
+
+WORKDIR /home/node/app
+ADD ./package*.json ./
+
+# ADD ./packages/zohoservice/package*.json ./packages/zohoservice/
+# ADD ./packages/zohoservice/src/ ./packages/zohoservice/
+
+# use this only when you need multiple packages inside the api package
+# disable this reduce the time needed to build the docker image
+RUN yarn
+
+WORKDIR /home/node/app/
+
+# RUN npm i
+
+USER node

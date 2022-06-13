@@ -12,3 +12,21 @@ services:
       POSTGRES_USER: 'todolist'
       POSTGRES_PASSWORD: 'todolist'
       POSTGRES_DB: 'todolist'
+  
+  api-todolist:
+    depends_on:
+      - postgres-todolist
+    build: 
+      context: .
+      dockerfile: DockerFile
+    container_name: api-todolist
+    expose:
+      - "3000"
+    ports:
+      - "3000:3000"
+      - "9229:9229"
+    volumes:
+      - ./src:/home/node/app/src
+      - ./nodemon.json:/home/node/app/nodemon.json
+      - ../../tsconfig.json:/home/node/app/tsconfig.json
+    command: yarn nodemon
