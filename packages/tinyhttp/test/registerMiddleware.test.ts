@@ -44,8 +44,8 @@ describe('middlewares controller', () => {
       .expect(200)
       .then(response => {
         expect(response.body).toBeTruthy()
-        expect(response.body.id).toBe(1)
-        expect(response.body.model).toBe('voiture')
+        expect(response.body.length).toBeGreaterThan(0)
+        expect(response.body[0]).toBe('findById')
       })
   })
 })

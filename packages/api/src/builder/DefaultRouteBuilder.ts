@@ -1,16 +1,17 @@
 import { RouteMethod } from '../enums'
 import { BodyFormat, DefaultActions, RouteMetadata } from '../interfaces'
 import { MetadataManager } from '../MetadataManager'
+import { BuboRepository } from '../models'
 
 /**
  * regroup building of default routes into metadata manager
  */
 export class DefaultRouteBuilder {
-  constructor(private controllerName: string) {}
+  constructor(private controllerName: string, private repository?: BuboRepository<any>) {}
 
   /**
    * register route depending of routeName
-   * @param routeName
+   * @param routeName routename of default actions
    */
   public registerDefaultRouteMetadata(routeName: DefaultActions) {
     switch (routeName) {
@@ -23,6 +24,9 @@ export class DefaultRouteBuilder {
       case DefaultActions.CREATE_ONE:
         this.registerCreateOneRoute()
         break
+      case DefaultActions.UPDATE_ONE:
+        this.registerUpdateOneRoute()
+        break
       case DefaultActions.DELETE_ONE:
         this.registerDeleteOneRoute()
         break
@@ -31,7 +35,7 @@ export class DefaultRouteBuilder {
 
   private createWrapper = (handler: Function) => {
     return async function (this: any, req: any, res: any, next: Function) {
-      req.result = handler(req, res, next)
+      req.result = await handler(req, res, next)
       next()
     }
   }
@@ -43,9 +47,9 @@ export class DefaultRouteBuilder {
     const metadata: RouteMetadata = {
       path: '/:id',
       method: RouteMethod.GET,
-      handler: this.createWrapper((req: any, res: any, next: Function) => {
-        //find one
-        return { id: 1, model: 'voiture' }
+      handler: this.createWrapper(async (req: any, res: any, next: Function) => {
+        const { params } = req
+        return this.repository.findById(params.id)
       }),
       parameters: []
     }
@@ -59,10 +63,8 @@ export class DefaultRouteBuilder {
     const metadata: RouteMetadata = {
       path: '/',
       method: RouteMethod.GET,
-      handler: this.createWrapper((req: any, res: any, next: Function) => {
-        //find
-        // return find
-        return [{ id: 1, model: 'voiture' }]
+      handler: this.createWrapper(async (req: any, res: any, next: Function) => {
+        return this.repository.findAll()
       }),
       parameters: []
     }
@@ -77,12 +79,27 @@ export class DefaultRouteBuilder {
       path: '/',
       method: RouteMethod.POST,
       handler: this.createWrapper((req: any, res: any, next: Function) => {
-        return { id: 2, model: 'car' }
+        return this.repository.create(req.body)
       }),
       parameters: [],
       bodyFormat: BodyFormat.JSON
     }
     MetadataManager.setRouteMetadata(this.controllerName, DefaultActions.CREATE_ONE, metadata)
+  }
+
+  private registerUpdateOneRoute() {
+    const metadata: RouteMetadata = {
+      path: '/:id',
+      method: RouteMethod.PUT,
+      handler: this.createWrapper((req: any, res: any, next: Function) => {
+        const { params, body } = req
+        console.log('registerUpdateOneRoute', params, body)
+        return this.repository.update(params.id, body)
+      }),
+      parameters: [],
+      bodyFormat: BodyFormat.JSON
+    }
+    MetadataManager.setRouteMetadata(this.controllerName, DefaultActions.UPDATE_ONE, metadata)
   }
 
   /**
@@ -93,8 +110,8 @@ export class DefaultRouteBuilder {
       path: '/:id',
       method: RouteMethod.DELETE,
       handler: this.createWrapper((req: any, res: any, next: Function) => {
-        //delete
-        return { message: 'deleted' }
+        const { params } = req
+        return this.repository.delete(params.id)
       }),
       parameters: []
     }
