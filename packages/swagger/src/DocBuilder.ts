@@ -1,11 +1,10 @@
-import { ControllerMetadata, RouteMetadata } from '@bubojs/api'
+import { ControllerMetadata, HeaderType, ParameterMetadata, RouteMetadata } from '@bubojs/api'
 import { setProperty } from 'dot-prop'
-import { InfoType, OpenApiJSONType, OperationType, PathType } from './interfaces'
+import { InfoType, OpenApiJSONType, OperationType, ParameterType, PathType } from './interfaces'
 
 export class DocBuilder {
   private openApiJSON: OpenApiJSONType
   private controllersMetadata: { [id: string]: ControllerMetadata }
-  private modelsMetadata: void
 
   constructor() {
     this.openApiJSON = {
@@ -29,25 +28,31 @@ export class DocBuilder {
     return this
   }
 
-  private createController(controllerMetadata: ControllerMetadata) {
+  public createController(controllerMetadata: ControllerMetadata) {
     const paths: PathType = {}
 
     const controllerPath = controllerMetadata.path
     const routes = controllerMetadata.routes
 
     Object.entries(routes).forEach(([key, routeMetadata]) => {
-      this.createRoute(paths, controllerPath, routeMetadata)
+      const routePath = routeMetadata.path
+      const method = routeMetadata.method
+      setProperty(paths, `${controllerPath}${routePath}.${method.toLowerCase()}`, this.createRoute(routeMetadata))
     })
 
     this.openApiJSON.paths = paths
   }
 
-  private createRoute(paths: PathType, path: string, routeMetadata: RouteMetadata) {
-    const routePath = routeMetadata.path
-    const method = routeMetadata.method
+  public createRoute(routeMetadata: RouteMetadata) {
     const parameterMetadata = routeMetadata.parameters
+    const parameters = parameterMetadata
+      ? Object.entries(parameterMetadata)
+          .map(([key, parameterMetadata]) => this.createParameter(parameterMetadata))
+          .filter(parameterType => parameterType)
+      : []
 
     let config: OperationType = {
+      parameters,
       responses: {
         '200': {
           description: 'OK',
@@ -56,7 +61,26 @@ export class DocBuilder {
       }
     }
 
-    setProperty(paths, `${path}${routePath}.${method.toLowerCase()}`, config)
+    return config
+  }
+
+  public createParameter(parameterMetadata: ParameterMetadata): ParameterType {
+    const inValues = {
+      [HeaderType.QUERY]: 'query',
+      [HeaderType.HEADER]: 'header',
+      [HeaderType.PARAM]: 'path',
+      COOKIE: 'cookie'
+    } as const
+    if (
+      (parameterMetadata.headerType === HeaderType.PARAM ||
+        parameterMetadata.headerType === HeaderType.QUERY ||
+        parameterMetadata.headerType === HeaderType.HEADER) &&
+      parameterMetadata.name
+    )
+      return {
+        in: inValues[parameterMetadata.headerType],
+        name: parameterMetadata.name
+      }
   }
 
   public buildDoc(): OpenApiJSONType {

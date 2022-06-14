@@ -1,4 +1,4 @@
-import { RouteMethod } from '../enums'
+import { HeaderType, RouteMethod } from '../enums'
 import { BodyFormat } from './DecoratorOptions'
 
 export interface RouteMetadata {
@@ -22,6 +22,8 @@ export interface ControllerMetadata {
 
 export interface ParameterMetadata {
   getValue: Function
+  name?: string
+  headerType: HeaderType
 }
 
 export interface MiddlewareMetadata {

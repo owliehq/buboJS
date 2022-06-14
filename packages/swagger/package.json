@@ -14,7 +14,7 @@
   ],
   "scripts": {
     "build": "rimraf ./dist && tsc -p tsconfig.build.json",
-    "start": "node --experimental-specifier-resolution=node  --loader ts-node/esm ./src/index.ts"
+    "start:test": "node --experimental-specifier-resolution=node  --loader ts-node/esm ./test/index.ts"
   },
   "dependencies": {
     "@bubojs/api": "0.0.1",

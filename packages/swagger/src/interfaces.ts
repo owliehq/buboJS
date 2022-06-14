@@ -91,7 +91,7 @@ type ExternalDocsType = {
   url: string
 }
 
-type ParameterType = {
+export type ParameterType = {
   name: string
   in: 'query' | 'header' | 'path' | 'cookie'
   description?: string
