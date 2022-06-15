@@ -122,7 +122,8 @@ export class MetadataManager {
     if (!registratedMiddlewares) {
       setProperty(this.meta, pathMiddlewareMetadata, [value])
     } else {
-      registratedMiddlewares.unshift(value)
+      // TODO check if unshift is needed instead of push
+      registratedMiddlewares.push(value)
       setProperty(this.meta, pathMiddlewareMetadata, registratedMiddlewares)
     }
   }

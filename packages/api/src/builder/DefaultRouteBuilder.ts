@@ -93,7 +93,6 @@ export class DefaultRouteBuilder {
       method: RouteMethod.PUT,
       handler: this.createWrapper((req: any, res: any, next: Function) => {
         const { params, body } = req
-        console.log('registerUpdateOneRoute', params, body)
         return this.repository.update(params.id, body)
       }),
       parameters: [],

@@ -6,8 +6,7 @@ export interface RouteMetadata {
   method: RouteMethod
   parameters: ParameterMetadata[]
   bodyFormat?: BodyFormat
-  beforeMiddlewares?: MiddlewareMetadata[]
-  afterMiddlewares?: MiddlewareMetadata[]
+  middlewares?: Middlewares
   handler: (this: any, req: any, res: any, next: Function) => any
 }
 
@@ -25,6 +24,11 @@ export interface ControllerMetadata {
 
 export interface ParameterMetadata {
   getValue: Function
+}
+
+export interface Middlewares {
+  before?: MiddlewareMetadata[]
+  after?: MiddlewareMetadata[]
 }
 
 export interface MiddlewareMetadata {
