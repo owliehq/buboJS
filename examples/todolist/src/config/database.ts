@@ -1,4 +1,5 @@
 import { Sequelize, SequelizeOptions } from 'sequelize-typescript'
+import { RefreshToken } from '../features/auth/RefreshToken'
 import { User } from '../features/users/User'
 
 export const startDatabase = async () => {
@@ -11,7 +12,7 @@ export const startDatabase = async () => {
   }
 
   const sequelize = new Sequelize('todolist', 'todolist', 'todolist', sequelizeConfig)
-  sequelize.addModels([User])
+  sequelize.addModels([RefreshToken, User])
 
   const sequelizeOptions = { alter: true, force: false }
   await sequelize.authenticate()

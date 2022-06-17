@@ -8,6 +8,7 @@ import {
   Query
 } from '../../../../../packages/api/src'
 import { ValidationMiddleware } from '../../../../../packages/catalog/src/middlewares'
+import { AuthMiddleware } from '../../../../../packages/catalog/src/middlewares/AuthMiddleware'
 import { UserRepository } from './UserRepository'
 import { UsersService } from './UsersService'
 import {
@@ -24,6 +25,7 @@ const userRepository = new UserRepository()
 export class UsersController {
   @Inject usersService: UsersService
 
+  @AuthMiddleware()
   @ValidationMiddleware(checkEmailValidations)
   @Get('/exists/by')
   async checkEmail(@Query('email') email: any) {
@@ -31,20 +33,25 @@ export class UsersController {
     return { exists }
   }
 
+  @AuthMiddleware()
   @AfterMiddleware(removePassword)
   [DefaultActions.GET_ONE]() {}
 
+  @AuthMiddleware()
   @AfterMiddleware(removePasswords)
   [DefaultActions.GET_MANY]() {}
 
+  @AuthMiddleware()
   @ValidationMiddleware(createValidations)
   @AfterMiddleware(removePassword)
   [DefaultActions.CREATE_ONE]() {}
 
+  @AuthMiddleware()
   @ValidationMiddleware(updateValidations)
   @AfterMiddleware(removePassword)
   [DefaultActions.UPDATE_ONE]() {}
 
+  @AuthMiddleware()
   @BeforeMiddleware(deleteValidations)
   @AfterMiddleware(removePassword)
   [DefaultActions.DELETE_ONE]() {}

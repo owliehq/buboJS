@@ -52,7 +52,7 @@ export const updateValidations = {
   beforeValidationMiddleware: async (req: any, res: any, next: Function) => {
     try {
       const { id } = req.params
-      await usersService.findUserByUser(id)
+      await usersService.findUserById(id)
       next()
     } catch (error) {
       res.status(404).json({ message: error.message })
@@ -135,7 +135,8 @@ export const removePasswords = (req, res, next) => {
 export const deleteValidations = async (req, res, next) => {
   try {
     const { id } = req.params
-    await usersService.findUserByUser(id)
+    await usersService.findUserById(id)
+    next()
   } catch (error) {
     res.status(404).send(error.message)
   }
