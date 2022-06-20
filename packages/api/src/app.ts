@@ -29,7 +29,15 @@ export class App {
     serviceResolver.serviceResolve(MetadataManager.meta)
   }
 
-  public async loadControllers() {
+  public use(base: Function)
+  public use(base: string, fn: Function)
+  public use(base: Function | string, fn?: Function) {
+    let path = typeof base === 'string' ? base : '/'
+    let handler = fn ? fn : base
+    this.server.use(path, handler)
+  }
+
+  private async loadControllers() {
     const controllerFound = glob.sync(`**/*Controller.ts`, {
       absolute: true,
       deep: 5,

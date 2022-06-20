@@ -26,12 +26,10 @@ export class MetadataConverter {
     const template = readFileSync(resolve(__dirname, 'template.html'), 'utf8')
     const html = template.replace('"##docs##"', strDocs).replace('"##title##"', 'api sample test')
 
-    const app = new App()
-    app.get('/', (_req: Request, res: Response) => {
+    const fn = (_req: Request, res: Response) => {
       res.status(200).send(html)
-    })
+    }
 
-    app.listen(3001)
-    console.log('listen 3001')
+    return fn
   }
 }

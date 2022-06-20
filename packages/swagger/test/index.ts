@@ -1,6 +1,8 @@
+import { app } from '@bubojs/api'
+import { TinyHttpAdapter } from '@bubojs/tinyhttp'
 import { MetadataConverter } from '../src'
-import { TaskController } from './mock/TaskController'
-TaskController.name
 
 const metadataConverter = new MetadataConverter()
-metadataConverter.serveDoc()
+
+const server = await app.initHttpModule(new TinyHttpAdapter())
+app.use('/openapi', metadataConverter.serveDoc())
