@@ -1,6 +1,7 @@
-import { App, Request, Response } from '@tinyhttp/app'
-import { AdapterHttpModule, BodyFormat, raw, json, text, Handler } from '@bubojs/api'
+import { AdapterHttpModule, BodyFormat, Handler, json, raw, text } from '@bubojs/api'
+import { App } from '@tinyhttp/app'
 import { Server } from 'http'
+import jsonwebtoken from 'jsonwebtoken'
 
 export class TinyHttpAdapter implements AdapterHttpModule<App> {
   public app: App
@@ -18,6 +19,20 @@ export class TinyHttpAdapter implements AdapterHttpModule<App> {
 
   public initRouter() {
     return new TinyHttpAdapter()
+  }
+
+  public useTokenStrategy(accessTokenSecret: any, strategy: Function) {
+    this.app.use((req: any, res: any, next: Function) => {
+      const authHeader = req.get('Authorization')
+      if (authHeader && authHeader.startsWith('Bearer ')) {
+        const token = authHeader.substring(7, authHeader.length)
+        const decoded: any = jsonwebtoken.verify(token, accessTokenSecret)
+        const { id } = decoded
+        const user = strategy(id)
+        req.user = user
+      }
+      next()
+    })
   }
 
   public startServer() {

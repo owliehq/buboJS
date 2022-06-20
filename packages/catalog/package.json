@@ -1,0 +1,18 @@
+{
+  "name": "@bubojs/catalog",
+  "version": "0.0.1",
+  "main": "index.ts",
+  "author": "Owlie",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "rimraf ./dist && tsc -p tsconfig.build.json"
+  },
+  "dependencies": {
+    "fastest-validator": "^1.12.0",
+    "jsonwebtoken": "^8.5.1"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^8.5.8"
+  }
+}

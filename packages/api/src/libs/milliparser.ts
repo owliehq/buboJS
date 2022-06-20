@@ -42,7 +42,6 @@ const json = () => async (req: ReqWithBody, res: Response, next: NextFunction) =
   if (hasBody(req.method)) {
     req.body = await p(x => {
       const body = x ? x : `{}`
-      console.log('return body:', JSON.parse(body.toString()))
       return JSON.parse(body.toString())
     })(req, res, next)
     next()

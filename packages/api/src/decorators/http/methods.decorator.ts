@@ -54,8 +54,10 @@ const buildMethod =
       parameters,
       handler,
       bodyFormat,
-      beforeMiddlewares,
-      afterMiddlewares
+      middlewares: {
+        before: beforeMiddlewares,
+        after: afterMiddlewares
+      }
     })
   }
 

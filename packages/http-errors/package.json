@@ -1,0 +1,14 @@
+{
+  "name": "@bubojs/http-errors",
+  "version": "0.0.1",
+  "main": "src/index.ts",
+  "author": "owlie",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "rimraf ./dist && tsc -p tsconfig.build.json"
+  },
+  "dependencies": {
+    "ts-custom-error": "^3.2.0"
+  }
+}
