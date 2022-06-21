@@ -1,4 +1,4 @@
-import { BeforeMiddleware } from '../../../api/src'
+import { BeforeMiddleware } from '@bubojs/api'
 
 export const authMiddleware = (req, res, next): void => {
   if (!req.user) {
