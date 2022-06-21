@@ -14,6 +14,7 @@ export interface ListMetadata {
   controllers: { [id: string]: ControllerMetadata }
   services: { [id: string]: any }
   injections: { [id: string]: any }
+  modules: any[]
 }
 
 export interface ControllerMetadata {

@@ -1,5 +1,4 @@
-import { ListMetadata, MetadataManager } from '@bubojs/api'
-import { App, Request, Response } from '@tinyhttp/app'
+import { ListMetadata } from '@bubojs/api'
 import { readFileSync } from 'fs'
 import { dirname, resolve } from 'path'
 import { fileURLToPath } from 'url'
@@ -16,8 +15,8 @@ export class MetadataConverter {
       .buildDoc()
   }
 
-  public serveDoc() {
-    const docs = this.convertController(MetadataManager.meta)
+  public serveDoc(appMetadata: ListMetadata) {
+    const docs = this.convertController(appMetadata)
     const strDocs = JSON.stringify(docs)
 
     const modulePath = fileURLToPath(import.meta.url)
@@ -26,7 +25,7 @@ export class MetadataConverter {
     const template = readFileSync(resolve(__dirname, 'template.html'), 'utf8')
     const html = template.replace('"##docs##"', strDocs).replace('"##title##"', 'api sample test')
 
-    const fn = (_req: Request, res: Response) => {
+    const fn = (req: any, res: any, Next: Function) => {
       res.status(200).send(html)
     }
 

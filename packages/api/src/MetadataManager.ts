@@ -14,7 +14,7 @@ import {
  */
 export class MetadataManager {
   // Root of all metadata of the app
-  public static meta: ListMetadata = { controllers: {}, services: {}, injections: {} }
+  public static meta: ListMetadata = { controllers: {}, services: {}, injections: {}, modules: [] }
 
   /**
    * Set metadata of the controller

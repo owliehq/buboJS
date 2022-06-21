@@ -1,6 +1,6 @@
 import { ControllerMetadata, HeaderType, ParameterMetadata, RouteMetadata } from '@bubojs/api'
 import { setProperty } from 'dot-prop'
-import { InfoType, OpenApiJSONType, OperationType, ParameterType, PathType } from './interfaces'
+import { InfoType, OpenApiJSONType, OperationType, ParameterType, PathType, RouteOptions } from './interfaces'
 
 export class DocBuilder {
   private openApiJSON: OpenApiJSONType
@@ -37,13 +37,17 @@ export class DocBuilder {
     Object.entries(routes).forEach(([key, routeMetadata]) => {
       const routePath = routeMetadata.path
       const method = routeMetadata.method
-      setProperty(paths, `${controllerPath}${routePath}.${method.toLowerCase()}`, this.createRoute(routeMetadata))
+      setProperty(
+        paths,
+        `${controllerPath}${routePath}.${method.toLowerCase()}`,
+        this.createRoute(routeMetadata, { tag: controllerMetadata.path.slice(1) })
+      )
     })
 
     this.openApiJSON.paths = paths
   }
 
-  public createRoute(routeMetadata: RouteMetadata) {
+  public createRoute(routeMetadata: RouteMetadata, { tag }: RouteOptions) {
     const parameterMetadata = routeMetadata.parameters
     const parameters = parameterMetadata
       ? Object.entries(parameterMetadata)
@@ -58,7 +62,8 @@ export class DocBuilder {
           description: 'OK',
           content: { 'application/json': {} }
         }
-      }
+      },
+      tags: [tag]
     }
 
     return config

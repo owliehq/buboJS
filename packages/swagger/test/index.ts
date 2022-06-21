@@ -1,8 +1,13 @@
-import { app } from '@bubojs/api'
+import { app, MetadataManager } from '@bubojs/api'
 import { TinyHttpAdapter } from '@bubojs/tinyhttp'
 import { MetadataConverter } from '../src'
 
 const metadataConverter = new MetadataConverter()
 
-const server = await app.initHttpModule(new TinyHttpAdapter())
-app.use('/openapi', metadataConverter.serveDoc())
+await app.initHttpModule(new TinyHttpAdapter())
+
+app.use('/openapi', metadataConverter.serveDoc(MetadataManager.meta))
+
+const server = app.listen(3000)
+
+console.log('started.')

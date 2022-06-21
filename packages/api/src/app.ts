@@ -1,5 +1,4 @@
 import glob from 'fast-glob'
-import { Server } from 'http'
 import { pathToFileURL } from 'url'
 import { AdapterHttpModule } from './adapters'
 import { HttpResolver } from './HttpResolver'
@@ -11,7 +10,7 @@ export class App {
 
   constructor() {}
 
-  public async initHttpModule(adapter: AdapterHttpModule<any>): Promise<Server> {
+  public async initHttpModule(adapter: AdapterHttpModule<any>) {
     this.server = adapter
 
     await this.loadControllers()
@@ -20,8 +19,6 @@ export class App {
     controllerResolver.controllerRevolve(MetadataManager.meta)
 
     this.initApiModule()
-
-    return this.server.listen(3000)
   }
 
   public initApiModule() {
@@ -29,12 +26,22 @@ export class App {
     serviceResolver.serviceResolve(MetadataManager.meta)
   }
 
-  public use(base: Function)
-  public use(base: string, fn: Function)
-  public use(base: Function | string, fn?: Function) {
+  public listen(port: number) {
+    MetadataManager.meta.modules.forEach(module => {
+      this.server.use(module.path, module.handler)
+    })
+    return this.server.listen(port)
+  }
+
+  public use(base: (req: any, res: any, next: Function) => any)
+  public use(base: string, fn: (req: any, res: any, next: Function) => any)
+  public use(
+    base: string | ((req: any, res: any, next: Function) => any),
+    fn?: (req: any, res: any, next: Function) => any
+  ) {
     let path = typeof base === 'string' ? base : '/'
     let handler = fn ? fn : base
-    this.server.use(path, handler)
+    MetadataManager.meta.modules.push({ path, handler })
   }
 
   private async loadControllers() {
