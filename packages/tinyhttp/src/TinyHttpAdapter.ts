@@ -1,5 +1,5 @@
 import { AdapterHttpModule, BodyFormat, Handler, json, raw, text } from '@bubojs/api'
-import { App } from '@tinyhttp/app'
+import { App, NextFunction, Request, Response } from '@tinyhttp/app'
 import { Server } from 'http'
 import jsonwebtoken from 'jsonwebtoken'
 
@@ -7,6 +7,7 @@ export class TinyHttpAdapter implements AdapterHttpModule<App> {
   public app: App
   constructor() {
     this.app = new App()
+    this.useErrorHandler()
     // this.app.all(json()) //get post put patch delete
   }
   public use(path: string, router: TinyHttpAdapter) {
@@ -22,17 +23,25 @@ export class TinyHttpAdapter implements AdapterHttpModule<App> {
   }
 
   public useTokenStrategy(accessTokenSecret: any, strategy: Function) {
-    this.app.use((req: any, res: any, next: Function) => {
+    this.app.use(async (req: any, res: any, next: Function) => {
       const authHeader = req.get('Authorization')
       if (authHeader && authHeader.startsWith('Bearer ')) {
         const token = authHeader.substring(7, authHeader.length)
         const decoded: any = jsonwebtoken.verify(token, accessTokenSecret)
         const { id } = decoded
-        const user = strategy(id)
+        const user = await strategy(id)
         req.user = user
       }
       next()
     })
+  }
+
+  private useErrorHandler() {
+    this.app.onError = (error: any, req: Request, res: Response, next?: NextFunction) => {
+      const statusCode = error.statusCode || 500
+      const { message } = error
+      res.status(statusCode).json({ statusCode, message })
+    }
   }
 
   public startServer() {

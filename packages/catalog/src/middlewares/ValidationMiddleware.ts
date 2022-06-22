@@ -38,10 +38,6 @@ export interface ValidationData {
   validatorOptions?: Object
 }
 
-// export interface Middleware {
-//   (req: any, res: any, next: Function): void
-// }
-
 export const ValidationMiddleware = (validationData: ValidationData) => {
   return BeforeMiddleware(validationMiddleware(validationData))
 }
