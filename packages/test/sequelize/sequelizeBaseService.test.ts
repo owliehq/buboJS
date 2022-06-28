@@ -48,7 +48,7 @@ describe('Sequelize Base Service', () => {
   })
 
   test('should get a User', async () => {
-    const user = await repository.getOne(userId.toString())
+    const user = await repository.findById(userId.toString())
     expect(user).toBeDefined()
     expect(user).toBeInstanceOf(User)
     expect(user.id).toBe(userId)
@@ -56,7 +56,7 @@ describe('Sequelize Base Service', () => {
 
   test('should get all users', async () => {
     //[userCount] users was created and one in tests
-    const users = await repository.getMany()
+    const users = await repository.findAll()
     expect(users.length).toBe(userCount + 1)
     expect(users[0]).toBeInstanceOf(User)
   })
@@ -69,7 +69,7 @@ describe('Sequelize Base Service', () => {
 
   test('should delete one user', async () => {
     await repository.delete(userId.toString())
-    const newCount = (await repository.getMany()).length
+    const newCount = (await repository.findAll()).length
   })
 })
 

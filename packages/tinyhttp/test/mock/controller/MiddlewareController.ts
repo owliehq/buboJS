@@ -1,18 +1,8 @@
 import { Controller, DefaultActions, Get, AfterMiddleware, BeforeMiddleware, Body } from '@bubojs/api'
+import { MiddlewareRepository } from '../repository/MiddlewareRepository'
 
-@Controller('middlewares')
+@Controller('middlewares', { repository: new MiddlewareRepository() })
 export class MiddlewareController {
-  //   @BeforeMiddleware((req: any, res: any, next: Function): void => {
-  //     if (!req.body) req.body = {}
-  //     req.body.test = 'middleware added value'
-  //     next()
-  //   })
-  //   @AfterMiddleware((req: any, res: any, next: Function): void => {
-  //     req.result = [req.result]
-  //     next()
-  //   })
-  [DefaultActions.GET_ONE]() {}
-
   [DefaultActions.GET_MANY]() {}
 
   [DefaultActions.CREATE_ONE]() {}
@@ -60,4 +50,15 @@ export class MiddlewareController {
     const { test } = body
     return test + ' content'
   }
+
+  @BeforeMiddleware((req: any, res: any, next: Function): void => {
+    if (!req.body) req.body = {}
+    req.body.test = 'middleware added value'
+    next()
+  })
+  @AfterMiddleware((req: any, res: any, next: Function): void => {
+    req.result = [req.result]
+    next()
+  })
+  [DefaultActions.GET_ONE]() {}
 }

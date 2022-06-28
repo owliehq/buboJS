@@ -6,9 +6,21 @@ import { MetadataManager } from '../../MetadataManager'
  * @param middleware the middleware
  * @returns
  */
-export const BeforeMiddleware = (middleware: MiddlewareMetadata) => (target: any, propertyKey: string) => {
-  MetadataManager.setMiddlewareMetadata(target.constructor.name, propertyKey, MiddlewarePosition.BEFORE, middleware)
-}
+export const BeforeMiddleware =
+  (middleware: MiddlewareMetadata | MiddlewareMetadata[]) => (target: any, propertyKey: string) => {
+    if (Array.isArray(middleware)) {
+      for (const middlewareElement of middleware) {
+        MetadataManager.setMiddlewareMetadata(
+          target.constructor.name,
+          propertyKey,
+          MiddlewarePosition.BEFORE,
+          middlewareElement
+        )
+      }
+    } else {
+      MetadataManager.setMiddlewareMetadata(target.constructor.name, propertyKey, MiddlewarePosition.BEFORE, middleware)
+    }
+  }
 
 /**
  * AfterMiddleware decorator. The function middleware will be executed after the main method

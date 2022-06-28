@@ -10,7 +10,7 @@ export type ReqWithBody<T = any> = IncomingMessage & {
   body?: T
 } & EventEmitter
 
-export const hasBody = (method: string) => ['POST', 'PUT', 'PATCH', 'DELETE'].includes(method)
+export const hasBody = (method: string) => ['POST', 'PUT', 'PATCH'].includes(method)
 
 // Main function
 export const p =
@@ -38,7 +38,11 @@ const custom =
 
 const json = () => async (req: ReqWithBody, res: Response, next: NextFunction) => {
   if (hasBody(req.method)) {
-    req.body = await p(x => JSON.parse(x.toString()))(req, res, next)
+    req.body = await p(x => {
+      const body = x ? x : `{}`
+
+      return JSON.parse(body.toString())
+    })(req, res, next)
     next()
   } else next()
 }

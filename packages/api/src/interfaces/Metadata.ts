@@ -6,22 +6,29 @@ export interface RouteMetadata {
   method: RouteMethod
   parameters: ParameterMetadata[]
   bodyFormat?: BodyFormat
-  beforeMiddlewares?: MiddlewareMetadata[]
-  afterMiddlewares?: MiddlewareMetadata[]
+  middlewares?: Middlewares
   handler: (this: any, req: any, res: any, next: Function) => any
 }
 
 export interface ListMetadata {
   controllers: { [id: string]: ControllerMetadata }
+  services: { [id: string]: any }
+  injections: { [id: string]: any }
 }
 
 export interface ControllerMetadata {
-  routes: { [id: string]: RouteMetadata }
+  routes?: { [id: string]: RouteMetadata }
   path: string
+  instance: any
 }
 
 export interface ParameterMetadata {
   getValue: Function
+}
+
+export interface Middlewares {
+  before?: MiddlewareMetadata[]
+  after?: MiddlewareMetadata[]
 }
 
 export interface MiddlewareMetadata {

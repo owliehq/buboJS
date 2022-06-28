@@ -5,7 +5,8 @@ import {
   RouteMetadata,
   ParameterMetadata,
   MiddlewareMetadata,
-  MiddlewarePosition
+  MiddlewarePosition,
+  Class
 } from './interfaces'
 
 /**
@@ -13,14 +14,14 @@ import {
  */
 export class MetadataManager {
   // Root of all metadata of the app
-  public static meta: ListMetadata = { controllers: {} }
+  public static meta: ListMetadata = { controllers: {}, services: {}, injections: {} }
 
   /**
    * Set metadata of the controller
    * @param controllerName name of the controller
    * @param controllerMetadata the metadata of the controller
    */
-  public static setControllerMetadata(controllerName: string, controllerMetadata: any): void {
+  public static setControllerMetadata(controllerName: string, controllerMetadata: ControllerMetadata): void {
     const pathControllerMetadata = `controllers.${controllerName}`
     setProperty(
       this.meta,
@@ -61,6 +62,15 @@ export class MetadataManager {
    */
   public static getRouteMetadata(controllerName: string, routeName: string): RouteMetadata {
     return getProperty(this.meta, `controllers.${controllerName}.routes.${routeName}`)
+  }
+
+  /**
+   * Get metadata of all routes of the controller
+   * @param controllerName name of the controller
+   * @returns The metadata of all routes
+   */
+  public static getRoutesMetadata(controllerName: string): RouteMetadata {
+    return getProperty(this.meta, `controllers.${controllerName}.routes`)
   }
 
   /**
@@ -112,7 +122,8 @@ export class MetadataManager {
     if (!registratedMiddlewares) {
       setProperty(this.meta, pathMiddlewareMetadata, [value])
     } else {
-      registratedMiddlewares.unshift(value)
+      // TODO check if unshift is needed instead of push
+      registratedMiddlewares.push(value)
       setProperty(this.meta, pathMiddlewareMetadata, registratedMiddlewares)
     }
   }
@@ -130,5 +141,52 @@ export class MetadataManager {
     position: MiddlewarePosition
   ): MiddlewareMetadata[] {
     return getProperty(this.meta, `controllers.${controllerName}.routes.${routeName}.middlewares.${position}`)
+  }
+
+  /**
+   * Set metadata of the service
+   * @param serviceName name of the service
+   * @param serviceMetadata the metadata of the service
+   */
+  public static setServiceMetadata(serviceName: string, serviceMetadata: any): void {
+    const pathServiceMetadata = `services.${serviceName}`
+    setProperty(this.meta, pathServiceMetadata, serviceMetadata)
+  }
+
+  /**
+   * Get metadata of the service
+   * @param serviceName name of the service
+   * @returns the metadata of the service
+   */
+  public static getServiceMetadata<T>(serviceName: string | Class<T>): T {
+    const name = typeof serviceName === 'string' ? serviceName : serviceName.name
+    return getProperty(this.meta, `services.${name}`)
+  }
+
+  /**
+   * Set one link between the parent class and service which need to be injected
+   * @param parentName name of the parent which contains injection
+   * @param serviceName the service name
+   */
+  public static setInjectionMetadata(parentName: string, serviceName: string, className: string): void {
+    const pathServiceMetadata = `injections.${parentName}.services.${serviceName}`
+    setProperty(this.meta, pathServiceMetadata, className)
+  }
+
+  /**
+   * get link between the parent class and service wich need to be injected
+   * @param parentName name of the parent wich contains injection
+   * @param serviceName the service name
+   */
+  public static getInjectionMetadata(parentName: string, serviceName: string): any {
+    return getProperty(this.meta, `injections.${parentName}.services.${serviceName}`)
+  }
+
+  /**
+   * Get all injections metadata
+   * @returns the metadata of the service
+   */
+  public static getInjectionMetadatas(): any {
+    return getProperty(this.meta, `injections`)
   }
 }

@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+  postgres-todolist:
+    image: 'postgres'
+    container_name: 'postgres-todolist'
+    expose:
+      - '5432'
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: 'todolist'
+      POSTGRES_PASSWORD: 'todolist'
+      POSTGRES_DB: 'todolist'

@@ -1,11 +1,14 @@
-import { App } from '@tinyhttp/app'
-import { AdapterHttpModule, BodyFormat, raw, json, text, Handler } from '@bubojs/api'
+import { AdapterHttpModule, BodyFormat, Handler, json, raw, text } from '@bubojs/api'
+import { App, NextFunction, Request, Response } from '@tinyhttp/app'
 import { Server } from 'http'
+import jsonwebtoken from 'jsonwebtoken'
 
 export class TinyHttpAdapter implements AdapterHttpModule<App> {
   public app: App
   constructor() {
     this.app = new App()
+    this.useErrorHandler()
+    // this.app.all(json()) //get post put patch delete
   }
   public use(path: string, router: TinyHttpAdapter) {
     this.app.use(path, router.app)
@@ -19,6 +22,28 @@ export class TinyHttpAdapter implements AdapterHttpModule<App> {
     return new TinyHttpAdapter()
   }
 
+  public useTokenStrategy(accessTokenSecret: any, strategy: Function) {
+    this.app.use(async (req: any, res: any, next: Function) => {
+      const authHeader = req.get('Authorization')
+      if (authHeader && authHeader.startsWith('Bearer ')) {
+        const token = authHeader.substring(7, authHeader.length)
+        const decoded: any = jsonwebtoken.verify(token, accessTokenSecret)
+        const { id } = decoded
+        const user = await strategy(id)
+        req.user = user
+      }
+      next()
+    })
+  }
+
+  private useErrorHandler() {
+    this.app.onError = (error: any, req: Request, res: Response, next?: NextFunction) => {
+      const statusCode = error.statusCode || 500
+      const { message } = error
+      res.status(statusCode).json({ statusCode, message })
+    }
+  }
+
   public startServer() {
     const server = this.app.listen(3000)
     console.log('listened to 3000')
@@ -27,44 +52,58 @@ export class TinyHttpAdapter implements AdapterHttpModule<App> {
   public stopServer() {}
 
   public get(path: string, beforeMiddlewares: any = [], handler: any, afterMiddlewares: any = []) {
-    return this.app.get(path, beforeMiddlewares, handler, afterMiddlewares, (req: any, res: any, next) => {
-      return res.status(200).send(req.result)
-    })
+    return this.app.get(path, beforeMiddlewares, handler, afterMiddlewares, this.response())
   }
 
-  public post(
+  public async post(
     path: string,
     bodyFormat: BodyFormat,
     beforeMiddlewares: any = [],
     handler: any,
     afterMiddlewares: any = []
   ) {
-    this.app.use(path, this.useBodyFormat(path, bodyFormat))
-    return this.app.post(path, beforeMiddlewares, handler, afterMiddlewares, (req: any, res: any, next) => {
-      return res.status(200).send(req.result)
-    })
+    return this.app.post(
+      path,
+      this.useBodyFormat(bodyFormat),
+      beforeMiddlewares,
+      handler,
+      afterMiddlewares,
+      this.response()
+    )
   }
 
-  public put(
+  public async put(
     path: string,
     bodyFormat: BodyFormat,
     beforeMiddlewares: any = [],
     handler: any,
     afterMiddlewares: any = []
   ) {
-    this.app.use(path, this.useBodyFormat(path, bodyFormat))
-    return this.app.put(path, beforeMiddlewares, handler, afterMiddlewares, this.response())
+    return this.app.put(
+      path,
+      this.useBodyFormat(bodyFormat),
+      beforeMiddlewares,
+      handler,
+      afterMiddlewares,
+      this.response()
+    )
   }
 
-  public patch(
+  public async patch(
     path: string,
     bodyFormat: BodyFormat,
     beforeMiddlewares: any = [],
     handler: any,
     afterMiddlewares: any = []
   ) {
-    this.app.use(path, this.useBodyFormat(path, bodyFormat))
-    return this.app.patch(path, beforeMiddlewares, handler, afterMiddlewares, this.response())
+    return this.app.patch(
+      path,
+      this.useBodyFormat(bodyFormat),
+      beforeMiddlewares,
+      handler,
+      afterMiddlewares,
+      this.response()
+    )
   }
 
   public delete(
@@ -74,8 +113,14 @@ export class TinyHttpAdapter implements AdapterHttpModule<App> {
     handler: any,
     afterMiddlewares: any = []
   ) {
-    this.app.use(path, this.useBodyFormat(path, bodyFormat))
-    return this.app.delete(path, beforeMiddlewares, handler, afterMiddlewares, this.response())
+    return this.app.delete(
+      path,
+      this.useBodyFormat(bodyFormat),
+      beforeMiddlewares,
+      handler,
+      afterMiddlewares,
+      this.response()
+    )
   }
 
   /**
@@ -98,7 +143,7 @@ export class TinyHttpAdapter implements AdapterHttpModule<App> {
    * @param bodyFormat the body format
    * @returns
    */
-  public useBodyFormat(path: string, bodyFormat: BodyFormat): Handler {
+  public useBodyFormat(bodyFormat: BodyFormat): Handler {
     switch (bodyFormat) {
       case BodyFormat.RAW:
         return raw()

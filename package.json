@@ -14,7 +14,7 @@
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
     "setup": "yarn && yarn run bootstrap",
     "bootstrap": "lerna bootstrap",
-    "build": "lerna exec -- yarn build"
+    "build": "lerna run build"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.0.0",
@@ -60,7 +60,7 @@
     "transform": {
       "^.+\\.(t|j)sx?$": "ts-jest"
     },
-    "testRegex": "(/tests/.*|\\.(test))\\.(ts|tsx|js)$",
+    "testRegex": "packages/.*(/tests/.*|\\.(test))\\.(ts|tsx|js)$",
     "moduleFileExtensions": [
       "ts",
       "js",
