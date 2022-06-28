@@ -1,4 +1,4 @@
-import type { UserConfig } from '@commitlint/types';
+import type { UserConfig } from '@commitlint/types'
 
 const Configuration: UserConfig = {
   /*
@@ -20,9 +20,9 @@ const Configuration: UserConfig = {
    * Any rules defined here will override rules from @commitlint/config-conventional
    */
   rules: {
-    'scope-enum': [2, 'always', ['root', 'api', 'tinyhttp', 'fastify']],
-    'subject-max-length': [2, 'always', 120],
-  },
+    'scope-enum': [2, 'always', ['root', 'api', 'tinyhttp', 'fastify', 'sequelize']],
+    'subject-max-length': [2, 'always', 120]
+  }
   /*
    * Functions that return true if commitlint should ignore the given message.
    */
@@ -47,6 +47,6 @@ const Configuration: UserConfig = {
   //     },
   //   },
   // },
-};
+}
 
-module.exports = Configuration;
+module.exports = Configuration
