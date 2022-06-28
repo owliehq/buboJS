@@ -39,7 +39,7 @@ type ServerType = {
 
 type ServerVariableType = { enum?: string[]; default: string; description?: string }
 
-type ComponentType = {
+export type ComponentType = {
   schemas?: { [key: string]: SchemaType | ReferenceType }
   responses?: { [key: string]: ResponseType | ReferenceType }
   parameters?: { [key: string]: ParameterType | ReferenceType }
@@ -181,7 +181,7 @@ type ReferenceType = {
   [ref: '$ref' | string]: string
 }
 
-type SchemaType = {
+export type SchemaType = {
   title?: string
   multipleOf?: any
   maximum?: any

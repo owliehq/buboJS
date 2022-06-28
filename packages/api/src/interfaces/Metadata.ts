@@ -15,6 +15,7 @@ export interface ListMetadata {
   services: { [id: string]: any }
   injections: { [id: string]: any }
   modules: any[]
+  models: { [id: string]: ModelMetadata }
 }
 
 export interface ControllerMetadata {
@@ -41,4 +42,23 @@ export interface MiddlewareMetadata {
 export enum MiddlewarePosition {
   BEFORE = 'before',
   AFTER = 'after'
+}
+
+export interface ModelMetadata {
+  name: string
+  columns: { [id: string]: ColumnMetadata }
+  associations: { [id: string]: AssociationMetadata }
+}
+
+export interface ColumnMetadata {
+  type: string
+  allowNull?: boolean
+  primaryKey?: boolean
+  field: string
+}
+
+export interface AssociationMetadata {
+  attribute: string
+  associationType: string
+  attributeType: string
 }

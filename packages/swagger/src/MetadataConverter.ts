@@ -11,7 +11,7 @@ export class MetadataConverter {
     return docBuilder
       .registerInfo({ title: 'api sample', version: 'v1' })
       .registerControllers(appMetadata.controllers)
-      .registerModels()
+      .registerModels(appMetadata.models)
       .buildDoc()
   }
 

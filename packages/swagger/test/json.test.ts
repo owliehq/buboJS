@@ -17,12 +17,15 @@ describe('json result', () => {
 
   it('should transform routeMetadata into openapijson format', () => {
     const docBuilder = new DocBuilder()
-    const routeOpenAPI = docBuilder.createRoute({
-      method: RouteMethod.GET,
-      parameters: [],
-      path: '/',
-      handler: () => {}
-    })
+    const routeOpenAPI = docBuilder.createRoute(
+      {
+        method: RouteMethod.GET,
+        parameters: [],
+        path: '/',
+        handler: () => {}
+      },
+      { tag: 'testJSON' }
+    )
     expect(routeOpenAPI).toStrictEqual({
       parameters: [],
       responses: {
@@ -64,7 +67,7 @@ describe('json result', () => {
   it('should transform metadata into json path', () => {
     const controllerMetadata = MetadataManager.getControllerMetadata('TaskController')
     const jsonSwagger = converter.convertController(MetadataManager.meta)
-    console.log(JSON.stringify(jsonSwagger, null, 2))
+    // console.log(JSON.stringify(jsonSwagger, null, 2))
     // expect(jsonSwagger).toBe({
     //   openapi: '3.0.3',
     //   info: {

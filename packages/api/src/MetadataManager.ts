@@ -6,7 +6,8 @@ import {
   ParameterMetadata,
   MiddlewareMetadata,
   MiddlewarePosition,
-  Class
+  Class,
+  ModelMetadata
 } from './interfaces'
 
 /**
@@ -14,7 +15,7 @@ import {
  */
 export class MetadataManager {
   // Root of all metadata of the app
-  public static meta: ListMetadata = { controllers: {}, services: {}, injections: {}, modules: [] }
+  public static meta: ListMetadata = { controllers: {}, services: {}, injections: {}, modules: [], models: {} }
 
   /**
    * Set metadata of the controller
@@ -188,5 +189,29 @@ export class MetadataManager {
    */
   public static getInjectionMetadatas(): any {
     return getProperty(this.meta, `injections`)
+  }
+
+  /**
+   * set model metadata
+   * @param modelName model name
+   * @param modelMetadata model metadata
+   */
+  public static setModelMetadata(modelName: string, modelMetadata: ModelMetadata): void {
+    setProperty(this.meta, `models.${modelName}`, modelMetadata)
+  }
+
+  /**
+   * get model metadata
+   * @param modelName model name
+   */
+  public static getModelMetadata(modelName: string): ModelMetadata {
+    return getProperty(this.meta, `models.${modelName}`)
+  }
+
+  /**
+   * get all model metadata
+   */
+  public static getModelMetadatas(): { [id: string]: ModelMetadata } {
+    return getProperty(this.meta, `models`)
   }
 }
