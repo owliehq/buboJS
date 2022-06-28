@@ -1,3 +1,4 @@
+import { HeaderType } from '../../enums'
 import { MetadataManager } from '../../MetadataManager'
 
 /**
@@ -11,7 +12,9 @@ export const Params =
     MetadataManager.setParameterMetadata(target.constructor.name, propertyKey, index, {
       getValue: (req: any) => {
         return req.params[name]
-      }
+      },
+      name,
+      headerType: HeaderType.PARAM
     })
   }
 
@@ -23,7 +26,8 @@ export const Body = (target: any, propertyKey: string, index: number): any => {
   MetadataManager.setParameterMetadata(target.constructor.name, propertyKey, index, {
     getValue: (req: any) => {
       return req.body
-    }
+    },
+    headerType: HeaderType.BODY
   })
 }
 
@@ -38,7 +42,9 @@ export const Header =
     MetadataManager.setParameterMetadata(target.constructor.name, propertyKey, index, {
       getValue: (req: any) => {
         return req.get(name)
-      }
+      },
+      name,
+      headerType: HeaderType.HEADER
     })
   }
 
@@ -53,6 +59,8 @@ export const Query =
     MetadataManager.setParameterMetadata(target.constructor.name, propertyKey, index, {
       getValue: (req: any) => {
         return req.query[name]
-      }
+      },
+      name,
+      headerType: HeaderType.QUERY
     })
   }

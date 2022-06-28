@@ -37,10 +37,11 @@ const custom =
   }
 
 const json = () => async (req: ReqWithBody, res: Response, next: NextFunction) => {
+  console.log('milliparser method:', req.method)
+  console.log('body:', req.body)
   if (hasBody(req.method)) {
     req.body = await p(x => {
       const body = x ? x : `{}`
-
       return JSON.parse(body.toString())
     })(req, res, next)
     next()

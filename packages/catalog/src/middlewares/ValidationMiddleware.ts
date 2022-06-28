@@ -1,6 +1,6 @@
 import Validator from 'fastest-validator'
 import { ValidationError } from 'fastest-validator'
-import { BeforeMiddleware, MiddlewareMetadata } from '../../../api/src'
+import { BeforeMiddleware, MiddlewareMetadata } from '@bubojs/api'
 
 export const validationMiddleware = (validationData: ValidationData): MiddlewareMetadata[] => {
   const { beforeValidationMiddleware, schema, validatorOptions } = validationData

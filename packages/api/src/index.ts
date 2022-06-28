@@ -7,6 +7,7 @@ export * from './decorators'
 export * from './interfaces'
 export * from './builder'
 export * from './libs'
+export * from './enums'
 export * from './utils'
 export * from './models'
 

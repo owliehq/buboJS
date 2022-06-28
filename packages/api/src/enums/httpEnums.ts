@@ -15,3 +15,10 @@ export enum HttpStatus {
   UNPROCESSABLE_ENTITY = 422,
   INTERNAL_SERVER_ERROR = 500
 }
+
+export enum HeaderType {
+  PARAM = 'PARAM',
+  BODY = 'BODY',
+  QUERY = 'QUERY',
+  HEADER = 'HEADER'
+}

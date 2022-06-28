@@ -10,8 +10,9 @@ export class TinyHttpAdapter implements AdapterHttpModule<App> {
     this.useErrorHandler()
     // this.app.all(json()) //get post put patch delete
   }
-  public use(path: string, router: TinyHttpAdapter) {
-    this.app.use(path, router.app)
+  public use(path: string, router: any) {
+    if (router.app) this.app.use(path, router.app)
+    else this.app.use(path, router)
   }
 
   public init() {

@@ -18,6 +18,8 @@ export const startServer = () =>
 
     const server = await app.initHttpModule(adapter)
 
+    app.listen(3000)
+
     console.log(`=========================`)
     console.log(`API server is started.`)
     console.log(`=========================`)
