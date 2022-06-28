@@ -1,6 +1,5 @@
-import { MetadataManager, MiddlewarePosition } from '../../../api/src'
-import { RightsManager } from '../../../api/src/RightsManager'
-import { HttpError } from '../../../http-errors/src'
+import { MetadataManager, MiddlewarePosition, RightsManager } from '@bubojs/api'
+import { HttpError } from '@bubojs/http-errors'
 
 export const roleMiddleware = (resource: string, action: string, prepareContext?: Function) => {
   const callback = async (req: any, res: any, next: Function): Promise<void> => {

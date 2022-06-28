@@ -17,6 +17,7 @@
     "build": "lerna run build"
   },
   "devDependencies": {
+    "@typescript-eslint/parser": "^5.27.0",
     "@commitlint/cli": "^17.0.2",
     "@commitlint/config-conventional": "^17.0.2",
     "@types/jest": "^28.1.1",
@@ -24,7 +25,11 @@
     "commitizen": "^4.2.4",
     "cross-env": "^7.0.3",
     "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^8.16.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
     "husky": "^8.0.1",
+    "prettier": "^2.6.2",
     "jest": "28.1.1",
     "lerna": "^5.1.2",
     "ts-jest": "^28.0.5",

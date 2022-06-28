@@ -1,6 +1,6 @@
 import { initMockDb, sequelize } from './mock'
-import { ModelData, SequelizeBaseRepository } from '@bubojs/sequelize'
-import { User } from './models/models'
+import { ModelData, SequelizeBaseRepository, SequelizePopulate } from '@bubojs/sequelize'
+import { Project, Task, User, UserProject } from './models/models'
 import { randEmail, randFirstName, randLastName, randPassword } from '@ngneat/falso'
 
 // params
@@ -70,6 +70,28 @@ describe('Sequelize Base Service', () => {
   test('should delete one user', async () => {
     await repository.delete(userId.toString())
     const newCount = (await repository.findAll()).length
+  })
+})
+
+describe('Sequelize Populate Functions', () => {
+  test('test', async () => {
+    const populator = new SequelizePopulate(Project, ['tasks', 'userProjects.user'])
+    const wTasks = populator.buildIncludeOptions('tasks')
+    expect(wTasks).toStrictEqual([{ model: Task, as: 'tasks' }])
+
+    const wUserProject = populator.buildIncludeOptions('userProjects.user')
+    expect(wUserProject).toStrictEqual([
+      { model: UserProject, as: 'userProjects', include: [{ model: User, as: 'user' }] }
+    ])
+
+    const wU = populator.buildIncludeOptions('users')
+    expect(wU).toStrictEqual([])
+
+    const wAll = populator.buildIncludeOptions('tasks userProjects.user.tasks user')
+    expect(wAll).toStrictEqual([
+      { model: Task, as: 'tasks' },
+      { model: UserProject, as: 'userProjects', include: [{ model: User, as: 'user' }] }
+    ])
   })
 })
 
