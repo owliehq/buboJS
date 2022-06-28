@@ -1,4 +1,4 @@
-import { RouteMethod } from '../enums'
+import { HeaderType, RouteMethod } from '../enums'
 import { BodyFormat } from './DecoratorOptions'
 
 export interface RouteMetadata {
@@ -14,6 +14,8 @@ export interface ListMetadata {
   controllers: { [id: string]: ControllerMetadata }
   services: { [id: string]: any }
   injections: { [id: string]: any }
+  modules: any[]
+  models: { [id: string]: ModelMetadata }
 }
 
 export interface ControllerMetadata {
@@ -24,6 +26,8 @@ export interface ControllerMetadata {
 
 export interface ParameterMetadata {
   getValue: Function
+  name?: string
+  headerType: HeaderType
 }
 
 export interface Middlewares {
@@ -38,4 +42,23 @@ export interface MiddlewareMetadata {
 export enum MiddlewarePosition {
   BEFORE = 'before',
   AFTER = 'after'
+}
+
+export interface ModelMetadata {
+  name: string
+  columns: { [id: string]: ColumnMetadata }
+  associations: { [id: string]: AssociationMetadata }
+}
+
+export interface ColumnMetadata {
+  type: string
+  allowNull?: boolean
+  primaryKey?: boolean
+  field: string
+}
+
+export interface AssociationMetadata {
+  attribute: string
+  associationType: string
+  attributeType: string
 }
