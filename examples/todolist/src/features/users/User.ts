@@ -1,4 +1,5 @@
-import { Column, Model, Table, Unique } from 'sequelize-typescript'
+import { AllowNull, Column, Default, Model, Table, Unique } from 'sequelize-typescript'
+import { ROLES } from '../../config/constants'
 
 @Table({
   tableName: 'users',
@@ -18,4 +19,9 @@ export class User extends Model {
 
   @Column
   declare email: string
+
+  @Default(ROLES.USER)
+  @AllowNull(false)
+  @Column
+  declare role: ROLES
 }
