@@ -61,4 +61,5 @@ export interface AssociationMetadata {
   attribute: string
   associationType: string
   attributeType: string
+  attributeTableName: string
 }

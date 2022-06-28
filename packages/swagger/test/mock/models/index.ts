@@ -1,4 +1,4 @@
-import { ColumnMetadata, MetadataManager } from '@bubojs/api'
+import { AssociationMetadata, ColumnMetadata, MetadataManager } from '@bubojs/api'
 import { setProperty } from 'dot-prop'
 import { Repository, Sequelize, SequelizeOptions } from 'sequelize-typescript'
 import { Project } from './Project'
@@ -33,7 +33,7 @@ export async function initMockDb() {
     if (typeof tableName === 'string') name = tableName
     else name = tableName.tableName
 
-    let associations: { [id: string]: { attribute: string; associationType: string; attributeType: string } } = {}
+    let associations: { [id: string]: AssociationMetadata } = {}
     const columns: { [id: string]: ColumnMetadata } = {}
 
     Object.entries(model.getAttributes()).forEach(([key, attribute]) => {
@@ -49,9 +49,9 @@ export async function initMockDb() {
     Object.entries(model.associations).forEach(([key, association]) => {
       const attribute = association.as,
         associationType = association.associationType,
-        attributeType = association.target.name
-
-      setProperty(association, key, { attribute, associationType, attributeType })
+        attributeType = association.target.name,
+        attributeTableName = association.target.getTableName()
+      setProperty(associations, key, { attribute, associationType, attributeType, attributeTableName })
     })
 
     MetadataManager.setModelMetadata(name, {

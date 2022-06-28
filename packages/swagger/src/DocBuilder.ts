@@ -130,9 +130,14 @@ export class DocBuilder {
    */
   public createModel(modelMetadata: ModelMetadata) {
     const columns = modelMetadata.columns
+    const associations = modelMetadata.associations
     const properties = {}
     Object.entries(columns).forEach(([key, columnMetadata]) => {
       setProperty(properties, key, this.createColumn(columnMetadata))
+    })
+
+    Object.entries(associations).forEach(([key, associationMetadata]) => {
+      setProperty(properties, key, this.createAssociation(associationMetadata.attributeTableName))
     })
 
     setProperty(this.openApiJSON.components.schemas, modelMetadata.name, { type: 'object', properties })
@@ -144,6 +149,10 @@ export class DocBuilder {
    */
   public createColumn(columnMetadata: ColumnMetadata): SchemaType {
     return { type: SequelizeTypeToDefaultType.convert(columnMetadata.type) }
+  }
+
+  public createAssociation(modelName: string) {
+    return { $ref: `#/components/schemas/${modelName}` }
   }
 
   /**
