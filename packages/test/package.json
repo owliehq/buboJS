@@ -1,7 +1,14 @@
 {
   "name": "@bubojs/test",
   "version": "0.0.1",
-  "main": "index.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/owliehq/buboJS.git",
+    "directory": "packages/api"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "author": "Owlie",
   "license": "MIT",
   "dependencies": {

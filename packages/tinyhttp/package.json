@@ -3,10 +3,14 @@
   "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/owliehq/buboJS"
+    "url": "https://github.com/owliehq/buboJS.git",
+    "directory": "packages/tinyhttp"
   },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "main": "src/index.ts",
   "type": "module",
-  "private": true,
   "types": "./dist/index.d.ts",
   "exports": "./dist/index.js",
   "files": [

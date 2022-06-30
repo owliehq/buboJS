@@ -5,6 +5,16 @@
   "author": "owlie",
   "license": "MIT",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/owliehq/buboJS.git",
+    "directory": "packages/http-errors"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "types": "./dist/index.d.ts",
+  "exports": "./dist/index.js",
   "scripts": {
     "build": "rimraf ./dist && tsc -p tsconfig.build.json"
   },

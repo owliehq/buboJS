@@ -3,12 +3,15 @@
   "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/owliehq/buboJS"
+    "url": "https://github.com/owliehq/buboJS.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   },
   "workspaces": [
     "packages/*"
   ],
-  "private": true,
+  "private": false,
   "scripts": {
     "prepare": "husky install",
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",

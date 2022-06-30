@@ -1,9 +1,19 @@
 {
   "name": "@bubojs/catalog",
   "version": "0.0.1",
-  "main": "index.ts",
+  "main": "src/index.ts",
+  "types": "./dist/index.d.ts",
+  "exports": "./dist/index.js",
   "author": "Owlie",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/owliehq/buboJS.git",
+    "directory": "packages/catalog"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "type": "module",
   "scripts": {
     "build": "rimraf ./dist && tsc -p tsconfig.build.json"
