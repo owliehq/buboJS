@@ -1,0 +1,8 @@
+node_modules
+src
+sequelize
+test
+tsconfig.json
+tsconfig.build.json
+docker-compose.yml
+jest.config.ts
