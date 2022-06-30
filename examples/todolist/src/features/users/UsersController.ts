@@ -10,8 +10,8 @@ import {
 import { ValidationMiddleware } from '../../../../../packages/catalog/src/middlewares'
 import { AuthMiddleware } from '../../../../../packages/catalog/src/middlewares/AuthMiddleware'
 import { RoleMiddleware } from '../../../../../packages/catalog/src/middlewares/RoleMiddleware'
-import { UserRepository } from './UserRepository'
 import { applyUserAccessControlList } from './UsersAccess'
+import { UsersRepository } from './UsersRepository'
 import { UsersService } from './UsersService'
 import {
   checkEmailValidations,
@@ -20,10 +20,10 @@ import {
   removePassword,
   removePasswords,
   updateValidations
-} from './UsersValidation'
+} from './UsersValidations'
 
-const userRepository = new UserRepository()
-@Controller('users', { repository: userRepository })
+const usersRepository = new UsersRepository()
+@Controller('users', { repository: usersRepository })
 export class UsersController {
   constructor() {
     applyUserAccessControlList()

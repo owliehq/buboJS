@@ -123,10 +123,37 @@ export class MetadataManager {
     if (!registratedMiddlewares) {
       setProperty(this.meta, pathMiddlewareMetadata, [value])
     } else {
-      // TODO check if unshift is needed instead of push
       registratedMiddlewares.push(value)
       setProperty(this.meta, pathMiddlewareMetadata, registratedMiddlewares)
     }
+  }
+
+  /**
+   * Set validator of the route of the controller
+   * @param controllerName name of the controller
+   * @param routeName name of the route
+   * @param position before or after the method handler
+   * @param value the middleware to register
+   */
+  public static setRouteValidatorMetadata(controllerName: string, routeName: string, value: any): void {
+    const pathValidatorMetadata = `controllers.${controllerName}.routes.${routeName}.validator`
+    const registratedValidator: any = getProperty(this.meta, pathValidatorMetadata)
+    if (!registratedValidator) {
+      setProperty(this.meta, pathValidatorMetadata, value)
+    } else {
+      throw new Error('Cannot have two validators on the same middleware')
+    }
+  }
+
+  /**
+   * Get validator of the route of the controller
+   * @param controllerName name of the controller
+   * @param routeName name of the route
+   * @param position before or after the method handler
+   * @returns List of middlewares
+   */
+  public static getRouteValidatorMetadata(controllerName: string, routeName: string): any {
+    return getProperty(this.meta, `controllers.${controllerName}.routes.${routeName}.validator`)
   }
 
   /**

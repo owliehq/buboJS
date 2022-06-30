@@ -1,20 +1,22 @@
 import request from 'supertest'
 import { startServer } from '../src/server'
-import { UserRepository } from '../src/features/users/UserRepository'
+import { UsersRepository } from '../src/features/users/UsersRepository'
 import { User } from '../src/features/users/User'
+import { ROLES } from '../src/config/constants'
 
 let app
-let userRepository: UserRepository
+let usersRepository: UsersRepository
 let user: User
 
 beforeAll(async () => {
   app = await startServer()
-  userRepository = new UserRepository()
-  user = await userRepository.create({
+  usersRepository = new UsersRepository()
+  user = await usersRepository.create({
     firstName: 'toto',
     lastName: 'titi',
     password: 'mdpsecret',
-    email: 'totodu99@hotmail.fr'
+    email: 'totodu99@hotmail.fr',
+    role: ROLES.USER
   })
 })
 
@@ -90,7 +92,7 @@ describe('userModule', () => {
 
   it('should delete one user', async () => {
     const getUserFunction = async () => {
-      const userDeleted = await userRepository.findById(user.id)
+      const userDeleted = await usersRepository.findById(user.id)
     }
     await request(app)
       .delete(`/users/${user.id}`)

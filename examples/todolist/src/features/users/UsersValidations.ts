@@ -13,7 +13,9 @@ export const createValidations = {
       type: 'email',
       custom: async (v, errors) => {
         const exists = await usersService.checkEmailExistence(v)
+        // console.log('exists', exists)
         if (exists) errors.push({ type: 'emailNotAvailable' })
+
         return v
       }
     },
@@ -24,7 +26,8 @@ export const createValidations = {
         if (!/[A-Z]/.test(v)) errors.push({ type: 'atLeastOneUpperCaseLetter' })
         if (!/[a-z]/.test(v)) errors.push({ type: 'atLeastOneLetter' })
         if (!/[\!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?]/.test(v)) errors.push({ type: 'atLeastOneSpecialCaracter' })
-        return v
+
+        return usersService.generatePassword(v)
       },
       min: 8,
       max: 20,
@@ -121,6 +124,7 @@ export const checkEmailValidations = {
 
 export const removePassword = (req, res, next) => {
   req.result.password = undefined
+  console.log('after middleware 2')
   next()
 }
 

@@ -1,5 +1,8 @@
-import { AllowNull, Column, Default, Model, Table, Unique } from 'sequelize-typescript'
+import { AllowNull, Column, Default, HasMany, Model, Table } from 'sequelize-typescript'
 import { ROLES } from '../../config/constants'
+import { CircularHelper } from '../../utils/TypeUtils'
+import { Task } from '../tasks/Task'
+import { UserProject } from '../user_projects/UserProject'
 
 @Table({
   tableName: 'users',
@@ -24,4 +27,10 @@ export class User extends Model {
   @AllowNull(false)
   @Column
   declare role: ROLES
+
+  @HasMany(() => UserProject)
+  declare projects: CircularHelper<UserProject>[]
+
+  @HasMany(() => Task)
+  declare tasks: CircularHelper<Task>[]
 }

@@ -17,16 +17,12 @@ export class HttpResolver {
     Object.entries(metadatas.controllers).map(([controllerKey, controllerMetadata]) => {
       const router = this.httpAdapter.initRouter()
       Object.entries(controllerMetadata.routes).map(([routeKey, routeMetadata]) => {
-        const beforeMiddlewares = MetadataManager.getMiddlewaresMetadata(
-          controllerKey,
-          routeKey,
-          MiddlewarePosition.BEFORE
-        )
-        const afterMiddlewares = MetadataManager.getMiddlewaresMetadata(
-          controllerKey,
-          routeKey,
-          MiddlewarePosition.AFTER
-        )
+        const beforeMiddlewares = (
+          MetadataManager.getMiddlewaresMetadata(controllerKey, routeKey, MiddlewarePosition.BEFORE) || []
+        ).reverse()
+        const afterMiddlewares = (
+          MetadataManager.getMiddlewaresMetadata(controllerKey, routeKey, MiddlewarePosition.AFTER) || []
+        ).reverse()
         const { bodyFormat } = routeMetadata
         // router.useBodyFormat(routeMetadata.path, bodyFormat)
         if (routeMetadata.method === RouteMethod.GET)

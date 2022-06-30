@@ -8,5 +8,5 @@ import { Column, Model, PrimaryKey, Table } from 'sequelize-typescript'
 export class RefreshToken extends Model<RefreshToken> {
   @PrimaryKey
   @Column
-  content: string
+  declare content: string
 }

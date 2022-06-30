@@ -1,8 +1,7 @@
+import { CreateOptions, DestroyOptions, FindOptions, UpdateOptions } from 'sequelize'
 import { Model } from 'sequelize-typescript'
-import { FindOptions, Op, CreateOptions, UpdateOptions, DestroyOptions } from 'sequelize'
 //import { NotFoundError } from '@owliehq/http-errors'
 import { BuboRepository } from '@bubojs/api'
-import { User } from './User'
 
 export type ModelQuery<Model> = { [K in keyof Model]?: Model[K] }
 

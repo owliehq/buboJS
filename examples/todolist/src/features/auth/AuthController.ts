@@ -2,9 +2,9 @@ import { AfterMiddleware, Body, Controller, Inject, Post } from '../../../../../
 import { ValidationMiddleware } from '../../../../../packages/catalog/src/middlewares'
 import { HttpError } from '../../../../../packages/http-errors/src'
 import { UsersService } from '../users/UsersService'
-import { createValidations, removePassword } from '../users/UsersValidation'
+import { createValidations, removePassword } from '../users/UsersValidations'
 import { AuthService } from './AuthService'
-import { checkLoginValidations } from './AuthValidation'
+import { checkLoginValidations } from './AuthValidations'
 
 @Controller('auth')
 export class AuthController {
