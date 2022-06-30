@@ -7,7 +7,7 @@
     "directory": "packages/api"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://registry.npmjs.org"
   },
   "author": "Owlie",
   "license": "MIT",

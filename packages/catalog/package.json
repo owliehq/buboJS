@@ -12,7 +12,7 @@
     "directory": "packages/catalog"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://registry.npmjs.org"
   },
   "type": "module",
   "scripts": {

@@ -11,7 +11,7 @@
     "directory": "packages/http-errors"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://registry.npmjs.org"
   },
   "types": "./dist/index.d.ts",
   "exports": "./dist/index.js",
