@@ -1,7 +1,7 @@
 {
   "name": "@bubojs/catalog",
   "version": "0.0.1",
-  "main": "src/index.ts",
+  "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": "./dist/index.js",
   "author": "Owlie",

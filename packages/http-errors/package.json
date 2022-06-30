@@ -1,7 +1,7 @@
 {
   "name": "@bubojs/http-errors",
   "version": "0.0.1",
-  "main": "src/index.ts",
+  "main": "./dist/index.js",
   "author": "owlie",
   "license": "MIT",
   "type": "module",
