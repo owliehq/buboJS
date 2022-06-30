@@ -6,7 +6,7 @@
     "url": "https://github.com/owliehq/buboJS.git"
   },
   "publishConfig": {
-    "registry": "https://registry.npmjs.org"
+    "registry": "https://registry.npmjs.org/"
   },
   "workspaces": [
     "packages/*"

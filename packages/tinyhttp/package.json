@@ -7,7 +7,7 @@
     "directory": "packages/tinyhttp"
   },
   "publishConfig": {
-    "registry": "https://registry.npmjs.org"
+    "registry": "https://registry.npmjs.org/"
   },
   "main": "src/index.ts",
   "type": "module",
