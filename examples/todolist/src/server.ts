@@ -1,5 +1,5 @@
-import { app } from '../../../packages/api/src'
-import { TinyHttpAdapter } from '../../../packages/tinyhttp/src'
+import { app } from '@owliehq/bubojs/packages/api'
+import { TinyHttpAdapter } from '@owliehq/bubojs/packages/tinyhttp'
 import { ACCESS_TOKEN_SECRET } from './config/constants'
 import { startDatabase } from './config/database'
 import { User } from './features/users/User'
@@ -18,7 +18,7 @@ export const startServer = () =>
 
     const server = await app.initHttpModule(adapter)
 
-    app.listen(3000)
+    // app.listen(3000)
 
     console.log(`=========================`)
     console.log(`API server is started.`)

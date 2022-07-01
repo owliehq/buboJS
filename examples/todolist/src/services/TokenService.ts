@@ -1,6 +1,6 @@
 import jsonwebtoken from 'jsonwebtoken'
 import { Transaction } from 'sequelize/types'
-import { Service } from '../../../../packages/api/src'
+import { Service } from '@owliehq/bubojs/packages/api'
 import { ACCESS_TOKEN_DURATION, ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET } from '../config/constants'
 import { RefreshToken } from '../features/auth/RefreshToken'
 

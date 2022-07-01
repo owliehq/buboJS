@@ -4,10 +4,10 @@ import {
   Controller,
   DefaultActions,
   MetadataManager
-} from '../../../../../packages/api/src'
-import { ValidationMiddleware } from '../../../../../packages/catalog/src/middlewares'
-import { AuthMiddleware } from '../../../../../packages/catalog/src/middlewares/AuthMiddleware'
-import { RoleMiddleware } from '../../../../../packages/catalog/src/middlewares/RoleMiddleware'
+} from '@owliehq/bubojs/packages/api'
+import { ValidationMiddleware } from '@owliehq/bubojs/packages/catalog'
+import { AuthMiddleware } from '@owliehq/bubojs/packages/catalog'
+import { RoleMiddleware } from '@owliehq/bubojs/packages/catalog'
 import { Positions } from '../user_projects/UserProject'
 import { UserProjectsService } from '../user_projects/UserProjectsService'
 import { applyProjectAccessControlList } from './ProjectsAccess'
