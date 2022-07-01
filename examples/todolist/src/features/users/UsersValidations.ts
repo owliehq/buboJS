@@ -1,4 +1,4 @@
-import { MetadataManager } from '@owliehq/bubojs/packages/api'
+import { MetadataManager } from '@bubojs/api'
 import { User } from './User'
 import { UsersService } from './UsersService'
 

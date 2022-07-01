@@ -1,5 +1,4 @@
-import { DefaultActions, MetadataManager } from '@owliehq/bubojs/packages/api'
-import { RightsManager } from '@owliehq/bubojs/packages/api'
+import { DefaultActions, MetadataManager, RightsManager } from '@bubojs/api'
 import { ROLES } from '../../config/constants'
 import { UsersService } from './UsersService'
 

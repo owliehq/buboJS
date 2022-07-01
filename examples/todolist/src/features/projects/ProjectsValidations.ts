@@ -1,4 +1,4 @@
-import { MetadataManager } from '@owliehq/bubojs/packages/api'
+import { MetadataManager } from '@bubojs/api'
 import { ProjectsService } from './ProjectsService'
 
 const projectsService = MetadataManager.getServiceMetadata(ProjectsService)

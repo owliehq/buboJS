@@ -1,4 +1,4 @@
-import { SequelizeBaseRepository } from '@owliehq/bubojs/packages/sequelize'
+import { SequelizeBaseRepository } from '@bubojs/sequelize'
 import { Task } from './Task'
 
 export class TasksRepository extends SequelizeBaseRepository<Task> {

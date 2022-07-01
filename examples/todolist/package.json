@@ -24,7 +24,11 @@
   ],
   "type": "module",
   "dependencies": {
-    "@owliehq/bubojs": "^0.0.15",
+    "@bubojs/api": "^0.0.1",
+    "@bubojs/catalog": "^0.0.1",
+    "@bubojs/sequelize": "^0.0.1",
+    "@bubojs/http-errors": "^0.0.1",
+    "@bubojs/tinyhttp": "^0.0.1",
     "bcrypt": "^5.0.1",
     "jsonwebtoken": "^8.5.1",
     "pg-mem": "^2.5.0",

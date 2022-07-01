@@ -1,5 +1,5 @@
-import { app } from '@owliehq/bubojs/packages/api'
-import { TinyHttpAdapter } from '@owliehq/bubojs/packages/tinyhttp'
+import { app } from '@bubojs/api'
+import { TinyHttpAdapter } from '@bubojs/tinyhttp'
 import { ACCESS_TOKEN_SECRET } from './config/constants'
 import { startDatabase } from './config/database'
 import { User } from './features/users/User'

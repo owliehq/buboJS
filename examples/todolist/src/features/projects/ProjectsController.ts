@@ -1,13 +1,5 @@
-import {
-  AfterMiddleware,
-  BeforeMiddleware,
-  Controller,
-  DefaultActions,
-  MetadataManager
-} from '@owliehq/bubojs/packages/api'
-import { ValidationMiddleware } from '@owliehq/bubojs/packages/catalog'
-import { AuthMiddleware } from '@owliehq/bubojs/packages/catalog'
-import { RoleMiddleware } from '@owliehq/bubojs/packages/catalog'
+import { AfterMiddleware, BeforeMiddleware, Controller, DefaultActions, MetadataManager } from '@bubojs/api'
+import { AuthMiddleware, RoleMiddleware, ValidationMiddleware } from '@bubojs/catalog'
 import { Positions } from '../user_projects/UserProject'
 import { UserProjectsService } from '../user_projects/UserProjectsService'
 import { applyProjectAccessControlList } from './ProjectsAccess'

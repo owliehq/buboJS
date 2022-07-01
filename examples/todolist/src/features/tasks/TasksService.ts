@@ -1,4 +1,4 @@
-import { Service } from '@owliehq/bubojs/packages/api'
+import { Service } from '@bubojs/api'
 import { Task } from './Task'
 
 @Service()

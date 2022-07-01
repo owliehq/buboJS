@@ -1,15 +1,5 @@
-import {
-  AfterMiddleware,
-  BeforeMiddleware,
-  Controller,
-  DefaultActions,
-  Get,
-  Inject,
-  Query
-} from '@owliehq/bubojs/packages/api'
-import { ValidationMiddleware } from '@owliehq/bubojs/packages/catalog'
-import { AuthMiddleware } from '@owliehq/bubojs/packages/catalog'
-import { RoleMiddleware } from '@owliehq/bubojs/packages/catalog'
+import { AfterMiddleware, BeforeMiddleware, Controller, DefaultActions, Get, Inject, Query } from '@bubojs/api'
+import { AuthMiddleware, RoleMiddleware, ValidationMiddleware } from '@bubojs/catalog'
 import { applyUserAccessControlList } from './UsersAccess'
 import { UsersRepository } from './UsersRepository'
 import { UsersService } from './UsersService'

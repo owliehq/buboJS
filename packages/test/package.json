@@ -9,6 +9,7 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
+  "private": true,
   "author": "Owlie",
   "license": "MIT",
   "dependencies": {

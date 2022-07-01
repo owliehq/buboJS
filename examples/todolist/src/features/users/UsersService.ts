@@ -1,4 +1,4 @@
-import { Service } from '@owliehq/bubojs/packages/api'
+import { Service } from '@bubojs/api'
 import { User } from './User'
 import * as bcrypt from 'bcrypt'
 import { PASSWORD_SALT_ROUND } from '../../config/constants'

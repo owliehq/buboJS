@@ -1,6 +1,6 @@
 {
-  "name": "@owliehq/bubojs",
-  "version": "0.0.15",
+  "name": "bubojs",
+  "version": "0.0.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/owliehq/buboJS.git"
@@ -14,7 +14,7 @@
   "workspaces": [
     "packages/*"
   ],
-  "private": false,
+  "private": true,
   "scripts": {
     "prepare": "husky install",
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
