@@ -2,9 +2,9 @@ import { AfterMiddleware, Body, Controller, Inject, Post } from '@bubojs/api'
 import { ValidationMiddleware } from '@bubojs/catalog'
 import { HttpError } from '@bubojs/http-errors'
 import { UsersService } from '../users/UsersService'
-import { createValidations, removePassword } from '../users/UsersValidations'
+import { removePassword } from '../users/UsersValidations'
 import { AuthService } from './AuthService'
-import { checkLoginValidations } from './AuthValidations'
+import { checkLoginValidations, createValidations } from './AuthValidations'
 
 @Controller('auth')
 export class AuthController {

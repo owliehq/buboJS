@@ -39,7 +39,6 @@ export class UsersService {
   }
 
   async createUser(payload: any) {
-    if (payload.password) payload.password = await this.generatePassword(payload.password)
     const user = await User.create(payload)
     return user
   }
