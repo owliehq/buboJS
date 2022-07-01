@@ -1,7 +1,5 @@
 import { BeforeMiddleware, Controller, DefaultActions } from '@owliehq/bubojs/packages/api'
-import { ValidationMiddleware } from '@owliehq/bubojs/packages/catalog'
-import { AuthMiddleware } from '@owliehq/bubojs/packages/catalog/src'
-import { RoleMiddleware } from '@owliehq/bubojs/packages/catalog/src'
+import { ValidationMiddleware, AuthMiddleware, RoleMiddleware } from '@owliehq/bubojs/packages/catalog'
 import { applyTaskAccessControlList } from './TasksAccess'
 import { TasksRepository } from './TasksRepository'
 import { createValidations, deleteValidations, updateValidations } from './TasksValidations'

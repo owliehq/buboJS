@@ -1,12 +1,15 @@
 {
   "name": "@owliehq/bubojs",
-  "version": "0.0.4",
+  "version": "0.0.15",
   "repository": {
     "type": "git",
     "url": "https://github.com/owliehq/buboJS.git"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
+  },
+  "exports": {
+    "./*": "./*/dist/index.js"
   },
   "workspaces": [
     "packages/*"
@@ -20,11 +23,11 @@
     "build": "lerna run build"
   },
   "devDependencies": {
-    "@typescript-eslint/parser": "^5.27.0",
     "@commitlint/cli": "^17.0.2",
     "@commitlint/config-conventional": "^17.0.2",
     "@types/jest": "^28.1.1",
     "@types/node": "^18.0.0",
+    "@typescript-eslint/parser": "^5.27.0",
     "commitizen": "^4.2.4",
     "cross-env": "^7.0.3",
     "cz-conventional-changelog": "^3.3.0",
@@ -32,9 +35,9 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
     "husky": "^8.0.1",
-    "prettier": "^2.6.2",
     "jest": "28.1.1",
     "lerna": "^5.1.2",
+    "prettier": "^2.6.2",
     "ts-jest": "^28.0.5",
     "ts-node": "^10.8.1",
     "typescript": "^4.7.3"
@@ -69,5 +72,6 @@
       "js",
       "json"
     ]
-  }
+  },
+  "packageManager": "yarn@3.2.1"
 }

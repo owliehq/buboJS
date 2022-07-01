@@ -13,3 +13,4 @@ compiled
 *.code-workspace
 .yarnrc
 yarn-*
+examples

@@ -12,3 +12,5 @@ compiled
 *.code-workspace
 .yarnrc
 yarn-*
+.yarn
+.yarnrc.yml
