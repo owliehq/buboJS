@@ -6,10 +6,10 @@ import {
   Get,
   Inject,
   Query
-} from '../../../../../packages/api/src'
-import { ValidationMiddleware } from '../../../../../packages/catalog/src/middlewares'
-import { AuthMiddleware } from '../../../../../packages/catalog/src/middlewares/AuthMiddleware'
-import { RoleMiddleware } from '../../../../../packages/catalog/src/middlewares/RoleMiddleware'
+} from '@owliehq/bubojs/packages/api'
+import { ValidationMiddleware } from '@owliehq/bubojs/packages/catalog'
+import { AuthMiddleware } from '@owliehq/bubojs/packages/catalog'
+import { RoleMiddleware } from '@owliehq/bubojs/packages/catalog'
 import { applyUserAccessControlList } from './UsersAccess'
 import { UsersRepository } from './UsersRepository'
 import { UsersService } from './UsersService'

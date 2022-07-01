@@ -94,6 +94,11 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@owliehq/bubojs@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.npmjs.org/@owliehq/bubojs/-/bubojs-0.0.6.tgz#7542fe65ad037e85d375e9c735952eca8395aa2f"
+  integrity sha512-ZEsIfFlZLNHyU+INGLJ8G5tBe3qhCMha2EXkNpOqkYMDPYCQQQKIwi7FjTEb0va/ZY/vIyOHVupcPsxHzjrlXQ==
+
 "@tsconfig/node10@^1.0.7":
   version "1.0.8"
   resolved "https://registry.npmjs.org/@tsconfig/node10/-/node10-1.0.8.tgz#c1e4e80d6f964fbecb3359c43bd48b40f7cadad9"

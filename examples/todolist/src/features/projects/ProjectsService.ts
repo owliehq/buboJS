@@ -1,4 +1,4 @@
-import { Service } from '../../../../../packages/api/src'
+import { Service } from '@owliehq/bubojs/packages/api'
 import { Project } from './Project'
 
 @Service()

@@ -1,4 +1,4 @@
-import { MetadataManager } from '../../../../../packages/api/src'
+import { MetadataManager } from '@owliehq/bubojs/packages/api'
 import { User } from './User'
 import { UsersService } from './UsersService'
 
@@ -13,7 +13,6 @@ export const createValidations = {
       type: 'email',
       custom: async (v, errors) => {
         const exists = await usersService.checkEmailExistence(v)
-        // console.log('exists', exists)
         if (exists) errors.push({ type: 'emailNotAvailable' })
 
         return v
@@ -124,7 +123,6 @@ export const checkEmailValidations = {
 
 export const removePassword = (req, res, next) => {
   req.result.password = undefined
-  console.log('after middleware 2')
   next()
 }
 

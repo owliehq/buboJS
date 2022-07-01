@@ -1,4 +1,4 @@
-import { MetadataManager } from '../../../../../packages/api/src'
+import { MetadataManager } from '@owliehq/bubojs/packages/api'
 import { ProjectsService } from '../projects/ProjectsService'
 import { TasksService } from './TasksService'
 
@@ -18,7 +18,6 @@ export const createValidations = {
 
         if (!project) errors.push({ type: 'projectNotFound' })
 
-        console.log('project', project)
         return v
       }
     }

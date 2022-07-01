@@ -24,6 +24,7 @@
   ],
   "type": "module",
   "dependencies": {
+    "@owliehq/bubojs": "^0.0.6",
     "bcrypt": "^5.0.1",
     "jsonwebtoken": "^8.5.1",
     "pg-mem": "^2.5.0",

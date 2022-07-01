@@ -1,5 +1,5 @@
 import { Transaction } from 'sequelize/types'
-import { Inject, Service } from '../../../../../packages/api/src'
+import { Inject, Service } from '@owliehq/bubojs/packages/api'
 import { TokenService } from '../../services/TokenService'
 import { User } from '../users/User'
 import { UsersService } from '../users/UsersService'

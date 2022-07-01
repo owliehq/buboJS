@@ -1,5 +1,5 @@
-import { DefaultActions } from '../../../../../packages/api/src'
-import { RightsManager } from '../../../../../packages/api/src/RightsManager'
+import { DefaultActions } from '@owliehq/bubojs/packages/api'
+import { RightsManager } from '@owliehq/bubojs/packages/api'
 import { ROLES } from '../../config/constants'
 
 export const applyTaskAccessControlList = () => {
