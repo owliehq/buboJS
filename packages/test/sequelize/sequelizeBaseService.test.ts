@@ -2,6 +2,8 @@ import { initMockDb, sequelize } from './mock'
 import { ModelData, SequelizeBaseRepository, SequelizePopulate } from '@bubojs/sequelize'
 import { Project, Task, User, UserProject } from './models/models'
 import { randEmail, randFirstName, randLastName, randPassword } from '@ngneat/falso'
+import { SequelizeConditionsParser } from '@bubojs/sequelize/src/SequelizeConditions'
+import { Op } from 'sequelize/types'
 
 // params
 const userCount = 3
@@ -74,24 +76,46 @@ describe('Sequelize Base Service', () => {
 })
 
 describe('Sequelize Populate Functions', () => {
-  test('test', async () => {
-    const populator = new SequelizePopulate(Project, ['tasks', 'userProjects.user'])
+  const populator = new SequelizePopulate(Project, ['tasks', 'userProjects.user'])
+  test('simple include', async () => {
     const wTasks = populator.buildIncludeOptions('tasks')
     expect(wTasks).toStrictEqual([{ model: Task, as: 'tasks' }])
+  })
 
+  test('Nested include', async () => {
     const wUserProject = populator.buildIncludeOptions('userProjects.user')
     expect(wUserProject).toStrictEqual([
       { model: UserProject, as: 'userProjects', include: [{ model: User, as: 'user' }] }
     ])
-
+  })
+  test('Forbidden include', async () => {
     const wU = populator.buildIncludeOptions('users')
     expect(wU).toStrictEqual([])
+  })
 
+  test('Include with simple, nested + forbidden, forbidden', () => {
     const wAll = populator.buildIncludeOptions('tasks userProjects.user.tasks user')
     expect(wAll).toStrictEqual([
       { model: Task, as: 'tasks' },
       { model: UserProject, as: 'userProjects', include: [{ model: User, as: 'user' }] }
     ])
+  })
+})
+
+describe('Sequelize Query Functions', () => {
+  const parser = new SequelizeConditionsParser()
+  test('Query with a simple where', async () => {
+    expect(parser.toOptions({ id: 3 })).toBe({ where: { id: 3 } })
+  })
+
+  test('Query with a range for id', async () => {
+    expect(parser.toOptions({ id: { $in: [1, 2, 3] } })).toBe({ where: { id: { [Op.in]: [1, 2, 3] } } })
+  })
+
+  test('Query with two parameters', async () => {
+    expect(parser.toOptions({ $and: [{ id: 3 }, { name: 'Roger' }] })).toBe({
+      where: { [Op.and]: [{ id: 3 }, { name: 'Roger' }] }
+    })
   })
 })
 

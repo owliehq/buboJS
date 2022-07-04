@@ -1,6 +1,6 @@
 import {BelongsToMany, Column, HasMany, Model, Table} from "sequelize-typescript";
 import {Task, UserProject} from './models'
-import {CircularHelper} from "../TypeUtils";
+import {CircularHelper} from "@bubojs/sequelize";
 
 @Table({
     tableName: 'project',
