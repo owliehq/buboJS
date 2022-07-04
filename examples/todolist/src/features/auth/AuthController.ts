@@ -19,7 +19,7 @@ export class AuthController {
       const user = await this.userService.createUser(body)
       return user
     } catch (error) {
-      return HttpError.BadRequest({ message: 'Invalid credentials' })
+      throw HttpError.BadRequest({ message: 'Invalid credentials' })
     }
   }
 
@@ -34,7 +34,7 @@ export class AuthController {
       return tokens
     } catch (error) {
       console.error(error)
-      return HttpError.BadRequest({ message: 'Invalid credentials' })
+      throw HttpError.BadRequest({ message: 'Invalid credentials' })
     }
   }
 }
