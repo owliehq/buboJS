@@ -48,8 +48,8 @@ export class DefaultRouteBuilder {
       path: '/:id',
       method: RouteMethod.GET,
       handler: this.createWrapper(async (req: any, res: any, next: Function) => {
-        const { params } = req
-        return this.repository.findById(params.id)
+        const { params, options } = req
+        return this.repository.findById(params.id, options)
       }),
       parameters: []
     }
@@ -64,7 +64,7 @@ export class DefaultRouteBuilder {
       path: '/',
       method: RouteMethod.GET,
       handler: this.createWrapper(async (req: any, res: any, next: Function) => {
-        return this.repository.findAll()
+        return this.repository.findAll(req.options)
       }),
       parameters: []
     }
@@ -79,7 +79,7 @@ export class DefaultRouteBuilder {
       path: '/',
       method: RouteMethod.POST,
       handler: this.createWrapper((req: any, res: any, next: Function) => {
-        return this.repository.create(req.body)
+        return this.repository.create(req.body, req.options)
       }),
       parameters: [],
       bodyFormat: BodyFormat.JSON
@@ -92,8 +92,8 @@ export class DefaultRouteBuilder {
       path: '/:id',
       method: RouteMethod.PUT,
       handler: this.createWrapper((req: any, res: any, next: Function) => {
-        const { params, body } = req
-        return this.repository.update(params.id, body)
+        const { params, body, options } = req
+        return this.repository.update(params.id, body, options)
       }),
       parameters: [],
       bodyFormat: BodyFormat.JSON
@@ -109,8 +109,8 @@ export class DefaultRouteBuilder {
       path: '/:id',
       method: RouteMethod.DELETE,
       handler: this.createWrapper((req: any, res: any, next: Function) => {
-        const { params } = req
-        return this.repository.delete(params.id)
+        const { params, options } = req
+        return this.repository.delete(params.id, options)
       }),
       parameters: []
     }
