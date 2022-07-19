@@ -31,7 +31,7 @@ export const roleMiddleware = (resource: string, action: string, prepareContext?
       throw HttpError.Forbidden({
         message: `You don't have the right ACL to execute this action on optional requested resource.`
       })
-
+    req.permission = permission
     next()
   }
   return callback
