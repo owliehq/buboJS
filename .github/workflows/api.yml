@@ -22,7 +22,7 @@ jobs:
     - run: yarn run build
       name: building package
       working-directory: packages/api
-    - run: yarn publish
+    - run: npm publish
       name: publishing
       working-directory: packages/api
     env:
