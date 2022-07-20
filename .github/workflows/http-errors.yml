@@ -17,7 +17,7 @@ jobs:
       with:
         node-version: "16.x"
         registry-url: 'https://registry.npmjs.org'
-    - run: yarn set version latest
+    - run: yarn set version stable
       name: upgrade yarn 
     - run: yarn & yarn run bootstrap
       name: Install dependencies
