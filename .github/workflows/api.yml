@@ -3,7 +3,7 @@ name: Publish API package
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - "packages/api/**"
 jobs:
