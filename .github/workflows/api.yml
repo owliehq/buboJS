@@ -22,8 +22,8 @@ jobs:
     - run: yarn run build
       name: building package
       working-directory: packages/api
-    - run: npm publish
+    - run: yarn publish
       name: publishing
       working-directory: packages/api
     env:
-      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
