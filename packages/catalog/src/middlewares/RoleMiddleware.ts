@@ -37,23 +37,20 @@ export const roleMiddleware = (resource: string, action: string, prepareContext?
   return callback
 }
 
-export const RoleMiddleware = () => {
-  return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
-    const name = target.constructor.name
+export const RoleMiddleware = () => (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
+  const name = target.constructor.name
+  const isController = name?.substring(name.length - 10) === 'Controller'
 
-    const isController = name?.substring(name.length - 10) === 'Controller'
+  if (!isController) throw new Error(`Controller name's must finish with "Controller"`)
 
-    if (!isController) throw new Error(`Controller name's must finish with "Controller"`)
+  const resource = name.substring(0, name.length - 10).toLowerCase()
 
-    const resource = name.substring(0, name.length - 10).toLowerCase()
+  const currentRoleMiddleware = roleMiddleware(resource, propertyKey)
 
-    const currentRoleMiddleware = roleMiddleware(resource, propertyKey)
-
-    MetadataManager.setMiddlewareMetadata(
-      target.constructor.name,
-      propertyKey,
-      MiddlewarePosition.BEFORE,
-      currentRoleMiddleware
-    )
-  }
+  MetadataManager.setMiddlewareMetadata(
+    target.constructor.name,
+    propertyKey,
+    MiddlewarePosition.BEFORE,
+    currentRoleMiddleware
+  )
 }

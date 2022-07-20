@@ -1,0 +1,27 @@
+name: Publish API package
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "packages/api/**"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        name: checkout
+      - uses: actions/setup-node@v3
+        name: Install node.js
+        with:
+          node-version: "16.x"
+          registry-url: 'https://registry.npmjs.org'
+      - run: yarn install
+        name: Install dependencies
+      - run: yarn run build
+        name: building package
+        working-directory: packages/api
+      - run: yarn publish
+      env:
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

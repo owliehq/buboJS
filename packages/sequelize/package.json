@@ -1,6 +1,6 @@
 {
   "name": "@bubojs/sequelize",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "main": "./dist/index.js",
   "author": "owlie",
   "license": "MIT",
@@ -20,7 +20,7 @@
     "build": "rimraf ./dist && tsc -p tsconfig.build.json"
   },
   "dependencies": {
-    "@bubojs/api": "^0.0.1",
+    "@bubojs/api": "^0.1.0",
     "sequelize": "^6.19.2",
     "sequelize-typescript": "^2.1.3"
   },

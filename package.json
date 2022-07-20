@@ -1,6 +1,6 @@
 {
   "name": "bubojs",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/owliehq/buboJS.git"
@@ -20,7 +20,8 @@
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
     "setup": "yarn && yarn run bootstrap",
     "bootstrap": "lerna bootstrap",
-    "build": "lerna run build"
+    "build": "lerna run build --sort",
+    "publish" : "yarn --cwd ./packages/api npm publish"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.0.2",
