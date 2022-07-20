@@ -23,5 +23,7 @@ jobs:
       name: building package
       working-directory: packages/api
     - run: yarn publish
+      name: publishing
+      working-directory: packages/api
     env:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
