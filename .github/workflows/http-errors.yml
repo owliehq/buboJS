@@ -18,20 +18,17 @@ jobs:
       with:
         node-version: "16.x"
         registry-url: 'https://registry.npmjs.org'
-    - run: env
-      name: identify env
-    - run: echo "test env name $PACKAGE_NAME"
-      name: test env
     - run: yarn set version classic
       name: upgrade yarn 
     - run: yarn install
       name: Install dependencies
-      working-directory: "packages/${{env.PACKAGE_NAME}}"
+      working-directory: $WORK_DIR
     - run: yarn run build
       name: building package
-      working-directory: "packages/$PACKAGE_NAME"
+      working-directory: $WORK_DIR
     - run: yarn publish
       name: "publishing $PACKAGE_NAME"
-      working-directory: "packages/$PACKAGE_NAME"
+      working-directory: $WORK_DIR
     env:
       NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      WORK_DIR: 'packages/${{ env.PACKAGE_NAME}}'
