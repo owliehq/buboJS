@@ -6,7 +6,7 @@ on:
     branches:
       - main
     paths:
-      - "packages/$PACKAGE_NAME/**"
+      - "packages/http-errors/**"
 
 jobs:
   build:
