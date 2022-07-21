@@ -17,8 +17,11 @@ jobs:
       with:
         node-version: "16.x"
         registry-url: 'https://registry.npmjs.org'
-    - run: yarn & yarn run bootstrap
+    - run: yarn set version stable
+      name: upgrade yarn 
+    - run: yarn
       name: Install dependencies
+      working-directory: packages/fastify
     - run: yarn run build
       name: building package
       working-directory: packages/fastify
