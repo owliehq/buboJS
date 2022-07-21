@@ -1,6 +1,4 @@
 name: Publish Http-errors Package
-env: 
-  PACKAGE_NAME : http-errors
 on:
   push:
     branches:
@@ -32,3 +30,4 @@ jobs:
       working-directory: packages/$PACKAGE_NAME
     env:
       NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      PACKAGE_NAME : http-errors
