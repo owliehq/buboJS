@@ -19,7 +19,7 @@ jobs:
         registry-url: 'https://registry.npmjs.org'
     - run: yarn set version stable
       name: upgrade yarn 
-    - run: yarn
+    - run: yarn install
       name: Install dependencies
       working-directory: packages/fastify
     - run: yarn run build
