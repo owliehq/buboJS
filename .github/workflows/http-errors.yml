@@ -1,5 +1,6 @@
 name: Publish http-errors Package
-
+env:
+  PACKAGE_NAME: http-errors
 on:
   push:
     branches:
@@ -17,6 +18,10 @@ jobs:
       with:
         node-version: "16.x"
         registry-url: 'https://registry.npmjs.org'
+    - run: env
+      name: identify env
+    - run: echo "test env name $PACKAGE_NAME"
+      name: test env
     - run: yarn set version classic
       name: upgrade yarn 
     - run: yarn install
