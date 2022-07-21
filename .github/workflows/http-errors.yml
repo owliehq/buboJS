@@ -7,9 +7,8 @@ on:
     paths:
       - "packages/http-errors/**"
 jobs:
-  build:
+  build:    
     uses: ./.github/workflows/package_publisher.yml
     with:
       package_name: http-errors
-  env:
-    NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      npm_token: ${{ secrets.NPM_TOKEN}}
