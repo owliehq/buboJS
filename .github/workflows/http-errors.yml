@@ -31,4 +31,4 @@ jobs:
       working-directory: $WORK_DIR
     env:
       NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      WORK_DIR: 'packages/$PACKAGE_NAME'
+      WORK_DIR: 'packages/${{ env.PACKAGE_NAME}}'
