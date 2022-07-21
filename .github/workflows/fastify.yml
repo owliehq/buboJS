@@ -15,7 +15,7 @@ jobs:
     - uses: actions/setup-node@v3
       name: Install node.js
       with:
-        node-version: "18.x"
+        node-version: "16.x"
         registry-url: 'https://registry.npmjs.org'
     - run: yarn set version classic
       name: upgrade yarn 

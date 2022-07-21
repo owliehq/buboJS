@@ -1,13 +1,11 @@
-name: Publish Http-errors Package
-env: 
-  PACKAGE_NAME : http-errors
+name: Publish http-error Package
+
 on:
   push:
     branches:
       - main
     paths:
-      - "packages/http-errors/**"
-
+      - "packages/http-error/**"
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,16 +17,16 @@ jobs:
       with:
         node-version: "16.x"
         registry-url: 'https://registry.npmjs.org'
-    - run: yarn set version stable
+    - run: yarn set version classic
       name: upgrade yarn 
-    - run: yarn & yarn install
+    - run: yarn install
       name: Install dependencies
-      working-directory: packages/${{env.PACKAGE_NAME}}
+      working-directory: packages/http-error
     - run: yarn run build
       name: building package
-      working-directory: packages/${{env.PACKAGE_NAME}}
+      working-directory: packages/http-error
     - run: yarn publish
-      name: publishing ${{env.PACKAGE_NAME}}
-      working-directory: packages/${{env.PACKAGE_NAME}}
+      name: publishing http-error
+      working-directory: packages/http-error
     env:
       NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
