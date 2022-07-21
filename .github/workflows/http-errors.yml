@@ -26,7 +26,7 @@ jobs:
       name: upgrade yarn 
     - run: yarn install
       name: Install dependencies
-      working-directory: "packages/$PACKAGE_NAME"
+      working-directory: "packages/${{env.PACKAGE_NAME}}"
     - run: yarn run build
       name: building package
       working-directory: "packages/$PACKAGE_NAME"
