@@ -6,7 +6,7 @@ on:
     branches:
       - main
     paths:
-      - "packages/${{ env.PACKAGE_NAME}}/**"
+      - 'packages/${{ env.PACKAGE_NAME}}/**'
 jobs:
   build:
     runs-on: ubuntu-latest
