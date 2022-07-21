@@ -22,13 +22,12 @@ jobs:
       name: upgrade yarn 
     - run: yarn install
       name: Install dependencies
-      working-directory: $WORK_DIR
+      working-directory: 'packages/${{ env.PACKAGE_NAME}}'
     - run: yarn run build
       name: building package
-      working-directory: $WORK_DIR
+      working-directory: 'packages/${{ env.PACKAGE_NAME}}'
     - run: yarn publish
-      name: "publishing $PACKAGE_NAME"
-      working-directory: $WORK_DIR
+      name: "publishing ${{ env.PACKAGE_NAME}}"
+      working-directory: 'packages/${{ env.PACKAGE_NAME}}'
     env:
       NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      WORK_DIR: 'packages/${{ env.PACKAGE_NAME}}'
