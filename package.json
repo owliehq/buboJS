@@ -11,9 +11,11 @@
   "exports": {
     "./*": "./*/dist/index.js"
   },
-  "workspaces": [
-    "packages/*"
-  ],
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
   "private": true,
   "scripts": {
     "prepare": "husky install",

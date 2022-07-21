@@ -28,13 +28,12 @@ jobs:
     - run: yarn set version classic
       name: upgrade yarn 
 
-    - run: yarn install --install.focus true
+    - run: yarn & yarn bootstrap
       name: installing packages
       working-directory: 'packages/${{ inputs.package_name}}'
 
-    - run: yarn run build
+    - run: yarn build
       name: building package
-      working-directory: 'packages/${{ inputs.package_name}}'
 
     - run: yarn publish
       name: "publishing ${{ inputs.package_name}}"
