@@ -1,11 +1,11 @@
-name: Publish http-error Package
+name: Publish http-errors Package
 
 on:
   push:
     branches:
       - main
     paths:
-      - "packages/http-error/**"
+      - "packages/http-errors/**"
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -21,12 +21,12 @@ jobs:
       name: upgrade yarn 
     - run: yarn install
       name: Install dependencies
-      working-directory: packages/http-error
+      working-directory: packages/http-errors
     - run: yarn run build
       name: building package
-      working-directory: packages/http-error
+      working-directory: packages/http-errors
     - run: yarn publish
-      name: publishing http-error
-      working-directory: packages/http-error
+      name: publishing http-errors
+      working-directory: packages/http-errors
     env:
       NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
