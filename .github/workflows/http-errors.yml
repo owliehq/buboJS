@@ -1,4 +1,6 @@
 name: Publish Http-errors Package
+env: 
+  PACKAGE_NAME : http-errors
 on:
   push:
     branches:
@@ -21,13 +23,12 @@ jobs:
       name: upgrade yarn 
     - run: yarn & yarn install
       name: Install dependencies
-      working-directory: packages/$PACKAGE_NAME
+      working-directory: packages/${{env.PACKAGE_NAME}}
     - run: yarn run build
       name: building package
-      working-directory: packages/$PACKAGE_NAME
+      working-directory: packages/${{env.PACKAGE_NAME}}
     - run: yarn publish
-      name: publishing $PACKAGE_NAME
-      working-directory: packages/$PACKAGE_NAME
+      name: publishing ${{env.PACKAGE_NAME}}
+      working-directory: packages/${{env.PACKAGE_NAME}}
     env:
       NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      PACKAGE_NAME : http-errors
