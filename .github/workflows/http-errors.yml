@@ -1,5 +1,6 @@
 name: Publish Http-errors Package
-env: PACKAGE_NAME = http-errors
+env: 
+  PACKAGE_NAME : http-errors
 on:
   push:
     branches:
