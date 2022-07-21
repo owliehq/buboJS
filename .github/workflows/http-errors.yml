@@ -26,12 +26,12 @@ jobs:
       name: upgrade yarn 
     - run: yarn install
       name: Install dependencies
-      working-directory: packages/http-errors
+      working-directory: "packages/$PACKAGE_NAME"
     - run: yarn run build
       name: building package
-      working-directory: packages/http-errors
+      working-directory: "packages/$PACKAGE_NAME"
     - run: yarn publish
-      name: publishing http-errors
-      working-directory: packages/http-errors
+      name: "publishing $PACKAGE_NAME"
+      working-directory: "packages/$PACKAGE_NAME"
     env:
       NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
