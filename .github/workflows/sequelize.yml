@@ -8,22 +8,8 @@ on:
       - "packages/sequelize/**"
 jobs:
   build:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-      name: checkout
-    - uses: actions/setup-node@v3
-      name: Install node.js
-      with:
-        node-version: "16.x"
-        registry-url: 'https://registry.npmjs.org'
-    - run: yarn install
-      name: Install dependencies
-    - run: yarn run build
-      name: building sequelize
-      working-directory: packages/sequelize
-    - run: yarn publish
-      name: publishing sequelize
-      working-directory: packages/sequelize
-    env:
-      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+    uses: ./.github/workflows/package_publisher.yml
+    with:
+      package_name: sequelize
+  env:
+    NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
