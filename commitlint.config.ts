@@ -20,7 +20,7 @@ const Configuration: UserConfig = {
    * Any rules defined here will override rules from @commitlint/config-conventional
    */
   rules: {
-    'scope-enum': [2, 'always', ['root', 'api', 'tinyhttp', 'fastify', 'swagger', 'todolist', 'catalog',  'sequelize']],
+    'scope-enum': [2, 'always', ['root', 'api', 'tinyhttp', 'fastify', 'swagger', 'todolist', 'catalog',  'sequelize', 'ci']],
     'subject-max-length': [2, 'always', 120]
   }
   /*
