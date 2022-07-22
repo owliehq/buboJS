@@ -39,4 +39,4 @@ jobs:
       working-directory: 'packages/${{ inputs.package_name}}'
       
     env:
-      NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
+      npmAuthToken: ${{ secrets.npm_token }}
