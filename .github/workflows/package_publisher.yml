@@ -31,10 +31,6 @@ jobs:
     - run: yarn
       name: installing packages
 
-    - run: yarn
-      name: installing packages
-      working-directory: 'packages/${{ inputs.package_name}}'
-
     - run: yarn build
       name: building packages
 

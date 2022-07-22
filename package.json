@@ -13,7 +13,13 @@
   },
   "workspaces": {
     "packages": [
-      "packages/*"
+      "packages/api",
+      "packages/http-errors",
+      "packages/fastify",
+      "packages/tinyhttp",
+      "packages/sequelize",
+      "packages/catalog",
+      "packages/swagger"
     ]
   },
   "private": true,
