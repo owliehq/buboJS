@@ -34,9 +34,9 @@ jobs:
     - run: yarn build
       name: building packages
 
-    - run: yarn npm publish
+    - run: npm publish
       name: "publishing ${{ inputs.package_name}}"
       working-directory: 'packages/${{ inputs.package_name}}'
       
     env:
-      npmAuthToken: ${{ secrets.npm_token }}
+      NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
