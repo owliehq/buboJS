@@ -25,7 +25,7 @@ jobs:
         node-version: "16.x"
         registry-url: 'https://registry.npmjs.org'
 
-    - run: yarn set version classic
+    - run: yarn set version berry
       name: upgrade yarn 
 
     - run: yarn & yarn bootstrap
