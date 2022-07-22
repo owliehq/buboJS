@@ -12,9 +12,8 @@
     "./*": "./*/dist/index.js"
   },
   "workspaces": [
-      "packages/*"
-    ]
-  ,
+    "packages/*"
+  ],
   "private": true,
   "scripts": {
     "prepare": "husky install",
@@ -23,13 +22,12 @@
     "bootstrap": "lerna bootstrap",
     "build:api": "yarn --cwd ./packages/api build",
     "build:fastify": "yarn --cwd ./packages/fastify build",
-    "build:tinyhttp":"yarn --cwd ./packages/tinyhttp build",
-    "build:swagger":"yarn --cwd ./packages/swagger build",
+    "build:tinyhttp": "yarn --cwd ./packages/tinyhttp build",
+    "build:swagger": "yarn --cwd ./packages/swagger build",
     "build:sequelize": "yarn --cwd ./packages/sequelize build",
     "build:http-errors": "yarn --cwd ./packages/http-errors build",
-    "build:catalog":"yarn --cwd ./packages/catalog build",
+    "build:catalog": "yarn --cwd ./packages/catalog build",
     "build": "build:api && build:fastify && build:tinyhttp && build:swagger && build:sequelize && build:http-errors && build:catalog"
-    
   },
   "devDependencies": {
     "@commitlint/cli": "^17.0.2",
