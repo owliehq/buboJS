@@ -27,7 +27,7 @@
     "build:sequelize": "yarn --cwd ./packages/sequelize build",
     "build:http-errors": "yarn --cwd ./packages/http-errors build",
     "build:catalog": "yarn --cwd ./packages/catalog build",
-    "build": "build:api && build:fastify && build:tinyhttp && build:swagger && build:sequelize && build:http-errors && build:catalog"
+    "build": "lerna run build"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.0.2",
