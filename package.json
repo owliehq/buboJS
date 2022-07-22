@@ -11,8 +11,7 @@
   "exports": {
     "./*": "./*/dist/index.js"
   },
-  "workspaces": {
-    "packages": [
+  "workspaces": [
       "packages/api",
       "packages/http-errors",
       "packages/fastify",
@@ -21,7 +20,7 @@
       "packages/catalog",
       "packages/swagger"
     ]
-  },
+  ,
   "private": true,
   "scripts": {
     "prepare": "husky install",
