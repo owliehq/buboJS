@@ -19,6 +19,9 @@
   "scripts": {
     "build": "rimraf ./dist && tsc -p tsconfig.build.json"
   },
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "@bubojs/api": "^0.1.0",
     "@bubojs/http-errors": "^0.1.0",
