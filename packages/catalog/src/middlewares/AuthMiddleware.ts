@@ -1,4 +1,4 @@
-import { BeforeMiddleware } from '@bubojs/api'
+import { BeforeMiddleware, HeaderType, MetadataManager } from '@bubojs/api'
 
 export const authMiddleware = (req, res, next): void => {
   if (!req.user) {
@@ -10,4 +10,13 @@ export const authMiddleware = (req, res, next): void => {
 
 export const AuthMiddleware = () => {
   return BeforeMiddleware(authMiddleware)
+}
+
+export const User = (target: any, propertyKey: string, index: number) => {
+  MetadataManager.setParameterMetadata(target.constructor.name, propertyKey, index, {
+    getValue: (req: any) => {
+      return req.user
+    },
+    headerType: HeaderType.BODY
+  })
 }
