@@ -12,7 +12,7 @@ export const AuthMiddleware = () => {
   return BeforeMiddleware(authMiddleware)
 }
 
-export const User = (target: any, propertyKey: string, index: number) => {
+export const CurrentUser = (target: any, propertyKey: string, index: number) => {
   MetadataManager.setParameterMetadata(target.constructor.name, propertyKey, index, {
     getValue: (req: any) => {
       return req.user
