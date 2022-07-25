@@ -22,14 +22,25 @@ export const Params =
  * Decorator to get body in http request
  * @returns
  */
-export const Body = (target: any, propertyKey: string, index: number): any => {
-  MetadataManager.setParameterMetadata(target.constructor.name, propertyKey, index, {
-    getValue: (req: any) => {
-      return req.body
-    },
-    headerType: HeaderType.BODY
-  })
-}
+export const Body =
+  (name?: string) =>
+  (target: any, propertyKey: string, index: number): any => {
+    if (name) {
+      MetadataManager.setParameterMetadata(target.constructor.name, propertyKey, index, {
+        getValue: (req: any) => {
+          return req.body[name]
+        },
+        headerType: HeaderType.BODY
+      })
+    } else {
+      MetadataManager.setParameterMetadata(target.constructor.name, propertyKey, index, {
+        getValue: (req: any) => {
+          return req.body
+        },
+        headerType: HeaderType.BODY
+      })
+    }
+  }
 
 /**
  * Decorator to get one header

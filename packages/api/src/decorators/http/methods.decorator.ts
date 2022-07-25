@@ -44,7 +44,7 @@ const buildMethod =
       } catch (error) {
         const statusCode = error.statusCode || 500
         const { message } = error
-        res.status(statusCode).json({ statusCode, message })
+        await res.status(statusCode).json({ statusCode, message })
       }
     }
 
