@@ -10,7 +10,9 @@
     "url": "https://github.com/owliehq/buboJS.git",
     "directory": "packages/http-errors"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
@@ -27,5 +29,4 @@
     "rimraf": "^3.0.2",
     "typescript": "^4.7.4"
   }
-  
 }
