@@ -1,3 +1,3 @@
-export * from './AbstractError'
-export * from './NotFoundError'
+export * from './ErrorMiddleware'
+export * from './ErrorFactory'
 export * from './HttpError'
