@@ -1,6 +1,6 @@
 {
   "name": "@bubojs/catalog",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": "./dist/index.js",
@@ -24,7 +24,7 @@
   ],
   "dependencies": {
     "@bubojs/api": "^0.1.0",
-    "@bubojs/http-errors": "^0.1.0",
+    "@bubojs/http-errors": "^0.1.5",
     "fastest-validator": "^1.12.0",
     "jsonwebtoken": "^8.5.1",
     "pluralize-es": "^1.0.0"

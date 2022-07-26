@@ -1,5 +1,5 @@
 import { MetadataManager, MiddlewarePosition, RightsManager } from '@bubojs/api'
-import { HttpError } from '@bubojs/http-errors'
+import { ErrorFactory } from '@bubojs/http-errors'
 
 export const roleMiddleware = (resource: string, action: string, prepareContext?: Function) => {
   const callback = async (req: any, res: any, next: Function): Promise<void> => {
@@ -12,7 +12,7 @@ export const roleMiddleware = (resource: string, action: string, prepareContext?
     if (!role) throw Error(`There's an error with user's role, maybe the callback is not set correctly.`)
 
     if (!RightsManager.accessController.getRoles().includes(role))
-      throw HttpError.Forbidden({
+      throw ErrorFactory.Forbidden({
         message: `You don't have the right ACL to execute this action on optional requested resource.`
       })
 
@@ -28,7 +28,7 @@ export const roleMiddleware = (resource: string, action: string, prepareContext?
       .on(resource)
 
     if (!permission.granted)
-      throw HttpError.Forbidden({
+      throw ErrorFactory.Forbidden({
         message: `You don't have the right ACL to execute this action on optional requested resource.`
       })
     req.permission = permission
