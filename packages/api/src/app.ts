@@ -5,12 +5,11 @@ import { HttpResolver } from './HttpResolver'
 import { MetadataManager } from './MetadataManager'
 import { RightsManager } from './RightsManager'
 import { ServiceResolver } from './ServiceResolver'
-import { errorsMiddleware } from '@bubojs/http-errors'
 
 export interface AppOptions {
   port?: number
-  beforeAllMiddlewares: Array<{ path?: string; function: any }>
-  errorMiddleware: any
+  beforeAllMiddlewares?: Array<{ path?: string; function: any }>
+  errorMiddleware?: any
 }
 
 export class App {
@@ -28,7 +27,7 @@ export class App {
       adapter.use('/', middleware)
     })
     controllerResolver.controllerRevolve(MetadataManager.meta)
-    adapter.useErrorHandler(errorsMiddleware)
+    adapter.useErrorHandler(options?.errorMiddleware)
 
     this.initApiModule()
 
