@@ -5,25 +5,36 @@ import { HttpResolver } from './HttpResolver'
 import { MetadataManager } from './MetadataManager'
 import { RightsManager } from './RightsManager'
 import { ServiceResolver } from './ServiceResolver'
+import { errorsMiddleware } from '@bubojs/http-errors'
+
+export interface AppOptions {
+  port?: number
+  beforeAllMiddlewares: Array<{ path?: string; function: any }>
+  errorMiddleware: any
+}
 
 export class App {
   public server: AdapterHttpModule<any>
 
   constructor() {}
 
-  public async initHttpModule(adapter: AdapterHttpModule<any>) {
+  public async initHttpModule(adapter: AdapterHttpModule<any>, options?: AppOptions) {
     this.server = adapter
 
     await this.loadControllers()
 
     const controllerResolver = new HttpResolver(adapter)
+    options?.beforeAllMiddlewares?.forEach(middleware => {
+      adapter.use('/', middleware)
+    })
     controllerResolver.controllerRevolve(MetadataManager.meta)
+    adapter.useErrorHandler(errorsMiddleware)
 
     this.initApiModule()
 
     RightsManager.applyRights()
 
-    return this.server.listen(3000)
+    return this.server.listen(options?.port || 3000)
   }
 
   public initApiModule() {

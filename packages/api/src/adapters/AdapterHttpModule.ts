@@ -10,6 +10,7 @@ export interface AdapterHttpModule<App> {
   init(): any
   initRouter(): any
 
+  useErrorHandler(middleware: any)
   useTokenStrategy(accessTokenSecret: string, strategy: Function): void
 
   startServer(): Server

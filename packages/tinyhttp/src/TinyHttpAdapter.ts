@@ -7,7 +7,6 @@ export class TinyHttpAdapter implements AdapterHttpModule<App> {
   public app: App
   constructor() {
     this.app = new App()
-    this.useErrorHandler()
     // this.app.all(json()) //get post put patch delete
   }
   public use(path: string, router: any) {
@@ -37,7 +36,11 @@ export class TinyHttpAdapter implements AdapterHttpModule<App> {
     })
   }
 
-  private useErrorHandler() {
+  public useErrorHandler(handler?: (error: any, req: Request, res: Response, next?: NextFunction) => void) {
+    if (handler) {
+      this.app.onError = handler
+      return
+    }
     this.app.onError = (error: any, req: Request, res: Response, next?: NextFunction) => {
       const statusCode = error.statusCode || 500
       const { message } = error
@@ -45,9 +48,9 @@ export class TinyHttpAdapter implements AdapterHttpModule<App> {
     }
   }
 
-  public startServer() {
-    const server = this.app.listen(3000)
-    console.log('listened to 3000')
+  public startServer(port?: number) {
+    const server = this.app.listen(port || 3000)
+    console.log(`listened to ${port || 3000}`)
     return server
   }
   public stopServer() {}
@@ -130,7 +133,10 @@ export class TinyHttpAdapter implements AdapterHttpModule<App> {
    */
   public response(): Handler {
     return (req, res, next) => {
-      return res.status(200).send(req.result)
+      if (!req.result) return res.status(200)
+      else {
+        return res.status(200).json(req.result)
+      }
     }
   }
 
