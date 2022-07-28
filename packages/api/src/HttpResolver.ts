@@ -26,19 +26,25 @@ export class HttpResolver {
         const { bodyFormat } = routeMetadata
         // router.useBodyFormat(routeMetadata.path, bodyFormat)
         if (routeMetadata.method === RouteMethod.GET)
-          router.get(routeMetadata.path, beforeMiddlewares, routeMetadata.handler, afterMiddlewares)
+          router.get(routeMetadata.path, ...beforeMiddlewares, routeMetadata.handler, ...afterMiddlewares)
 
         if (routeMetadata.method === RouteMethod.POST)
-          router.post(routeMetadata.path, bodyFormat, beforeMiddlewares, routeMetadata.handler, afterMiddlewares)
+          router.post(routeMetadata.path, bodyFormat, ...beforeMiddlewares, routeMetadata.handler, ...afterMiddlewares)
 
         if (routeMetadata.method === RouteMethod.PUT)
-          router.put(routeMetadata.path, bodyFormat, beforeMiddlewares, routeMetadata.handler, afterMiddlewares)
+          router.put(routeMetadata.path, bodyFormat, ...beforeMiddlewares, routeMetadata.handler, ...afterMiddlewares)
 
         if (routeMetadata.method === RouteMethod.PATCH)
-          router.patch(routeMetadata.path, bodyFormat, beforeMiddlewares, routeMetadata.handler, afterMiddlewares)
+          router.patch(routeMetadata.path, bodyFormat, ...beforeMiddlewares, routeMetadata.handler, ...afterMiddlewares)
 
         if (routeMetadata.method === RouteMethod.DELETE)
-          router.delete(routeMetadata.path, bodyFormat, beforeMiddlewares, routeMetadata.handler, afterMiddlewares)
+          router.delete(
+            routeMetadata.path,
+            bodyFormat,
+            ...beforeMiddlewares,
+            routeMetadata.handler,
+            ...afterMiddlewares
+          )
       })
 
       this.httpAdapter.use(controllerMetadata.path, router)
