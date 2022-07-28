@@ -389,7 +389,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@bubojs/api@^0.1.0, @bubojs/api@workspace:packages/api":
+"@bubojs/api@>=0.1.5, @bubojs/api@^0.1.0, @bubojs/api@workspace:packages/api":
   version: 0.0.0-use.local
   resolution: "@bubojs/api@workspace:packages/api"
   dependencies:
@@ -410,10 +410,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bubojs/catalog@workspace:packages/catalog"
   dependencies:
-    "@bubojs/api": ^0.1.0
-    "@bubojs/http-errors": ^0.1.5
+    "@bubojs/api": ">=0.1.5"
+    "@bubojs/http-errors": ">=0.1.5 <0.2.0"
     "@types/jsonwebtoken": ^8.5.8
-    fastest-validator: ^1.12.0
+    fastest-validator: ">=1.12.0"
     jsonwebtoken: ^8.5.1
     pluralize-es: ^1.0.0
   languageName: unknown
@@ -429,7 +429,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bubojs/http-errors@^0.1.5, @bubojs/http-errors@workspace:packages/http-errors":
+"@bubojs/http-errors@>=0.1.5 <0.2.0, @bubojs/http-errors@workspace:packages/http-errors":
   version: 0.0.0-use.local
   resolution: "@bubojs/http-errors@workspace:packages/http-errors"
   dependencies:
@@ -5116,7 +5116,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fastest-validator@npm:^1.12.0":
+"fastest-validator@npm:>=1.12.0":
   version: 1.12.0
   resolution: "fastest-validator@npm:1.12.0"
   checksum: 7efc5534cd8a4f32b8784c5d0054c35b392722a43bba205a30e8021bd9bdd922ccb17ad139dfb5a6f9c4ca5b65137914a94eb2dbf9f1d5634960ef21bd52a94b
