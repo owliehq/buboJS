@@ -1,6 +1,6 @@
 {
   "name": "@bubojs/swagger",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "repository": {
     "type": "git",
     "url": "https://github.com/owliehq/buboJS.git",
@@ -27,8 +27,8 @@
     "dot-prop": "^7.2.0"
   },
   "devDependencies": {
-    "@bubojs/sequelize": "workspace:^",
-    "@bubojs/tinyhttp": "workspace:^",
+    "@bubojs/sequelize": "^0.1.0",
+    "@bubojs/tinyhttp": "^0.1.0",
     "@types/node": "^18.0.0",
     "kill-port": "^2.0.0",
     "nodemon": "^2.0.16",
