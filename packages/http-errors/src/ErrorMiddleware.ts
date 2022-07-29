@@ -16,7 +16,7 @@ export const errorsMiddleware = (options?: ErrorMiddlewareOptions) => {
   const middleware: Function = (err: Error & HttpError, req, res, next) => {
     const statusCode = err.statusCode || 500
 
-    if (options.debugServer && ((!options.skipClientError && statusCode < 500) || statusCode >= 500)) console.error(err)
+    if (options.debugServer && ((!options.skipClientError && statusCode < 500) || statusCode >= 500)) console.log(err)
     if (!err.statusCode) {
       let options: OptionsErrorFactory = {
         message: err.message,
