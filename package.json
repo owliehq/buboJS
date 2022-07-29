@@ -26,8 +26,7 @@
     "build:swagger": "yarn --cwd ./packages/swagger build",
     "build:sequelize": "yarn --cwd ./packages/sequelize build",
     "build:http-errors": "yarn --cwd ./packages/http-errors build",
-    "build:catalog": "yarn --cwd ./packages/catalog build",
-    "build": "lerna run build"
+    "build:catalog": "yarn --cwd ./packages/catalog build"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.0.2",
@@ -43,8 +42,8 @@
     "eslint-plugin-prettier": "^4.0.0",
     "husky": "^8.0.1",
     "jest": "28.1.1",
-    "lerna": "^5.1.2",
     "prettier": "^2.6.2",
+    "rimraf": "^3.0.2",
     "ts-jest": "^28.0.5",
     "ts-node": "^10.8.1",
     "typescript": "^4.7.3"
@@ -82,7 +81,6 @@
   },
   "packageManager": "yarn@3.2.2",
   "dependencies": {
-    "@bubojs/sequelize": "workspace:^",
-    "rimraf": "^3.0.2"
+    "@bubojs/sequelize": "workspace:^"
   }
 }

@@ -17,7 +17,7 @@
   "types": "./dist/index.d.ts",
   "exports": "./dist/index.js",
   "scripts": {
-    "build": "rimraf ./dist && tsc -p tsconfig.build.json"
+    "build": "echo 'sequelize' && rimraf ./dist && tsc -p tsconfig.build.json"
   },
   "files": [
     "dist"

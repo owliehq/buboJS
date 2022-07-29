@@ -1,6 +1,6 @@
 {
   "name": "@bubojs/http-errors",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "main": "./dist/index.js",
   "author": "owlie",
   "license": "MIT",
@@ -20,7 +20,7 @@
   "types": "./dist/index.d.ts",
   "exports": "./dist/index.js",
   "scripts": {
-    "build": "rimraf ./dist && tsc -p tsconfig.build.json"
+    "build": "echo 'http-error' && rimraf ./dist && tsc -p tsconfig.build.json"
   },
   "dependencies": {
     "ts-custom-error": "^3.2.0"

@@ -24,7 +24,7 @@
     "start:database": "docker-compose up postgres-bubo",
     "seed": "node --es-module-specifier-resolution=node --experimental-specifier-resolution=node --experimental-modules --loader ts-node/esm sequelize/seed/seeder.exec.ts",
     "test": "",
-    "build": "echo 'build'"
+    "build": "echo 'build test'"
   },
   "moduleFileExtensions": [
     "ts",
