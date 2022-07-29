@@ -82,6 +82,7 @@
   },
   "packageManager": "yarn@3.2.2",
   "dependencies": {
+    "@bubojs/sequelize": "workspace:^",
     "rimraf": "^3.0.2"
   }
 }

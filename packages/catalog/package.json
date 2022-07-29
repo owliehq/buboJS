@@ -23,8 +23,8 @@
     "dist"
   ],
   "dependencies": {
-    "@bubojs/api": ">=0.1.5 <0.2.0",
-    "@bubojs/http-errors": ">=0.1.5 <0.2.0",
+    "@bubojs/api": "workspace:^",
+    "@bubojs/http-errors": "workspace:^",
     "fastest-validator": ">=1.12.0",
     "jsonwebtoken": "^8.5.1",
     "pluralize-es": "^1.0.0"

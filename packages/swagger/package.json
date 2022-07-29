@@ -27,8 +27,8 @@
     "dot-prop": "^7.2.0"
   },
   "devDependencies": {
-    "@bubojs/sequelize": "^0.1.0",
-    "@bubojs/tinyhttp": "^0.1.0",
+    "@bubojs/sequelize": "workspace:^",
+    "@bubojs/tinyhttp": "workspace:^",
     "@types/node": "^18.0.0",
     "kill-port": "^2.0.0",
     "nodemon": "^2.0.16",
