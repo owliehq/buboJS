@@ -37,7 +37,7 @@ jobs:
       name: building packages
       working-directory: 'packages/${{ inputs.package_name}}'
 
-    - run: yarn npm publish
+    - run: npm publish
       name: "publishing ${{ inputs.package_name}}"
       working-directory: 'packages/${{ inputs.package_name}}'
       
