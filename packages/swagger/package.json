@@ -23,7 +23,6 @@
     "start:test:nodemon": "nodemon ./test/index.ts"
   },
   "dependencies": {
-    "@bubojs/api": "^0.1.0",
     "dot-prop": "^7.2.0"
   },
   "devDependencies": {

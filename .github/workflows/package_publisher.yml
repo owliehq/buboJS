@@ -26,15 +26,18 @@ jobs:
         registry-url: 'https://registry.npmjs.org'
 
     - run: yarn set version berry
-      name: upgrade yarn 
+      name: upgrade yarn
+      working-directory: 'packages/${{ inputs.package_name}}'
 
     - run: yarn
       name: installing packages
+      working-directory: 'packages/${{ inputs.package_name}}'
 
     - run: yarn build
       name: building packages
+      working-directory: 'packages/${{ inputs.package_name}}'
 
-    - run: npm publish
+    - run: yarn npm publish
       name: "publishing ${{ inputs.package_name}}"
       working-directory: 'packages/${{ inputs.package_name}}'
       

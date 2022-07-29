@@ -23,7 +23,7 @@
     "dist"
   ],
   "dependencies": {
-    "@bubojs/api": "workspace:^",
+    "@bubojs/api": "^0.1.0",
     "sequelize": "6.21.3",
     "sequelize-typescript": "2.1.3"
   },
@@ -33,5 +33,4 @@
     "rimraf": "^3.0.2",
     "typescript": "4.7.4"
   }
-
 }
