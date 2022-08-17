@@ -5,5 +5,8 @@ export interface MethodOptions {
 export enum BodyFormat {
   JSON = 'json',
   RAW = 'raw',
-  TEXT = 'text'
+  TEXT = 'text',
+  URL_ENCODED = 'urlEncoded',
+  AUTO = 'auto',
+  SKIP = 'skip'
 }
