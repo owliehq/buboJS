@@ -1,7 +1,8 @@
-import { AdapterHttpModule, BodyFormat, Handler, json, raw, text } from '@bubojs/api'
+import { AdapterHttpModule, BodyFormat, Handler } from '@bubojs/api'
 import { App, NextFunction, Request, Response } from '@tinyhttp/app'
 import { Server } from 'http'
 import jsonwebtoken from 'jsonwebtoken'
+import { json, raw, text, urlencoded } from 'milliparsec'
 
 export class TinyHttpAdapter implements AdapterHttpModule<App> {
   public app: App
@@ -144,6 +145,34 @@ export class TinyHttpAdapter implements AdapterHttpModule<App> {
     return this.app.listen(port)
   }
 
+  private static autoParse(req, _res, next: NextFunction) {
+    const enum encoding {
+      JSON = 'application/json',
+      TEXT = 'text/plain',
+      URL_ENCODED = 'application/x-www-form-urlencoded',
+      MULTIPART_FORM = 'multipart/form-data'
+    }
+    const contentType = req.headers['content-type']
+    if (contentType === encoding.JSON) {
+      json()(req, _res, next)
+      return
+    }
+    if (contentType === encoding.TEXT) {
+      text()(req, _res, next)
+      return
+    }
+    if (contentType === encoding.URL_ENCODED) {
+      urlencoded()(req, _res, next)
+      return
+    }
+    if (contentType === encoding.MULTIPART_FORM) {
+      next()
+      return
+    }
+    next()
+    return
+  }
+
   /**
    * Use the right body formatter for tinyhttp
    * @param path of the url request
@@ -156,8 +185,16 @@ export class TinyHttpAdapter implements AdapterHttpModule<App> {
         return raw()
       case BodyFormat.TEXT:
         return text()
-      default:
+      case BodyFormat.JSON:
         return json()
+      case BodyFormat.AUTO:
+        return TinyHttpAdapter.autoParse
+      case BodyFormat.SKIP:
+        return (_req, _res, next: Function) => {
+          next()
+        }
+      case BodyFormat.URL_ENCODED:
+        return urlencoded()
     }
   }
 }
