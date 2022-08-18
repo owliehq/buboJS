@@ -195,6 +195,8 @@ export class TinyHttpAdapter implements AdapterHttpModule<App> {
         }
       case BodyFormat.URL_ENCODED:
         return urlencoded()
+      default:
+        return TinyHttpAdapter.autoParse
     }
   }
 }
