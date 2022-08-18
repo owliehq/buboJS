@@ -13,7 +13,7 @@ const buildMethod =
   (method: RouteMethod) =>
   (subRoute: string = '/', options?: MethodOptions) =>
   (target: any, propertyKey: string, descriptor: PropertyDescriptor): any => {
-    const { bodyFormat } = options ? options : { bodyFormat: BodyFormat.JSON }
+    const { bodyFormat } = options ? options : { bodyFormat: BodyFormat.AUTO }
 
     const parameters = MetadataManager.getParametersMetadata(target.constructor.name, propertyKey)
     // Get middlewares to run before the method handler
