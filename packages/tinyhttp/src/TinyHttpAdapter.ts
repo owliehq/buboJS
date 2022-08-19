@@ -6,13 +6,16 @@ import { json, raw, text, urlencoded } from 'milliparsec'
 
 export class TinyHttpAdapter implements AdapterHttpModule<App> {
   public app: App
+  private onError?: (error: any, req: Request, res: Response, next?: NextFunction) => void = undefined
   constructor() {
     this.app = new App()
     // this.app.all(json()) //get post put patch delete
   }
   public use(path: string, router: any) {
-    if (router.app) this.app.use(path, router.app)
-    else this.app.use(path, router)
+    if (router.app) {
+      this.app.use(path, router.app)
+      router.app.onError = this.onError
+    } else this.app.use(path, router)
   }
 
   public init() {
@@ -23,6 +26,7 @@ export class TinyHttpAdapter implements AdapterHttpModule<App> {
     return new TinyHttpAdapter()
   }
 
+  // TODO Move away from here, it's a middleware
   public useTokenStrategy(accessTokenSecret: any, strategy: Function) {
     this.app.use(async (req: any, res: any, next: Function) => {
       const authHeader = req.get('Authorization')
@@ -39,14 +43,15 @@ export class TinyHttpAdapter implements AdapterHttpModule<App> {
 
   public useErrorHandler(handler?: (error: any, req: Request, res: Response, next?: NextFunction) => void) {
     if (handler) {
-      this.app.onError = handler
+      this.onError = handler
       return
     }
-    this.app.onError = (error: any, req: Request, res: Response, next?: NextFunction) => {
+    this.onError = (error: any, req: Request, res: Response, next?: NextFunction) => {
       const statusCode = error.statusCode || 500
       const { message } = error
       res.status(statusCode).json({ statusCode, message })
     }
+    this.app.onError = this.onError
   }
 
   public startServer(port?: number) {
@@ -134,7 +139,7 @@ export class TinyHttpAdapter implements AdapterHttpModule<App> {
    */
   public response(): Handler {
     return (req, res, next) => {
-      if (!req.result) return res.status(200)
+      if (!req?.result) return res.status(200)
       else {
         return res.status(200).json(req.result)
       }
