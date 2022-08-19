@@ -28,23 +28,27 @@ const buildMethod =
       propertyKey,
       MiddlewarePosition.AFTER
     )
+    let handler: (this: any, req: any, res: any, next: Function) => Promise<void>
+    if (options.rawHandler) {
+      handler = descriptor.value
+    } else {
+      handler = async function (this: any, req: any, res: any, next: Function) {
+        try {
+          //apply parameters decorator on function
+          const result = await descriptor.value.apply(
+            this,
+            parameters ? Object.values(parameters).map((param: any) => param.getValue(req)) : []
+          )
 
-    const handler = async function (this: any, req: any, res: any, next: Function) {
-      try {
-        //apply parameters decorator on function
-        const result = await descriptor.value.apply(
-          this,
-          parameters ? Object.values(parameters).map((param: any) => param.getValue(req)) : []
-        )
-
-        // We save result in result property of req
-        // This result will be send in response() method. See AdapterHttpModule.ts
-        req.result = result
-        next()
-      } catch (error) {
-        const statusCode = error.statusCode || 500
-        const { message } = error
-        await res.status(statusCode).json({ statusCode, message })
+          // We save result in result property of req
+          // This result will be send in response() method. See AdapterHttpModule.ts
+          req.result = result
+          next()
+        } catch (error) {
+          const statusCode = error.statusCode || 500
+          const { message } = error
+          await res.status(statusCode).json({ statusCode, message })
+        }
       }
     }
 

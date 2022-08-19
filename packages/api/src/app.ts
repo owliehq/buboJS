@@ -19,7 +19,7 @@ export class App {
 
   public async initHttpModule(adapter: AdapterHttpModule<any>, options?: AppOptions) {
     this.server = adapter
-
+    adapter.useErrorHandler(options?.errorMiddleware)
     await this.loadControllers()
 
     const controllerResolver = new HttpResolver(adapter)
@@ -27,7 +27,6 @@ export class App {
       adapter.use('/', middleware)
     })
     controllerResolver.controllerRevolve(MetadataManager.meta)
-    adapter.useErrorHandler(options?.errorMiddleware)
 
     this.initApiModule()
 

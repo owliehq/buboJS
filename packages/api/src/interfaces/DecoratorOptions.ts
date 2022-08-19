@@ -1,5 +1,6 @@
 export interface MethodOptions {
   bodyFormat: BodyFormat
+  rawHandler?: boolean
 }
 
 export enum BodyFormat {
