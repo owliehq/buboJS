@@ -29,7 +29,7 @@ const buildMethod =
       MiddlewarePosition.AFTER
     )
     let handler: (this: any, req: any, res: any, next: Function) => Promise<void>
-    if (options.rawHandler) {
+    if (options?.rawHandler) {
       handler = descriptor.value
     } else {
       handler = async function (this: any, req: any, res: any, next: Function) {
