@@ -12,7 +12,7 @@ import { MetadataManager } from '../../MetadataManager'
 const buildMethod =
   (method: RouteMethod) =>
   (subRoute: string = '/', options?: MethodOptions) =>
-  (target: any, propertyKey: string, descriptor: PropertyDescriptor): any => {
+  async (target: any, propertyKey: string, descriptor: PropertyDescriptor): Promise<any> => {
     const { bodyFormat } = options ? options : { bodyFormat: BodyFormat.AUTO }
 
     const parameters = MetadataManager.getParametersMetadata(target.constructor.name, propertyKey)
@@ -30,7 +30,8 @@ const buildMethod =
     )
     let handler: (this: any, req: any, res: any, next: Function) => Promise<void>
     if (options?.rawHandler) {
-      handler = descriptor.value()
+      const value = descriptor.value()
+      handler = value instanceof Promise ? await value : value
     } else {
       handler = async function (this: any, req: any, res: any, next: Function) {
         try {
