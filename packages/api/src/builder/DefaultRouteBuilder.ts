@@ -82,7 +82,7 @@ export class DefaultRouteBuilder {
         return this.repository.create(req.body, req.options)
       }),
       parameters: [],
-      bodyFormat: BodyFormat.JSON
+      bodyFormat: BodyFormat.AUTO
     }
     MetadataManager.setRouteMetadata(this.controllerName, DefaultActions.CREATE_ONE, metadata)
   }
@@ -96,7 +96,7 @@ export class DefaultRouteBuilder {
         return this.repository.update(params.id, body, options)
       }),
       parameters: [],
-      bodyFormat: BodyFormat.JSON
+      bodyFormat: BodyFormat.AUTO
     }
     MetadataManager.setRouteMetadata(this.controllerName, DefaultActions.UPDATE_ONE, metadata)
   }
