@@ -48,7 +48,7 @@ export class DefaultRouteBuilder {
       path: '/:id',
       method: RouteMethod.GET,
       handler: this.createWrapper(async (req: any, res: any, next: Function) => {
-        const { params, options } = req
+        const { params, $sequelize: options } = req
         return this.repository.findById(params.id, options)
       }),
       parameters: []
