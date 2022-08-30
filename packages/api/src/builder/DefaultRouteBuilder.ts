@@ -64,7 +64,7 @@ export class DefaultRouteBuilder {
       path: '/',
       method: RouteMethod.GET,
       handler: this.createWrapper(async (req: any, res: any, next: Function) => {
-        return this.repository.findAll(req.options)
+        return this.repository.findAll(req.$sequelize)
       }),
       parameters: []
     }
@@ -79,7 +79,7 @@ export class DefaultRouteBuilder {
       path: '/',
       method: RouteMethod.POST,
       handler: this.createWrapper((req: any, res: any, next: Function) => {
-        return this.repository.create(req.body, req.options)
+        return this.repository.create(req.body, req.$sequelize)
       }),
       parameters: [],
       bodyFormat: BodyFormat.AUTO
@@ -92,7 +92,7 @@ export class DefaultRouteBuilder {
       path: '/:id',
       method: RouteMethod.PUT,
       handler: this.createWrapper((req: any, res: any, next: Function) => {
-        const { params, body, options } = req
+        const { params, body, $sequelize: options } = req
         return this.repository.update(params.id, body, options)
       }),
       parameters: [],
@@ -109,7 +109,7 @@ export class DefaultRouteBuilder {
       path: '/:id',
       method: RouteMethod.DELETE,
       handler: this.createWrapper((req: any, res: any, next: Function) => {
-        const { params, options } = req
+        const { params, $sequelize: options } = req
         return this.repository.delete(params.id, options)
       }),
       parameters: []
