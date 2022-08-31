@@ -122,13 +122,12 @@ export class SequelizeBaseRepository<Type extends Model> implements BuboReposito
   }
 
   async update(pk: string, data: Partial<ModelData<Type>>, options?: UpdateOptions): Promise<Type> {
-    let findOptions: FindOptions = options ? { transaction: options.transaction } : {}
-    let original = (await this.model.findByPk(pk, findOptions)) as Type
+    let original = (await this.model.findByPk(pk, options)) as Type
     return await original.update(data, options)
   }
 
   async delete(pk: string, options?: DestroyOptions): Promise<void> {
-    const item = await this.findById(pk, { transaction: options?.transaction })
+    const item = await this.findById(pk, options)
     return item.destroy(options)
   }
 }
