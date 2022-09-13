@@ -42,16 +42,15 @@ export class TinyHttpAdapter implements AdapterHttpModule<App> {
   }
 
   public useErrorHandler(handler?: (error: any, req: Request, res: Response, next?: NextFunction) => void) {
-    if (handler) {
-      this.onError = handler
-      return
-    }
-    this.onError = (error: any, req: Request, res: Response, next?: NextFunction) => {
+    const defaultHandler = (error: any, req: Request, res: Response, next?: NextFunction) => {
       const statusCode = error.statusCode || 500
       const { message } = error
       res.status(statusCode).json({ statusCode, message })
     }
+    handler = handler ?? defaultHandler
+    this.onError = handler
     this.app.onError = this.onError
+    return
   }
 
   public startServer(port?: number) {
