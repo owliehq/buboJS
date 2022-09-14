@@ -44,12 +44,13 @@ export class DefaultRouteBuilder {
    * register GET_ONE route into metadata manager
    */
   private registerGetOneRoute() {
+    const optionsGetter = this.repository.requestOptions(DefaultActions.GET_ONE)
     const metadata: RouteMetadata = {
       path: '/:id',
       method: RouteMethod.GET,
       handler: this.createWrapper(async (req: any, res: any, next: Function) => {
-        const { params, $sequelize: options } = req
-        return this.repository.findById(params.id, options)
+        const { params } = req
+        return this.repository.findById(params.id, optionsGetter(req))
       }),
       parameters: []
     }
@@ -60,11 +61,12 @@ export class DefaultRouteBuilder {
    * register GET_MANY route into metadata manager
    */
   private registerGetManyRoute() {
+    const optionsGetter = this.repository.requestOptions(DefaultActions.GET_MANY)
     const metadata: RouteMetadata = {
       path: '/',
       method: RouteMethod.GET,
       handler: this.createWrapper(async (req: any, res: any, next: Function) => {
-        return this.repository.findAll(req.$sequelize)
+        return this.repository.findAll(optionsGetter(req))
       }),
       parameters: []
     }
@@ -75,11 +77,12 @@ export class DefaultRouteBuilder {
    * register CREATE_ONE route into metadata manager
    */
   private registerCreateOneRoute() {
+    const optionsGetter = this.repository.requestOptions(DefaultActions.CREATE_ONE)
     const metadata: RouteMetadata = {
       path: '/',
       method: RouteMethod.POST,
       handler: this.createWrapper((req: any, res: any, next: Function) => {
-        return this.repository.create(req.body, req.$sequelize)
+        return this.repository.create(req.body, optionsGetter(req))
       }),
       parameters: [],
       bodyFormat: BodyFormat.AUTO
@@ -88,12 +91,13 @@ export class DefaultRouteBuilder {
   }
 
   private registerUpdateOneRoute() {
+    const optionsGetter = this.repository.requestOptions(DefaultActions.UPDATE_ONE)
     const metadata: RouteMetadata = {
       path: '/:id',
       method: RouteMethod.PUT,
       handler: this.createWrapper((req: any, res: any, next: Function) => {
-        const { params, body, $sequelize: options } = req
-        return this.repository.update(params.id, body, options)
+        const { params, body } = req
+        return this.repository.update(params.id, body, optionsGetter(req))
       }),
       parameters: [],
       bodyFormat: BodyFormat.AUTO
@@ -105,12 +109,13 @@ export class DefaultRouteBuilder {
    * register DELETE_ONE route into metadata manager
    */
   private registerDeleteOneRoute() {
+    const optionsGetter = this.repository.requestOptions(DefaultActions.DELETE_ONE)
     const metadata: RouteMetadata = {
       path: '/:id',
       method: RouteMethod.DELETE,
       handler: this.createWrapper((req: any, res: any, next: Function) => {
         const { params, $sequelize: options } = req
-        return this.repository.delete(params.id, options)
+        return this.repository.delete(params.id, optionsGetter(req))
       }),
       parameters: []
     }

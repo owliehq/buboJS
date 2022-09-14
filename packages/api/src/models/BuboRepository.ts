@@ -1,3 +1,5 @@
+import { DefaultActions } from '../interfaces'
+
 export abstract class BuboRepository<ModelType, ModelData = ModelType> {
   /**
    * Find an instance of the model corresponding to the value of the given field with optional given options
@@ -71,4 +73,6 @@ export abstract class BuboRepository<ModelType, ModelData = ModelType> {
    * @param any options that should be specified by the service itself
    */
   abstract findAll(...any): Promise<Array<ModelType>>
+
+  abstract requestOptions(routeType: DefaultActions): (req: any) => any
 }
