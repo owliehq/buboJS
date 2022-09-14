@@ -54,8 +54,6 @@ export class SequelizeBaseRepository<Type extends Model> implements BuboReposito
     let opt: FindOptions = options ? options : {}
     opt.where = { [key]: value }
     const result = await this.model.findOne(opt)
-    //TODO add errors
-    //if (!result) throw new NotFoundError(this.modelGetter().name)
     if (!result) throw ErrorFactory.NotFound({ message: `${this.model.name} not found` })
     return result as Type
   }
@@ -74,8 +72,6 @@ export class SequelizeBaseRepository<Type extends Model> implements BuboReposito
     let opt: FindOptions = options ? options : {}
     opt.where = { [key]: value }
     const result = await this.model.findAll(opt)
-    //TODO add errors
-    //if (!result) throw new NotFoundError(this.modelGetter().name)
     if (!result) throw ErrorFactory.NotFound({ message: `${this.model.name} not found` })
     return result as Array<Type>
   }
