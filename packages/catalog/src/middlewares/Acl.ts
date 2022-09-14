@@ -79,7 +79,7 @@ export class AclManager {
 }
 
 export const Acl = (rights: Array<Omit<Right, 'resource'>>) => (constructor: any) => {
-  const resource = pluralize.plural(toSnakeCase(constructor.name.replace('Controller', ''))) //must match route name
+  const resource = constructor.name
   const rightsFull = rights.reduce((list, r) => {
     const { role, action, attributes, condition } = r
     list.push({ resource, action, attributes: attributes ?? ['*'], condition, role })
@@ -96,10 +96,5 @@ export const CheckAcl =
 
     const currentRoleMiddleware = AclManager.getMiddleware(name, propertyKey, customContext)
 
-    MetadataManager.setMiddlewareMetadata(
-      target.constructor.name,
-      propertyKey,
-      MiddlewarePosition.BEFORE,
-      currentRoleMiddleware
-    )
+    MetadataManager.setMiddlewareMetadata(name, propertyKey, MiddlewarePosition.BEFORE, currentRoleMiddleware)
   }
