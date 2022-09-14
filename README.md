@@ -144,7 +144,7 @@ Une route custom s'ajoute via un decorateur :
 import { Controller, DefaultActions, BeforeMiddleware, Post, Get, BodyFormat, Body } from '@bubojs/api'
 
 @Controller()
-class MyController 
+class TestController 
 {
   @Get('/hello_world')
   greetings(){
@@ -153,7 +153,7 @@ class MyController
 }
 ```
 
-nous venons de créer une route qui renvoie __hello_world__ sur __address:port/my_controller/hello_world__
+nous venons de créer une route qui renvoie __hello_world__ sur __address:port/test/hello_world__
 
 ### Passer des paramètres sur les routes custom ###
 

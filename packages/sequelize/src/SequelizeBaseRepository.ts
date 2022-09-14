@@ -1,7 +1,7 @@
 import { Model } from 'sequelize-typescript'
-import { FindOptions, Op, CreateOptions, UpdateOptions, DestroyOptions } from 'sequelize'
+import { CreateOptions, DestroyOptions, FindOptions, UpdateOptions } from 'sequelize'
 import { ErrorFactory } from '@bubojs/http-errors'
-import { BuboRepository } from '@bubojs/api'
+import { BuboRepository, DefaultActions } from '@bubojs/api'
 
 export type ModelQuery<Model> = { [K in keyof Model]?: Model[K] }
 
@@ -111,8 +111,6 @@ export class SequelizeBaseRepository<Type extends Model> implements BuboReposito
 
   async findById(pk: string, options?: FindOptions): Promise<Type> {
     const result = await this.model.findByPk(pk, options)
-    //TODO add errors
-    //if (!result) throw new NotFoundError(this.modelGetter().name)
     if (!result) throw ErrorFactory.NotFound({ message: `${this.model.name} not found` })
     return result as Type
   }
@@ -129,5 +127,46 @@ export class SequelizeBaseRepository<Type extends Model> implements BuboReposito
   async delete(pk: string, options?: DestroyOptions): Promise<void> {
     const item = await this.findById(pk, options)
     return item.destroy(options)
+  }
+
+  requestOptions(routeType: DefaultActions) {
+    switch (routeType) {
+      case DefaultActions.GET_MANY:
+        return this.getManyOptions
+      case DefaultActions.GET_ONE:
+        return this.getOneOptions
+      case DefaultActions.CREATE_ONE:
+        return this.createOptions
+      case DefaultActions.DELETE_ONE:
+        return this.deleteOptions
+      case DefaultActions.UPDATE_ONE:
+        return this.updateOptions
+      default:
+        return () => {}
+    }
+  }
+
+  private createOptions(req: any) {
+    return req.$sequelize || {}
+  }
+  private getOneOptions(req: any) {
+    return req.$sequelize || {}
+  }
+  private getManyOptions(req: any) {
+    let opt: FindOptions = req.$sequelize || {}
+    let limit = req.query.limit
+    let offset = req.query.offset
+    if (!limit) {
+      throw ErrorFactory.UnprocessableEntity({ message: 'missing limit in query' })
+    }
+    opt.limit = limit
+    opt.offset = offset
+    return opt
+  }
+  private updateOptions(req: any) {
+    return req.$sequelize
+  }
+  private deleteOptions(req: any) {
+    return req.$sequelize
   }
 }
