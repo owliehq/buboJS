@@ -18,11 +18,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@bubojs/http-errors@npm:^0.1.8":
+  version: 0.1.8
+  resolution: "@bubojs/http-errors@npm:0.1.8"
+  dependencies:
+    ts-custom-error: ^3.2.0
+  checksum: ef5e923c9565d8bf28f3aacd4f3cb3d90063aa356bbc26bc7d5671ecd36f72d03aa1a935641b7c53457e801f3209b364e025231ebdf60725d65f48d16676c2d9
+  languageName: node
+  linkType: hard
+
 "@bubojs/sequelize@workspace:.":
   version: 0.0.0-use.local
   resolution: "@bubojs/sequelize@workspace:."
   dependencies:
     "@bubojs/api": ^0.1.0
+    "@bubojs/http-errors": ^0.1.8
     eslint: ^8.16.0
     eslint-plugin-prettier: ^4.0.0
     rimraf: ^3.0.2
@@ -1156,6 +1166,13 @@ __metadata:
   version: 1.0.1
   resolution: "toposort-class@npm:1.0.1"
   checksum: c5e3229d4899b23350b09ed26cfb7a28aadd0889550625f1bcadc0da266cdf2790fb0ccc3e92be93ba6ad64f57bc2fd1ab94446cb4ae83054dab263753157f5f
+  languageName: node
+  linkType: hard
+
+"ts-custom-error@npm:^3.2.0":
+  version: 3.2.2
+  resolution: "ts-custom-error@npm:3.2.2"
+  checksum: e0d8ab82c631ae16111eb9d55941151c060290b245203f425df2878c2dc0cd4ba9deea4fbb7a3b5e527dc03d434c4a34ca1c96ac122e3edb08d5cbdd6f544802
   languageName: node
   linkType: hard
 

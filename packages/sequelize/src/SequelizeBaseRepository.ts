@@ -1,6 +1,6 @@
 import { Model } from 'sequelize-typescript'
 import { FindOptions, Op, CreateOptions, UpdateOptions, DestroyOptions } from 'sequelize'
-//import { NotFoundError } from '@owliehq/http-errors'
+import { ErrorFactory } from '@bubojs/http-errors'
 import { BuboRepository } from '@bubojs/api'
 
 export type ModelQuery<Model> = { [K in keyof Model]?: Model[K] }
@@ -56,7 +56,7 @@ export class SequelizeBaseRepository<Type extends Model> implements BuboReposito
     const result = await this.model.findOne(opt)
     //TODO add errors
     //if (!result) throw new NotFoundError(this.modelGetter().name)
-    if (!result) throw new Error(`${this.model.name} not found`)
+    if (!result) throw ErrorFactory.NotFound({ message: `${this.model.name} not found` })
     return result as Type
   }
 
@@ -76,7 +76,7 @@ export class SequelizeBaseRepository<Type extends Model> implements BuboReposito
     const result = await this.model.findAll(opt)
     //TODO add errors
     //if (!result) throw new NotFoundError(this.modelGetter().name)
-    if (!result) throw new Error(`${this.model.name} not found`)
+    if (!result) throw ErrorFactory.NotFound({ message: `${this.model.name} not found` })
     return result as Array<Type>
   }
 
@@ -113,7 +113,7 @@ export class SequelizeBaseRepository<Type extends Model> implements BuboReposito
     const result = await this.model.findByPk(pk, options)
     //TODO add errors
     //if (!result) throw new NotFoundError(this.modelGetter().name)
-    if (!result) throw new Error(`${this.model.name} not found`)
+    if (!result) throw ErrorFactory.NotFound({ message: `${this.model.name} not found` })
     return result as Type
   }
 

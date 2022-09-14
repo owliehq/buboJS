@@ -1,6 +1,6 @@
 {
   "name": "@bubojs/sequelize",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "main": "./dist/index.js",
   "author": "owlie",
   "license": "MIT",
@@ -24,6 +24,7 @@
   ],
   "dependencies": {
     "@bubojs/api": "^0.1.0",
+    "@bubojs/http-errors": "^0.1.8",
     "sequelize": "6.21.3",
     "sequelize-typescript": "2.1.3"
   },
