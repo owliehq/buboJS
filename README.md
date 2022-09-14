@@ -224,7 +224,7 @@ class MyController
 
 ## Validateur  de route ##
 
-Les validations sont construites avec [fatestValidator](https://github.com/icebob/) n'hesitez pas à regarder la documentation pour en savoir plus
+Les validations sont construites avec [fatestValidator](https://github.com/icebob/fastest-validator) n'hesitez pas à regarder la documentation pour en savoir plus
 
 ### schema de validation ###
 
@@ -376,7 +376,7 @@ le middleware peut etre appliqué sur tous l'ensemble des routes:
 ```ts
 import { TinyHttpAdapter } from '@bubojs/tinyhttp'
 import { app, AppOptions } from '@bubojs/api'
-import { JwtAuth } from './bubo.middlewares/Jwt/Jwt' // TODO Update
+import { JwtAuth } from '@bubojs/catalog'
 
 export const startServer = () => {
   return new Promise(async (resolve, reject) => {
@@ -445,7 +445,9 @@ exemple:
 import { Controller, DefaultActions, Post, Body } from '@bubojs/api'
 import { SequelizeAttributes } from '../../utils/middlewares/SequelizeAttributes.middleware'
 import { AuthMiddleware, RoleMiddleware } from '@bubojs/catalog'
+import { userAcl } from './UserAcl'
 
+@Acl(userAcl)
 @Controller({ repository: userRepository })
 export class UsersController {
   constructor() {
@@ -453,7 +455,7 @@ export class UsersController {
   }
 
   @AuthMiddleware()
-  @RoleMiddleware()
+  @CheckAcl()
   @SequelizeAttributes(
     User,
     () => ['password'],
@@ -579,16 +581,15 @@ import { AfterMiddleware, BeforeMiddleware, Controller, DefaultActions, Post, Bo
 import { ValidationMiddleware, CurrentUser, AuthMiddleware, RoleMiddleware } from '@bubojs/catalog'
 import { applyUserAccessControlList } from './UsersAccess'
 import { User } from './User'
+import { userAcl } from './UserAcl'
 import { SequelizePopulate } from '../../bubo.middlewares/Sequelize/Populate.middleware'
 
+@Acl(userAcl)
 @Controller({ repository: userRepository })
 export class UsersController {
-  constructor() {
-    applyUserAccessControlList()
-  }
 
   @AuthMiddleware()
-  @RoleMiddleware()
+  @CheckAcl()
   @SequelizePopulate(User, ['basket.product'])
   [DefaultActions.GET_ONE]() {}
 }
