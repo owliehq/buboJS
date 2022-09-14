@@ -2,8 +2,8 @@ import { DefaultRouteBuilder } from '../../builder'
 import { DefaultActions } from '../../interfaces'
 import { MetadataManager } from '../../MetadataManager'
 import { BuboRepository } from '../../models'
-import {} from '../../utils/SnakeCase'
-import * as pluralize from 'pluralize'
+import { toSnakeCase } from '../../utils/SnakeCase'
+import { default as pluralize } from 'pluralize'
 
 /**
  * Controller decorator
@@ -17,7 +17,7 @@ export const Controller =
   (constructor: T) => {
     const { name } = constructor
     const instance = new constructor()
-    const routeName = pluralize.plural(name.replace('Controller', '').toSnakeCase())
+    const routeName = pluralize.plural(toSnakeCase(name.replace('Controller', '')))
 
     MetadataManager.setControllerMetadata(name, { path: `/${routeName}`, instance })
     const defaultRouteBuilder = new DefaultRouteBuilder(name, params.repository)

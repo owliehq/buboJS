@@ -79,7 +79,7 @@ export class AclManager {
 }
 
 export const Acl = (rights: Array<Omit<Right, 'resource'>>) => (constructor: any) => {
-  const resource = pluralize.plural(constructor.name.replace('Controller', '').toSnakeCase()) //must match route name
+  const resource = pluralize.plural(toSnakeCase(constructor.name.replace('Controller', ''))) //must match route name
   const rightsFull = rights.reduce((list, r) => {
     const { role, action, attributes, condition } = r
     list.push({ resource, action, attributes: attributes ?? ['*'], condition, role })
@@ -94,9 +94,7 @@ export const CheckAcl =
     const isController = name?.includes('Controller')
     if (!isController) throw new Error(`Controller name's must finish with "Controller"`)
 
-    const resource = name.replace('Controller', '').toSnakeCase()
-
-    const currentRoleMiddleware = AclManager.getMiddleware(resource, propertyKey, customContext)
+    const currentRoleMiddleware = AclManager.getMiddleware(name, propertyKey, customContext)
 
     MetadataManager.setMiddlewareMetadata(
       target.constructor.name,
