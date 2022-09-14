@@ -53,7 +53,7 @@ export const validationMiddleware = (
 
 export interface ValidationData {
   beforeValidationMiddleware?: MiddlewareMetadata
-  schema?: Object
+  schema: Object
   validatorOptions?: Object
   handlerOptions?: {
     forceRequestField: 'body' | 'query'
