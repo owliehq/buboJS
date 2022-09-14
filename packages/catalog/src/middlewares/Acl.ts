@@ -12,19 +12,19 @@ export interface Right {
   condition?: Function
 }
 
-export class RightsManager {
+export class AclManager {
   private static acl = new Array<Right>()
   private static accessController = new AccessControl()
   private static roleGetter: Function = (user: any) => user.role
 
   static roleCallback(getter: (user: any) => string) {
-    RightsManager.roleGetter = getter
+    AclManager.roleGetter = getter
   }
 
   static addRight(right: Right | Array<Right>) {
     const pushOne = (r: Right) => {
       const { resource, role, action, attributes, condition } = r
-      RightsManager.acl.push({ resource, role, action, attributes: attributes ?? ['*'], condition })
+      AclManager.acl.push({ resource, role, action, attributes: attributes ?? ['*'], condition })
     }
     if (Array.isArray(right)) {
       right.forEach(r => pushOne(r))
@@ -34,11 +34,11 @@ export class RightsManager {
   }
 
   static applyRights() {
-    RightsManager.accessController.setGrants(RightsManager.acl)
+    AclManager.accessController.setGrants(AclManager.acl)
   }
 
   static getRole(user: any) {
-    return RightsManager.roleGetter(user)
+    return AclManager.roleGetter(user)
   }
 
   static getMiddleware(resource: string, action: string, prepareContext?: Function) {
@@ -47,16 +47,16 @@ export class RightsManager {
 
       if (!user) throw Error(`You have not called AuthMiddleware before this one (RoleMiddleware).`)
 
-      const role = await RightsManager.getRole(user)
+      const role = await AclManager.getRole(user)
 
       if (!role) throw Error(`There's an error with user's role, maybe the callback is not set correctly.`)
 
-      if (!RightsManager.accessController.getRoles().includes(role))
+      if (!AclManager.accessController.getRoles().includes(role))
         throw ErrorFactory.Forbidden({
           message: `You don't have the right ACL to execute this action on optional requested resource.`
         })
 
-      const permission = await RightsManager.accessController
+      const permission = await AclManager.accessController
         .can(role)
         .context({
           body: req.body,
@@ -85,7 +85,7 @@ export const Acl = (rights: Array<Omit<Right, 'resource'>>) => (constructor: any
     list.push({ resource, action, attributes: attributes ?? ['*'], condition, role })
     return list
   }, new Array<Right>())
-  RightsManager.addRight(rightsFull)
+  AclManager.addRight(rightsFull)
 }
 
 export const CheckAcl =
@@ -96,7 +96,7 @@ export const CheckAcl =
 
     const resource = name.replace('Controller', '').toSnakeCase()
 
-    const currentRoleMiddleware = RightsManager.getMiddleware(resource, propertyKey, customContext)
+    const currentRoleMiddleware = AclManager.getMiddleware(resource, propertyKey, customContext)
 
     MetadataManager.setMiddlewareMetadata(
       target.constructor.name,
