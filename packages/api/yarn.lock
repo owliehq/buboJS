@@ -10,9 +10,11 @@ __metadata:
   resolution: "@bubojs/api@workspace:."
   dependencies:
     "@types/node": ^18.0.0
+    "@types/pluralize": 0.0.29
     dot-prop: ^7.2.0
     fast-glob: ^3.2.11
     path: ^0.12.7
+    pluralize: 8.0.0
     reflect-metadata: ^0.1.13
     rimraf: ^3.0.2
     role-acl: ^4.5.4
@@ -114,6 +116,13 @@ __metadata:
   version: 18.6.2
   resolution: "@types/node@npm:18.6.2"
   checksum: 644c460baedb1fbbd55369ab621167cb39ddaa727fd4fcf4bc7080183cf936d7ff8c2c886ba93ff42768d6f7a579a540e6d1e63d3adba4e5758fb13671ae68ce
+  languageName: node
+  linkType: hard
+
+"@types/pluralize@npm:0.0.29":
+  version: 0.0.29
+  resolution: "@types/pluralize@npm:0.0.29"
+  checksum: db7732b733ba1dc59f080f87364c9f985c1ae9f1e5ec5fcefb83c1327149e01ecac42766352eb7b19b117cf39defa99cf514629f3666968a3bdeb00e74f2a97e
   languageName: node
   linkType: hard
 
@@ -613,6 +622,13 @@ __metadata:
   version: 2.3.1
   resolution: "picomatch@npm:2.3.1"
   checksum: 050c865ce81119c4822c45d3c84f1ced46f93a0126febae20737bd05ca20589c564d6e9226977df859ed5e03dc73f02584a2b0faad36e896936238238b0446cf
+  languageName: node
+  linkType: hard
+
+"pluralize@npm:8.0.0":
+  version: 8.0.0
+  resolution: "pluralize@npm:8.0.0"
+  checksum: 08931d4a6a4a5561a7f94f67a31c17e6632cb21e459ab3ff4f6f629d9a822984cf8afef2311d2005fbea5d7ef26016ebb090db008e2d8bce39d0a9a9d218736e
   languageName: node
   linkType: hard
 

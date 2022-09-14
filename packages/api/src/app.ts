@@ -3,7 +3,6 @@ import { pathToFileURL } from 'url'
 import { AdapterHttpModule } from './adapters'
 import { HttpResolver } from './HttpResolver'
 import { MetadataManager } from './MetadataManager'
-import { RightsManager } from './RightsManager'
 import { ServiceResolver } from './ServiceResolver'
 
 export interface AppOptions {
@@ -29,9 +28,6 @@ export class App {
     controllerResolver.controllerRevolve(MetadataManager.meta)
 
     this.initApiModule()
-
-    RightsManager.applyRights()
-
     return this.server.listen(options?.port || 3000)
   }
 
