@@ -1,5 +1,5 @@
 import { Model } from 'sequelize-typescript'
-import { CreateOptions, DestroyOptions, FindOptions, UpdateOptions } from 'sequelize'
+import { CreateOptions, DestroyOptions, FindOptions, UpdateOptions, OrderItem } from 'sequelize'
 import { ErrorFactory } from '@bubojs/http-errors'
 import { BuboRepository, DefaultActions } from '@bubojs/api'
 
@@ -157,6 +157,17 @@ export class SequelizeBaseRepository<Type extends Model> implements BuboReposito
     }
     opt.limit = limit
     opt.offset = offset
+
+    if (req.query.order) {
+      let finalOrdering = new Array<Array<string>>()
+      const orderKeys = req.query.order.split(' ')
+      orderKeys.forEach((key: string) => {
+        const order = key.startsWith('-') ? 'DESC' : 'ASC'
+        const field = key.startsWith('-') ? key.substring(1) : key
+        finalOrdering.push([field, order])
+      })
+      opt.order = finalOrdering as any
+    }
     return opt
   }
   private updateOptions(req: any) {
