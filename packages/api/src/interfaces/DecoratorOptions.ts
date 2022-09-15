@@ -1,5 +1,5 @@
 export interface MethodOptions {
-  bodyFormat: BodyFormat
+  bodyFormat?: BodyFormat
   rawHandler?: boolean
 }
 

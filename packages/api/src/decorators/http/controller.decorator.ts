@@ -17,7 +17,9 @@ export const Controller =
   (constructor: T) => {
     const { name } = constructor
     const instance = new constructor()
-    const routeName = pluralize.plural(toSnakeCase(name.replace('Controller', '')))
+    const routeName = params.overrideRouteName
+      ? params.overrideRouteName
+      : pluralize.plural(toSnakeCase(name.replace('Controller', '')))
 
     MetadataManager.setControllerMetadata(name, { path: `/${routeName}`, instance })
     const defaultRouteBuilder = new DefaultRouteBuilder(name, params.repository)
@@ -44,4 +46,5 @@ export const Controller =
  */
 export interface ControllerParams {
   repository?: BuboRepository<unknown>
+  overrideRouteName?: string
 }
