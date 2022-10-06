@@ -70,7 +70,7 @@ export class MetadataManager {
    * @param controllerName name of the controller
    * @returns The metadata of all routes
    */
-  public static getRoutesMetadata(controllerName: string): RouteMetadata {
+  public static getRoutesMetadata(controllerName: string) {
     return getProperty(this.meta, `controllers.${controllerName}.routes`)
   }
 
