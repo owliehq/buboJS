@@ -34,7 +34,7 @@ export const Controller =
 
     const routes = MetadataManager.getRoutesMetadata(name)
     // We must bind all methods to be able to use the context of controller ("this") in it
-    const metadataRoutes: Array<RouteMetadata> = (Object.values(routes) as RouteMetadata[]).sort(comparePath)
+    const metadataRoutes: Array<RouteMetadata> = Object.values(routes) as RouteMetadata[]
     metadataRoutes.map(metadata => {
       metadata.handler = metadata.handler.bind(instance)
     })
@@ -46,31 +46,4 @@ export const Controller =
 export interface ControllerParams {
   repository?: BuboRepository<unknown>
   overrideRouteName?: string
-}
-
-const comparePath = function (routeA: RouteMetadata, routeB: RouteMetadata) {
-  const splitA = routeA.path.split('/')
-  const splitB = routeB.path.split('/')
-
-  if (splitA.length > splitB.length) {
-    return -1
-  }
-  if (splitA.length > splitB.length) {
-    return 1
-  }
-  // length are equal, searching for a parameter field
-  for (let i = 0; i < splitA.length; i++) {
-    const aHasParam = splitA[i].includes(':')
-    const bHasParam = splitB[i].includes(':')
-
-    // a has a param and not b, a must be last
-    if (aHasParam > bHasParam) {
-      return 1
-    }
-    // b has a param and not a, b must be last
-    if (aHasParam < bHasParam) {
-      return -1
-    }
-  }
-  return 0
 }
