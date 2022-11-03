@@ -9,6 +9,7 @@ export interface AppOptions {
   port?: number
   beforeAllMiddlewares?: Array<{ path?: string; function: any }>
   errorMiddleware?: any
+  fileExtension?: 'js' | 'ts'
 }
 
 export class App {
@@ -19,7 +20,7 @@ export class App {
   public async initHttpModule(adapter: AdapterHttpModule<any>, options?: AppOptions) {
     this.server = adapter
     adapter.useErrorHandler(options?.errorMiddleware)
-    await this.loadControllers()
+    await this.loadControllers(options?.fileExtension)
 
     const controllerResolver = new HttpResolver(adapter)
     options?.beforeAllMiddlewares?.forEach(middleware => {
@@ -54,8 +55,8 @@ export class App {
     MetadataManager.meta.modules.push({ path, handler })
   }
 
-  private async loadControllers() {
-    const controllerFound = glob.sync(`**/*Controller.ts`, {
+  private async loadControllers(extension: 'ts' | 'js' = 'ts') {
+    const controllerFound = glob.sync(`**/*Controller.${extension}`, {
       absolute: true,
       deep: 5,
       ignore: ['**/node_modules/**']
