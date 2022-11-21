@@ -49,8 +49,12 @@ export class HttpResolver {
 }
 
 const comparePath = function (routeA: [string, RouteMetadata], routeB: [string, RouteMetadata]) {
-  const splitA = routeA[1].path.split('/')
-  const splitB = routeB[1].path.split('/')
+  const splitA = routeA[1].path.split('/').filter(element => {
+    return element != ''
+  })
+  const splitB = routeB[1].path.split('/').filter(element => {
+    return element != ''
+  })
 
   if (splitA.length > splitB.length) {
     return -1
