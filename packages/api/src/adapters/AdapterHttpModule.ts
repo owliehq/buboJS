@@ -13,7 +13,7 @@ export interface AdapterHttpModule<App> {
   useErrorHandler(middleware: any)
   useTokenStrategy(accessTokenSecret: string, strategy: Function): void
 
-  startServer(): Server
+  startServer(port: number, credentials?: { key: string; cert: string }): Server
   stopServer(): void
 
   get(path: string, beforeMiddlewares: any[], handler: Function, afterMiddlewares: any[])
@@ -38,6 +38,4 @@ export interface AdapterHttpModule<App> {
    * @returns
    */
   useBodyFormat(path: string, bodyFormat: BodyFormat)
-
-  listen(port: number)
 }

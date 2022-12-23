@@ -4,12 +4,16 @@ import { AdapterHttpModule } from './adapters'
 import { HttpResolver } from './HttpResolver'
 import { MetadataManager } from './MetadataManager'
 import { ServiceResolver } from './ServiceResolver'
+import * as https from 'https'
+import * as http from 'http'
+import { rejects } from 'assert'
 
 export interface AppOptions {
   port?: number
   beforeAllMiddlewares?: Array<{ path?: string; function: any }>
   errorMiddleware?: any
   fileExtension?: 'js' | 'ts'
+  credentials?: { key: string; cert: string }
 }
 
 export class App {
@@ -29,7 +33,7 @@ export class App {
     controllerResolver.controllerRevolve(MetadataManager.meta)
 
     this.initApiModule()
-    return this.server.listen(options?.port || 3000)
+    return await this.server.startServer(options?.port || 3000, options?.credentials)
   }
 
   public initApiModule() {
@@ -37,11 +41,25 @@ export class App {
     serviceResolver.serviceResolve(MetadataManager.meta)
   }
 
-  public listen(port: number) {
+  public async listen(port: number, credentials?: { key: string; cert: string }) {
     MetadataManager.meta.modules.forEach(module => {
       this.server.use(module.path, module.handler)
     })
-    return this.server.listen(port)
+    return new Promise((resolve, reject) => {
+      try {
+        let server
+        if (credentials) {
+          server = https.createServer(credentials, this.server as any)
+        } else {
+          server = http.createServer(this.server as any)
+        }
+        return server.listen(port || 3000, (args: any) => {
+          resolve(args)
+        })
+      } catch (error) {
+        reject(error)
+      }
+    })
   }
 
   public use(base: (req: any, res: any, next: Function) => any)
