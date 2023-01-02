@@ -33,7 +33,7 @@ export class App {
     controllerResolver.controllerRevolve(MetadataManager.meta)
 
     this.initApiModule()
-    return await this.server.startServer(options?.port || 3000, options?.credentials)
+    return this.server.startServer(options?.port || 3000, options?.credentials)
   }
 
   public initApiModule() {
@@ -44,21 +44,6 @@ export class App {
   public async listen(port: number, credentials?: { key: string; cert: string }) {
     MetadataManager.meta.modules.forEach(module => {
       this.server.use(module.path, module.handler)
-    })
-    return new Promise((resolve, reject) => {
-      try {
-        let server
-        if (credentials) {
-          server = https.createServer(credentials, this.server as any)
-        } else {
-          server = http.createServer(this.server as any)
-        }
-        return server.listen(port || 3000, (args: any) => {
-          resolve(args)
-        })
-      } catch (error) {
-        reject(error)
-      }
     })
   }
 

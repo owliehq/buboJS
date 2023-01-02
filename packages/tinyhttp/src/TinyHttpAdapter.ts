@@ -3,6 +3,8 @@ import { App, NextFunction, Request, Response } from '@tinyhttp/app'
 import { Server } from 'http'
 import jsonwebtoken from 'jsonwebtoken'
 import { json, raw, text, urlencoded } from 'milliparsec'
+import * as https from 'https'
+import * as http from 'http'
 
 export class TinyHttpAdapter implements AdapterHttpModule<App> {
   public app: App
@@ -53,10 +55,22 @@ export class TinyHttpAdapter implements AdapterHttpModule<App> {
     return
   }
 
-  public startServer(port?: number) {
-    const server = this.app.listen(port || 3000)
-    console.log(`listened to ${port || 3000}`)
-    return server
+  public async startServer(port?: number, credentials?: { key: string; cert: string }) {
+    return new Promise((resolve, reject) => {
+      try {
+        let server
+        if (credentials) {
+          server = https.createServer(credentials, this.app as any)
+        } else {
+          server = http.createServer(this.app as any)
+        }
+        return server.listen(port || 3000, (args: any) => {
+          resolve(args)
+        })
+      } catch (error) {
+        reject(error)
+      }
+    }) as Promise<Server>
   }
   public stopServer() {}
 
@@ -143,10 +157,6 @@ export class TinyHttpAdapter implements AdapterHttpModule<App> {
         return res.status(200).json(req.result)
       }
     }
-  }
-
-  public listen(port: number): Server {
-    return this.app.listen(port)
   }
 
   private static autoParse(req, _res, next: NextFunction) {
