@@ -66,8 +66,8 @@ export class TinyHttpAdapter implements AdapterHttpModule<App> {
             server = http.createServer();
         }
         server.on('request', this.app.attach );
-        return this.app.listen(port || 3000, (args) => {
-          resolve(args);
+        return this.app.listen(port || 3000, () => {
+          resolve(server);
       })
     }
     catch (error) {
