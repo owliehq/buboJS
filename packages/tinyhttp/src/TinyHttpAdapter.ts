@@ -58,18 +58,21 @@ export class TinyHttpAdapter implements AdapterHttpModule<App> {
   public async startServer(port?: number, credentials?: { key: string; cert: string }) {
     return new Promise((resolve, reject) => {
       try {
-        let server
+        let server;
         if (credentials) {
-          server = https.createServer(credentials, this.app as any)
-        } else {
-          server = http.createServer(this.app as any)
+            server = https.createServer(credentials);
         }
-        return server.listen(port || 3000, (args: any) => {
-          resolve(args)
-        })
-      } catch (error) {
-        reject(error)
-      }
+        else {
+            server = http.createServer();
+        }
+        server.on('request', this.app.attach );
+        return this.app.listen(port || 3000, (args) => {
+          resolve(args);
+      })
+    }
+    catch (error) {
+        reject(error);
+    }
     }) as Promise<Server>
   }
   public stopServer() {}
