@@ -1,1 +1,1 @@
-export * from './AdapterHttpModule'
+export * from './AdapterHttpModule.js'

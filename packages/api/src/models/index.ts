@@ -1,1 +1,1 @@
-export * from './BuboRepository'
+export * from './BuboRepository.js'

@@ -1,5 +1,5 @@
-import { HeaderType } from '../../enums'
-import { MetadataManager } from '../../MetadataManager'
+import { HeaderType } from '../../enums/index.js'
+import { MetadataManager } from '../../MetadataManager.js'
 
 /**
  * Decorator to get one parameter in url request

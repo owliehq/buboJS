@@ -1,1 +1,1 @@
-export * from './ObjectType'
+export * from './ObjectType.js'

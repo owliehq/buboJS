@@ -1,9 +1,9 @@
-import { DefaultRouteBuilder } from '../../builder'
-import { DefaultActions, RouteMetadata } from '../../interfaces'
-import { MetadataManager } from '../../MetadataManager'
-import { BuboRepository } from '../../models'
-import { toSnakeCase } from '../../utils/SnakeCase'
-import { default as pluralize } from 'pluralize'
+import { DefaultRouteBuilder } from '../../builder/index.js'
+import { DefaultActions, RouteMetadata } from '../../interfaces/index.js'
+import { MetadataManager } from '../../MetadataManager.js'
+import { BuboRepository } from '../../models/index.js'
+import { toSnakeCase } from '../../utils/SnakeCase.js'
+import { default as pluralize } from 'pluralize/index.js'
 
 /**
  * Controller decorator

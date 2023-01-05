@@ -1,5 +1,5 @@
-import { ListMetadata } from './interfaces'
-import { MetadataManager } from './MetadataManager'
+import { ListMetadata } from './interfaces/index.js'
+import { MetadataManager } from './MetadataManager.js'
 
 export class ServiceResolver {
   public serviceResolve(metadatas: ListMetadata) {

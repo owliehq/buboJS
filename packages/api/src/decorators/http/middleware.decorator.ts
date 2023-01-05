@@ -1,5 +1,5 @@
-import { MiddlewareMetadata, MiddlewarePosition } from '../../interfaces'
-import { MetadataManager } from '../../MetadataManager'
+import { MiddlewareMetadata, MiddlewarePosition } from '../../interfaces/index.js'
+import { MetadataManager } from '../../MetadataManager.js'
 
 /**
  * BeforeMiddleware decorator. The function middleware will be executed before the main method

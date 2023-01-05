@@ -1,7 +1,7 @@
-import { AdapterHttpModule } from './adapters'
-import { RouteMethod } from './enums'
-import { ListMetadata, MiddlewarePosition, RouteMetadata } from './interfaces'
-import { MetadataManager } from './MetadataManager'
+import { AdapterHttpModule } from './adapters/index.js'
+import { RouteMethod } from './enums/index.js'
+import { ListMetadata, MiddlewarePosition, RouteMetadata } from './interfaces/index.js'
+import { MetadataManager } from './MetadataManager.js'
 
 /**
  * http resolver

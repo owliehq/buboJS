@@ -1,4 +1,4 @@
-import { DefaultActions } from '../interfaces'
+import { DefaultActions } from '../interfaces/index.js'
 
 export abstract class BuboRepository<ModelType, ModelData = ModelType> {
   /**

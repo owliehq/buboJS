@@ -1,6 +1,6 @@
 {
   "name": "@bubojs/api",
-  "version": "0.1.31",
+  "version": "0.1.32",
   "repository": {
     "type": "git",
     "url": "https://github.com/owliehq/buboJS.git",
@@ -22,7 +22,7 @@
     "dot-prop": "^7.2.0",
     "fast-glob": "^3.2.11",
     "path": "^0.12.7",
-    "pluralize": "8.0.0",
+    "pluralize": "^8.0.0",
     "reflect-metadata": "^0.1.13",
     "role-acl": "^4.5.4"
   },

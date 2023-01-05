@@ -1,4 +1,4 @@
-import { getProperty, setProperty } from 'dot-prop'
+import { getProperty, setProperty } from 'dot-prop/index.js'
 import {
   ControllerMetadata,
   ListMetadata,
@@ -8,7 +8,7 @@ import {
   MiddlewarePosition,
   Class,
   ModelMetadata
-} from './interfaces'
+} from './interfaces/index.js'
 
 /**
  * Metadata Manager save metadata of controllers and routes

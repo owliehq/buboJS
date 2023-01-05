@@ -1,12 +1,9 @@
-import glob from 'fast-glob'
+import glob from 'fast-glob/out/index.js'
 import { pathToFileURL } from 'url'
-import { AdapterHttpModule } from './adapters'
-import { HttpResolver } from './HttpResolver'
-import { MetadataManager } from './MetadataManager'
-import { ServiceResolver } from './ServiceResolver'
-import * as https from 'https'
-import * as http from 'http'
-import { rejects } from 'assert'
+import { AdapterHttpModule } from './adapters/index.js'
+import { HttpResolver } from './HttpResolver.js'
+import { MetadataManager } from './MetadataManager.js'
+import { ServiceResolver } from './ServiceResolver.js'
 
 export interface AppOptions {
   port?: number

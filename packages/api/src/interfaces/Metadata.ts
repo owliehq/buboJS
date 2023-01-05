@@ -1,5 +1,5 @@
-import { HeaderType, RouteMethod } from '../enums'
-import { BodyFormat } from './DecoratorOptions'
+import { HeaderType, RouteMethod } from '../enums/index.js'
+import { BodyFormat } from './DecoratorOptions.js'
 
 export interface RouteMetadata {
   path: string

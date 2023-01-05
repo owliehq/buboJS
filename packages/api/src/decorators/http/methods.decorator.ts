@@ -1,7 +1,7 @@
-import { RouteMethod } from '../../enums'
-import { MiddlewarePosition } from '../../interfaces'
-import { BodyFormat, MethodOptions } from '../../interfaces/DecoratorOptions'
-import { MetadataManager } from '../../MetadataManager'
+import { RouteMethod } from '../../enums/index.js'
+import { MiddlewarePosition } from '../../interfaces/index.js'
+import { BodyFormat, MethodOptions } from '../../interfaces/DecoratorOptions.js'
+import { MetadataManager } from '../../MetadataManager.js'
 
 /**
  * build method of route decorators

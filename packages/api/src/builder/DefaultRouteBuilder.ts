@@ -1,7 +1,7 @@
-import { RouteMethod } from '../enums'
-import { BodyFormat, DefaultActions, RouteMetadata } from '../interfaces'
-import { MetadataManager } from '../MetadataManager'
-import { BuboRepository } from '../models'
+import { RouteMethod } from '../enums/index.js'
+import { BodyFormat, DefaultActions, RouteMetadata } from '../interfaces/index.js'
+import { MetadataManager } from '../MetadataManager.js'
+import { BuboRepository } from '../models/index.js'
 
 /**
  * regroup building of default routes into metadata manager

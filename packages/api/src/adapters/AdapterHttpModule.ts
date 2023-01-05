@@ -1,5 +1,5 @@
 import { Server } from 'http'
-import { BodyFormat, Handler } from '../interfaces'
+import { BodyFormat, Handler } from '../interfaces/index.js'
 
 /**
  * adapt http modules (tinyhttp, fastify, express) to main api module
