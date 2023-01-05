@@ -54,7 +54,7 @@ export class TinyHttpAdapter implements AdapterHttpModule<App> {
 
   public async startServer(port?: number, credentials?: { key: string; cert: string }) {
     const server = this.app.listen(port || 3000)
-    console.log(`listened to ${port || 3000}`)
+    console.log(`listen to ${port || 3000}`)
     return server
   }
   public stopServer() {}
