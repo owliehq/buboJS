@@ -1,1 +1,1 @@
-export * from './TinyHttpAdapter';
+export * from './TinyHttpAdapter.js'

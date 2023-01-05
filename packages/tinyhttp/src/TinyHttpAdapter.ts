@@ -1,10 +1,7 @@
-import { AdapterHttpModule, BodyFormat, Handler } from '@bubojs/api'
-import { App, NextFunction, Request, Response } from '@tinyhttp/app'
-import { Server } from 'http'
-import jsonwebtoken from 'jsonwebtoken'
-import { json, raw, text, urlencoded } from 'milliparsec'
-import * as https from 'https'
-import * as http from 'http'
+import { AdapterHttpModule, BodyFormat, Handler } from '@bubojs/api/dist/index.js'
+import { App, NextFunction, Request, Response } from '@tinyhttp/app/dist/index.js'
+import jsonwebtoken from 'jsonwebtoken/index.js'
+import { json, raw, text, urlencoded } from 'milliparsec/dist/index.js'
 
 export class TinyHttpAdapter implements AdapterHttpModule<App> {
   public app: App
@@ -56,24 +53,9 @@ export class TinyHttpAdapter implements AdapterHttpModule<App> {
   }
 
   public async startServer(port?: number, credentials?: { key: string; cert: string }) {
-    return new Promise((resolve, reject) => {
-      try {
-        let server;
-        if (credentials) {
-            server = https.createServer(credentials);
-        }
-        else {
-            server = http.createServer();
-        }
-        server.on('request', this.app.attach );
-        return this.app.listen(port || 3000, () => {
-          resolve(server);
-      })
-    }
-    catch (error) {
-        reject(error);
-    }
-    }) as Promise<Server>
+    const server = this.app.listen(port || 3000)
+    console.log(`listened to ${port || 3000}`)
+    return server
   }
   public stopServer() {}
 
