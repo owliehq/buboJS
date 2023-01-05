@@ -137,9 +137,12 @@ export class TinyHttpAdapter implements AdapterHttpModule<App> {
    */
   public response(): Handler {
     return (req, res, next) => {
-      if (!req?.result) return res.status(200)
+      if (!req?.result) return res.sendStatus(200)
       else {
-        return res.status(200).json(req.result)
+        if (typeof req.result === 'object') {
+          return res.status(200).json(req.result)
+        }
+        return res.status(200).send(req.result)
       }
     }
   }
