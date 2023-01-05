@@ -1,5 +1,5 @@
-import { Association, FindOptions, Includeable, IncludeOptions, ModelStatic } from 'sequelize'
-import { Model, ModelType, ModelCtor } from 'sequelize-typescript'
+import { IncludeOptions, ModelStatic } from 'sequelize'
+import { Model, ModelCtor } from 'sequelize-typescript'
 
 type PopulateMap = Map<string, PopulateMap>
 

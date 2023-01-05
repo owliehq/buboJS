@@ -1,5 +1,5 @@
 import { Model } from 'sequelize-typescript'
-import { CreateOptions, DestroyOptions, FindOptions, UpdateOptions, OrderItem } from 'sequelize'
+import { CreateOptions, DestroyOptions, FindOptions, UpdateOptions } from 'sequelize'
 import { ErrorFactory } from '@bubojs/http-errors'
 import { BuboRepository, DefaultActions } from '@bubojs/api'
 

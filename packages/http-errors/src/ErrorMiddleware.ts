@@ -1,5 +1,5 @@
-import { HttpError } from './HttpError'
-import { ErrorFactory, OptionsErrorFactory } from './ErrorFactory'
+import { HttpError } from './HttpError.js'
+import { ErrorFactory, OptionsErrorFactory } from './ErrorFactory.js'
 
 export interface ErrorMiddlewareOptions {
   debugOnClient: Boolean

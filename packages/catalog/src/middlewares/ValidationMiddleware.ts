@@ -1,5 +1,5 @@
 import { MetadataManager, MiddlewareMetadata, MiddlewarePosition } from '@bubojs/api'
-import Validator, { ValidationError } from 'fastest-validator'
+import Validator from 'fastest-validator'
 
 const getParamsFieldName = req => {
   switch (req.method) {

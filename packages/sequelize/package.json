@@ -1,6 +1,6 @@
 {
   "name": "@bubojs/sequelize",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "main": "./dist/index.js",
   "author": "owlie",
   "license": "MIT",
@@ -14,8 +14,14 @@
     "registry": "https://registry.npmjs.org/"
   },
   "type": "module",
+  "module": "Esnext",
   "types": "./dist/index.d.ts",
-  "exports": "./dist/index.js",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "import": "./dist/index.js"
+    }
+  },
   "scripts": {
     "build": "echo 'sequelize' && rimraf ./dist && tsc -p tsconfig.build.json"
   },

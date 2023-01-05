@@ -1,8 +1,6 @@
 import { AccessControl } from 'role-acl'
-import { toSnakeCase } from '../utils/snakeCase'
 import { ErrorFactory } from '@bubojs/http-errors'
 import { MetadataManager, MiddlewarePosition } from '@bubojs/api'
-import * as pluralize from 'pluralize'
 
 export interface Right {
   resource: string

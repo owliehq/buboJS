@@ -1,9 +1,12 @@
 {
   "name": "@bubojs/catalog",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "exports": "./dist/index.js",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {"import":"./dist/index.js"
+    }},
   "author": "Owlie",
   "license": "MIT",
   "repository": {
@@ -16,6 +19,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "type": "module",
+  "module": "Esnext",
   "scripts": {
     "build": "echo 'catalog' && rimraf ./dist && tsc -p tsconfig.build.json"
   },

@@ -1,2 +1,2 @@
-export * from './fastifyImplement';
-export * from './adapterHttpModule';
+export * from './fastifyImplement.js'
+export * from './adapterHttpModule.js'

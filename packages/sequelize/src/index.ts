@@ -1,4 +1,3 @@
-export * from './SequelizeBaseRepository'
-export * from './SequelizePopulate'
-//export * from './SequelizeQuery'
-export * from './TypeUtils'
+export * from './SequelizeBaseRepository.js'
+export * from './SequelizePopulate.js'
+export * from './TypeUtils.js'

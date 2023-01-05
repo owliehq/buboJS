@@ -1,22 +1,22 @@
-import fastify, { FastifyInstance } from 'fastify';
-import { AdapterHttpModule } from './adapterHttpModule';
+import fastify, { FastifyInstance } from 'fastify'
+import { AdapterHttpModule } from './adapterHttpModule.js'
 
 export class FastifyImplement implements AdapterHttpModule {
-  public app: FastifyInstance;
+  public app: FastifyInstance
   constructor() {
-    this.app = fastify({ logger: true });
+    this.app = fastify({ logger: true })
   }
   public get getApp() {
-    return this.app;
+    return this.app
   }
   public async startServer() {
-    await this.app.listen(3000);
+    await this.app.listen(3000)
   }
   public stopServer() {
-    this.app.close();
+    this.app.close()
   }
 
   public get(path: string, routeFunction: any): object {
-    return this.app.get(path, routeFunction);
+    return this.app.get(path, routeFunction)
   }
 }
