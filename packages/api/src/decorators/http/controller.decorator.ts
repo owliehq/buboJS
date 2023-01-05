@@ -3,7 +3,7 @@ import { DefaultActions, RouteMetadata } from '../../interfaces/index.js'
 import { MetadataManager } from '../../MetadataManager.js'
 import { BuboRepository } from '../../models/index.js'
 import { toSnakeCase } from '../../utils/SnakeCase.js'
-import { default as pluralize } from 'pluralize/index.js'
+import { default as pluralize } from 'pluralize'
 
 /**
  * Controller decorator

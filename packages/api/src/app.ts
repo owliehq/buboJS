@@ -1,4 +1,4 @@
-import glob from 'fast-glob/out/index.js'
+import glob from 'fast-glob'
 import { pathToFileURL } from 'url'
 import { AdapterHttpModule } from './adapters/index.js'
 import { HttpResolver } from './HttpResolver.js'

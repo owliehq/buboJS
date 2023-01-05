@@ -1,4 +1,4 @@
-import { getProperty, setProperty } from 'dot-prop/index.js'
+import { getProperty, setProperty } from 'dot-prop'
 import {
   ControllerMetadata,
   ListMetadata,
