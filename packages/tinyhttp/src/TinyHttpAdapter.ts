@@ -1,7 +1,7 @@
-import { AdapterHttpModule, BodyFormat, Handler } from '@bubojs/api/dist/index.js'
-import { App, NextFunction, Request, Response } from '@tinyhttp/app/dist/index.js'
-import jsonwebtoken from 'jsonwebtoken/index.js'
-import { json, raw, text, urlencoded } from 'milliparsec/dist/index.js'
+import { AdapterHttpModule, BodyFormat, Handler } from '@bubojs/api'
+import { App, NextFunction, Request, Response } from '@tinyhttp/app'
+import jsonwebtoken from 'jsonwebtoken'
+import { json, raw, text, urlencoded } from 'milliparsec'
 
 export class TinyHttpAdapter implements AdapterHttpModule<App> {
   public app: App
