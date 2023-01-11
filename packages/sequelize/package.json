@@ -31,8 +31,8 @@
   "dependencies": {
     "@bubojs/api": "^0.1.0",
     "@bubojs/http-errors": "^0.1.8",
-    "sequelize": "6.0.0",
-    "sequelize-typescript": "2.0.0"
+    "sequelize": "^6.0.0",
+    "sequelize-typescript": "^2.0.0"
   },
   "devDependencies": {
     "eslint": "^8.16.0",
