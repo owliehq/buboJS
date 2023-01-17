@@ -43,7 +43,7 @@ export abstract class Uploader {
    */
   public buildDownloadEndpoint(options: DownloadEndpointOptions) {
     const handler = async (req: any, res: any) => {
-      const key = await options.retrieveKeyCallback(req.params.id)
+      const key = await options.retrieveKeyCallback(req)
 
       if (!key) throw ErrorFactory.NotFound()
 
@@ -86,7 +86,7 @@ export abstract class Uploader {
 
   public buildDeleteEndpoint(options: DeleteEndpointOptions) {
     const handler = async (req: any, res: any, next: any) => {
-      const key = await options.retrieveKeyCallback(req.params.id)
+      const key = await options.retrieveKeyCallback(req)
 
       if (!key) throw ErrorFactory.NotFound()
 
