@@ -74,10 +74,5 @@
   "dependencies": {
     "http": "^0.0.1-security",
     "https": "^1.0.0"
-  },
-  "workspaces": {
-    "packages": [
-      "packages/**/*"
-    ]
   }
 }
