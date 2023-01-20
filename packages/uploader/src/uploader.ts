@@ -10,11 +10,22 @@ export abstract class Uploader {
   /**
    * create middleware handler to manage uploading file or field
    */
-  public get middleware() {
+  public buildUploadEndpoint(options: UploadEndpointOptions) {
     const handler = (req: any, res: any, next: any) => {
       const busboyObject = busboy({ headers: req.headers })
       req.body = {}
       busboyObject.on('file', (fieldname: string, file: Readable, { filename, encoding, mimeType }) => {
+        const extension = mime.extension(mimeType) || ''
+        if (options.authorizedExtensions && !options.authorizedExtensions.includes(extension)) {
+          next(ErrorFactory.UnprocessableEntity(`Unauthorized file type ${extension}`))
+          return
+        }
+
+        if (options.authorizedFileFields && !options.authorizedFileFields.includes(fieldname)) {
+          next(ErrorFactory.UnprocessableEntity(`Unauthorized field name ${fieldname} for file uploading`))
+          return
+        }
+
         const key = this.onFileUploadHandler(fieldname, file, filename, encoding, mimeType)
 
         file.on('end', () => {
@@ -61,7 +72,7 @@ export abstract class Uploader {
 
       const promise = () =>
         new Promise(async (resolve, reject) => {
-          const stream = await this.getStreamFile(key)
+          const stream = await this.getStreamFile(options?.filename || key)
 
           stream.on('error', (err: any) => {
             if (err.code === 404) return reject(ErrorFactory.NotFound())
@@ -92,7 +103,7 @@ export abstract class Uploader {
 
       const promise = () =>
         new Promise((resolve, reject) => {
-          this.onFileDeleteHandler(key)
+          this.onFileDeleteHandler(options?.filename || key)
             .then(() => {
               resolve({})
             })
@@ -146,6 +157,14 @@ export abstract class Uploader {
   protected generateKey() {
     return foid(18)
   }
+}
+
+/**
+ * options to create upload endpoint
+ */
+export interface UploadEndpointOptions {
+  authorizedFileFields?: Array<string>
+  authorizedExtensions?: Array<string>
 }
 
 /**
