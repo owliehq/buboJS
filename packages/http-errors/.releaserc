@@ -1,0 +1,39 @@
+{
+  "tagFormat": "http-errors-v${version}",
+  "plugins": [
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        "preset": "angular",
+        "releaseRules": [
+          {
+            "type": "feat",
+            "release": "minor",
+            "scope": "http-errors"
+          },
+          {
+            "type": "fix",
+            "release": "patch",
+            "scope": "http-errors"
+          },
+          {
+            "type": "perf",
+            "release": "patch",
+            "scope": "http-errors"
+          }
+        ]
+      }
+    ],
+    "@semantic-release/github",
+    "@semantic-release/npm",
+    [
+      "@semantic-release/git",
+      {
+        "assets": [
+          "package.json"
+        ],
+        "message": "chore(release): bump \"@bubojs/http-errors\" to ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+      }
+    ]
+  ]
+}

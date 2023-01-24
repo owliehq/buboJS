@@ -1,0 +1,39 @@
+{
+  "tagFormat": "tinyhttp-v${version}",
+  "plugins": [
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        "preset": "angular",
+        "releaseRules": [
+          {
+            "type": "feat",
+            "release": "minor",
+            "scope": "tinyhttp"
+          },
+          {
+            "type": "fix",
+            "release": "patch",
+            "scope": "tinyhttp"
+          },
+          {
+            "type": "perf",
+            "release": "patch",
+            "scope": "tinyhttp"
+          }
+        ]
+      }
+    ],
+    "@semantic-release/github",
+    "@semantic-release/npm",
+    [
+      "@semantic-release/git",
+      {
+        "assets": [
+          "package.json"
+        ],
+        "message": "chore(release): bump \"@bubojs/tinyhttp\" to ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+      }
+    ]
+  ]
+}

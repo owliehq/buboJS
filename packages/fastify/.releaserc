@@ -1,0 +1,39 @@
+{
+  "tagFormat": "fastify-v${version}",
+  "plugins": [
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        "preset": "angular",
+        "releaseRules": [
+          {
+            "type": "feat",
+            "release": "minor",
+            "scope": "fastify"
+          },
+          {
+            "type": "fix",
+            "release": "patch",
+            "scope": "fastify"
+          },
+          {
+            "type": "perf",
+            "release": "patch",
+            "scope": "fastify"
+          }
+        ]
+      }
+    ],
+    "@semantic-release/github",
+    "@semantic-release/npm",
+    [
+      "@semantic-release/git",
+      {
+        "assets": [
+          "package.json"
+        ],
+        "message": "chore(release): bump \"@bubojs/fastify\" to ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+      }
+    ]
+  ]
+}

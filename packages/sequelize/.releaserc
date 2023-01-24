@@ -1,0 +1,39 @@
+{
+  "tagFormat": "sequelize-v${version}",
+  "plugins": [
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        "preset": "angular",
+        "releaseRules": [
+          {
+            "type": "feat",
+            "release": "minor",
+            "scope": "sequelize"
+          },
+          {
+            "type": "fix",
+            "release": "patch",
+            "scope": "sequelize"
+          },
+          {
+            "type": "perf",
+            "release": "patch",
+            "scope": "sequelize"
+          }
+        ]
+      }
+    ],
+    "@semantic-release/github",
+    "@semantic-release/npm",
+    [
+      "@semantic-release/git",
+      {
+        "assets": [
+          "package.json"
+        ],
+        "message": "chore(release): bump \"@bubojs/sequelize\" to ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+      }
+    ]
+  ]
+}
