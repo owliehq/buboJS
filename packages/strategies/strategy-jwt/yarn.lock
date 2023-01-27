@@ -45,9 +45,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@bubojs/catalog@workspace:.":
+"@bubojs/http-errors@npm:^0.1.0":
+  version: 0.1.7
+  resolution: "@bubojs/http-errors@npm:0.1.7"
+  dependencies:
+    ts-custom-error: ^3.2.0
+  checksum: 94c9b9faa2f2faafe7dc06fe9c94dc9092ab0ec9bef632b6ba98c5c66b2a5beae0c052f85fde8431d831364d494ad64bb1218969bf88ed4c9fbc410dec8dda0a
+  languageName: node
+  linkType: hard
+
+"@bubojs/strategy-jwt@workspace:.":
   version: 0.0.0-use.local
-  resolution: "@bubojs/catalog@workspace:."
+  resolution: "@bubojs/strategy-jwt@workspace:."
   dependencies:
     "@bubojs/api": ^0.1.0
     "@bubojs/http-errors": ^0.1.0
@@ -62,15 +71,6 @@ __metadata:
     typescript: ^4.7.4
   languageName: unknown
   linkType: soft
-
-"@bubojs/http-errors@npm:^0.1.0":
-  version: 0.1.7
-  resolution: "@bubojs/http-errors@npm:0.1.7"
-  dependencies:
-    ts-custom-error: ^3.2.0
-  checksum: 94c9b9faa2f2faafe7dc06fe9c94dc9092ab0ec9bef632b6ba98c5c66b2a5beae0c052f85fde8431d831364d494ad64bb1218969bf88ed4c9fbc410dec8dda0a
-  languageName: node
-  linkType: hard
 
 "@colors/colors@npm:1.5.0":
   version: 1.5.0

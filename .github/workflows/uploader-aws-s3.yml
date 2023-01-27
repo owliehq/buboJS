@@ -1,0 +1,15 @@
+name: Publish uploader aws s3 package
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'packages/providers/uploader-aws-s3/**'
+jobs:
+  build:
+    uses: ./.github/workflows/package_publisher.yml
+    with:
+      package_name: providers/uploader-aws-s3
+    secrets:
+      npm_token: ${{ secrets.NPM_TOKEN}}

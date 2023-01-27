@@ -1,0 +1,39 @@
+{
+  "tagFormat": "acl-v${version}",
+  "plugins": [
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        "preset": "angular",
+        "releaseRules": [
+          {
+            "type": "feat",
+            "release": "minor",
+            "scope": "acl"
+          },
+          {
+            "type": "fix",
+            "release": "patch",
+            "scope": "acl"
+          },
+          {
+            "type": "perf",
+            "release": "patch",
+            "scope": "acl"
+          }
+        ]
+      }
+    ],
+    "@semantic-release/github",
+    "@semantic-release/npm",
+    [
+      "@semantic-release/git",
+      {
+        "assets": [
+          "package.json"
+        ],
+        "message": "chore(release): bump \"@bubojs/acl\" to ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+      }
+    ]
+  ]
+}

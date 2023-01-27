@@ -8,7 +8,7 @@ export const authMiddleware = (req, res, next): void => {
   }
 }
 
-export const AuthMiddleware = () => {
+export const JWTAuth = () => {
   return BeforeMiddleware(authMiddleware)
 }
 

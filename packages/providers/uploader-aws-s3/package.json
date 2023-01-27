@@ -1,10 +1,10 @@
 {
-  "name": "@bubojs/uploader",
-  "version": "0.1.2",
+  "name": "@bubojs/uploader-aws-s3",
+  "version": "0.1.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/owliehq/buboJS.git",
-    "directory": "packages/uploader"
+    "directory": "packages/uploader-aws-s3"
   },
   "publishConfig": {
     "access": "public",

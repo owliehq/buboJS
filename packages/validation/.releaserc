@@ -1,5 +1,5 @@
 {
-  "tagFormat": "catalog-v${version}",
+  "tagFormat": "validation-v${version}",
   "plugins": [
     [
       "@semantic-release/commit-analyzer",
@@ -9,17 +9,17 @@
           {
             "type": "feat",
             "release": "minor",
-            "scope": "catalog"
+            "scope": "validation"
           },
           {
             "type": "fix",
             "release": "patch",
-            "scope": "catalog"
+            "scope": "validation"
           },
           {
             "type": "perf",
             "release": "patch",
-            "scope": "catalog"
+            "scope": "validation"
           }
         ]
       }
@@ -32,7 +32,7 @@
         "assets": [
           "package.json"
         ],
-        "message": "chore(release): bump \"@bubojs/catalog\" to ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        "message": "chore(release): bump \"@bubojs/validation\" to ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
       }
     ]
   ]

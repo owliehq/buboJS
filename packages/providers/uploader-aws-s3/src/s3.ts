@@ -1,5 +1,5 @@
 import { Readable } from 'stream'
-import { Uploader } from '../uploader.js'
+import { Uploader } from './uploader.js'
 import * as mime from 'mime-types'
 
 export class S3Uploader extends Uploader {

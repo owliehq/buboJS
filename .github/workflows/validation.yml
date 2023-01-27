@@ -1,0 +1,15 @@
+name: Publish Validation package
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'packages/validation/**'
+jobs:
+  build:
+    uses: ./.github/workflows/package_publisher.yml
+    with:
+      package_name: validation
+    secrets:
+      npm_token: ${{ secrets.NPM_TOKEN}}

@@ -1,5 +1,5 @@
 {
-  "tagFormat": "uploader-v${version}",
+  "tagFormat": "uploader-aws-s3-v${version}",
   "plugins": [
     [
       "@semantic-release/commit-analyzer",
@@ -9,17 +9,17 @@
           {
             "type": "feat",
             "release": "minor",
-            "scope": "uploader"
+            "scope": "uploader-aws-s3"
           },
           {
             "type": "fix",
             "release": "patch",
-            "scope": "uploader"
+            "scope": "uploader-aws-s3"
           },
           {
             "type": "perf",
             "release": "patch",
-            "scope": "uploader"
+            "scope": "uploader-aws-s3"
           }
         ]
       }
@@ -32,7 +32,7 @@
         "assets": [
           "package.json"
         ],
-        "message": "chore(release): bump \"@bubojs/uploader\" to ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        "message": "chore(release): bump \"@bubojs/uploader-aws-s3\" to ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
       }
     ]
   ]

@@ -23,7 +23,21 @@ const Configuration: UserConfig = {
     'scope-enum': [
       2,
       'always',
-      ['root', 'api', 'tinyhttp', 'fastify', 'swagger', 'todolist', 'catalog', 'sequelize', 'ci', 'uploader']
+      [
+        'root',
+        'api',
+        'tinyhttp',
+        'fastify',
+        'swagger',
+        'todolist',
+        'catalog',
+        'sequelize',
+        'ci',
+        'uploader-aws-s3',
+        'validation',
+        'strategy-jwt',
+        'acl'
+      ]
     ],
     'subject-max-length': [2, 'always', 120]
   }
