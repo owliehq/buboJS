@@ -1,0 +1,43 @@
+{
+  "name": "@bubojs/uploader-firebase",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/owliehq/buboJS.git",
+    "directory": "packages/providers/uploader-firebase"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "main": "./dist/index.js",
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rimraf ./dist && tsc -p tsconfig.build.json"
+  },
+  "author": "Owlie",
+  "license": "MIT",
+  "module": "Esnext",
+  "devDependencies": {
+    "rimraf": "^4.1.2",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "@bubojs/api": "^0.1.35",
+    "@bubojs/http-errors": "^0.1.10",
+    "busboy": "^1.6.0",
+    "firebase-admin": "^11.5.0",
+    "mime-types": "^2.1.35",
+    "nanoid": "^4.0.0"
+  }
+}

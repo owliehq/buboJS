@@ -1,0 +1,39 @@
+{
+  "tagFormat": "uploader-firebase-v${version}",
+  "plugins": [
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        "preset": "angular",
+        "releaseRules": [
+          {
+            "type": "feat",
+            "release": "minor",
+            "scope": "uploader-firebase"
+          },
+          {
+            "type": "fix",
+            "release": "patch",
+            "scope": "uploader-firebase"
+          },
+          {
+            "type": "perf",
+            "release": "patch",
+            "scope": "uploader-firebase"
+          }
+        ]
+      }
+    ],
+    "@semantic-release/github",
+    "@semantic-release/npm",
+    [
+      "@semantic-release/git",
+      {
+        "assets": [
+          "package.json"
+        ],
+        "message": "chore(release): bump \"@bubojs/uploader-firebase\" to ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+      }
+    ]
+  ]
+}

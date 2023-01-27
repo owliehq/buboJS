@@ -239,7 +239,7 @@ class MyController
 
 ## Upload de fichier ##
 
-[Google Cloud Storage](packages/providers/firebase/README.md)
+[Firebase](packages/providers/uploader-firebase/README.md)
 
 [Amazon S3](packages/providers/uploader-aws-s3/README.md)
 

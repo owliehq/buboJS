@@ -14,10 +14,7 @@
   "private": true,
   "scripts": {
     "prepare": "husky install",
-    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
-    "setup": "yarn && yarn run bootstrap",
-    "bootstrap": "lerna bootstrap",
-    "build": "lerna run build"
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.0.2",

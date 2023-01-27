@@ -34,6 +34,7 @@ const Configuration: UserConfig = {
         'sequelize',
         'ci',
         'uploader-aws-s3',
+        'uploader-firebase',
         'validation',
         'strategy-jwt',
         'acl'

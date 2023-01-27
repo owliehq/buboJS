@@ -1,8 +1,8 @@
-# Google Cloud Storage #
+# Firebase #
 
 [Back To Main Menu](../../../README.md)
 
-Cet uploader permet d'utiliser Google Cloud Storage
+Cet uploader permet d'utiliser Firebase Storage
 
 ## Instance de Storage ##
 
@@ -13,7 +13,6 @@ import { FirebaseInstance } from '../bubo.middlewares/uploader/Firebase'
 import { env } from './constants'
 
 export const firebase = new FirebaseInstance({
-  bucketId: env.FIREBASE.bucketId,
   privateKey: env.FIREBASE.privateKey,
   clientEmail: env.FIREBASE.clientEmail,
   projectId: env.FIREBASE.projectId
