@@ -27,6 +27,7 @@ Jest run all \*.test.ts files in packages/\* dir
 ```bash
 yarn test
 ```
+
 ## Présentation ##
 
 BuboJs est une bibliothèque permettant de construire rapidement et efficacement une API Rest, il est basé sur NodeJS, ecrit entierement en Typescript et utilisant les ESModules.
@@ -141,6 +142,7 @@ class BaseController
 
 Ces routes créent une requete directe à la base de donnée, vous pouvez ajouter des options à cette requete via nos middleware dédiés (voir plus loin), ou ajouter vos propres options en les passant dans req.$sequelize ( ⚠️ attention à l'interaction entre plusieurs middlewares d'options)
 Nous avons donc les routes suivantes :
+
 - __POST__ /base/
 - __PUT__ /base/:id
 - __GET__ /base/:id
@@ -216,7 +218,7 @@ Dans ce cas la route refusera tout ce qui n'est pas au format JSON
 ### Handler Brut ###
 
 Quand vous construisez une route custom l'api buboJs va wrapper votre fonction pour récupérer son résultat et le stocker dans req.result, cela va permettre d'appeler d'autre middleware après afin d'effectuer des operation de formatage par exemple.
-Vous pouvez cependant definir vous m^eme le handler et gérer directement l'appel des middleware suivant (ou non), pour cela vous aller fournir au decorateur de la route custom non pas la fonction que vous voulez exectuter mais un constructeur du handler que vous voulez appeler, il faut aussi activer l'option __{rawHandler : true}__ dans le decorateur de la route
+Vous pouvez cependant definir vous même le handler et gérer directement l'appel des middleware suivant (ou non), pour cela vous aller fournir au decorateur de la route custom non pas la fonction que vous voulez exectuter mais un constructeur du handler que vous voulez appeler, il faut aussi activer l'option __{rawHandler : true}__ dans le decorateur de la route
 exemple :
 
 ```ts

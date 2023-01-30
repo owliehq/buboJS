@@ -22,7 +22,7 @@ export const firebase = new FirebaseInstance({
 ## Placer l'uploader sur une route ##
 
 ```ts
-import { Upload } from '../../bubo.middlewares/uploader'
+import { Upload } from '@bubojs/uploader-firebase'
 import { firebase } from '../../config/Firebase'
 import { Controller, DefaultActions, BeforeMiddleware, Post } from '@bubojs/api'
 
