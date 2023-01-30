@@ -43,7 +43,7 @@ jobs:
         name: get package version base
         working-directory: 'packages/${{ inputs.package_name }}'
 
-      - run: npm version ${{ env.VERSION}}-dev.${{ GITHUB_SHA }}
+      - run: npm version ${{ env.VERSION}}-dev.${{ github.sha }}
         name: setting package version
         working-directory: 'packages/${{ inputs.package_name }}'
 
