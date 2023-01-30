@@ -1,0 +1,56 @@
+name: Package Publisher
+
+on:
+  workflow_call:
+    inputs:
+      package_name:
+        required: true
+        type: string
+    secrets:
+      npm_token:
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        name: checkout
+
+      - uses: actions/setup-node@v3
+        name: Install node.js
+        with:
+          node-version: '16.x'
+          registry-url: 'https://registry.npmjs.org'
+
+      - run: yarn set version berry
+        name: upgrade yarn
+        working-directory: 'packages/${{ inputs.package_name }}'
+
+      - run: yarn
+        name: installing packages
+        working-directory: 'packages/${{ inputs.package_name }}'
+
+      - run: yarn build
+        name: building packages
+        working-directory: 'packages/${{ inputs.package_name }}'
+
+      - run: | 
+          export VERSION = grep version package.json | awk -F: '{ print $2 }' | sed 's/[",]//g'
+          echo 'VERSION is $VERSION'
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+        name: get package version base
+        working-directory: 'packages/${{ inputs.package_name }}'
+
+      - run: npm version ${{ env.VERSION}}-dev.${{ GITHUB_SHA }}
+        name: setting package version
+        working-directory: 'packages/${{ inputs.package_name }}'
+
+      - run: npm publish 
+        name: "publishing ${{ inputs.package_name }}"
+        working-directory: 'packages/${{ inputs.package_name }}'
+
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GH_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
