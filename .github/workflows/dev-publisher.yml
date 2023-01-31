@@ -45,7 +45,7 @@ jobs:
         name: setting package version
         working-directory: 'packages/${{ inputs.package_name }}'
 
-      - run: npm publish 
+      - run: npm publish --tag dev
         name: "publishing ${{ inputs.package_name }}"
         working-directory: 'packages/${{ inputs.package_name }}'
 
