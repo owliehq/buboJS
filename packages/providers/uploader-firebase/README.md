@@ -1,6 +1,6 @@
 # Firebase #
 
-[Back To Main Menu](../../../README.md)
+[Back To Main Menu](../../../README.md#upload-de-fichier)
 
 Cet uploader permet d'utiliser Firebase Storage
 
@@ -77,4 +77,4 @@ La fonction prends deux parametres :
   }
 ```
 
-[Back To Main Menu](../../../README.md)
+[Back To Main Menu](../../../README.md#upload-de-fichier)

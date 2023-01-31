@@ -1,6 +1,6 @@
 # Acl Middleware #
 
-[Back to Main Menu](../../README.md)
+[Back to Main Menu](../../README.md#rights)
 
 le Set Acl (Access Control List) permet de définir les droits de chaque type d'utilisateur, il est basé sur la bibliothèque [role-acl](https://github.com/tensult/role-acl)
 Le Set fournit par bubo se compose de 2 fonctions et 2 middlewares 
@@ -142,4 +142,4 @@ __AclManager.applyRights__ qui doit etre appelée pour appliquée les droits dan
 
 __AclManager.roleCallback__ permet de redefinir le getter de roles pour un utilisateur, par defaut il va récupérer le champ "role"
 
-[Back to Main Menu](../../README.md)
+[Back to Main Menu](../../README.md#rights)

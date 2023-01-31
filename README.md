@@ -90,7 +90,11 @@ Pour gérer l'authentification actuellement seul JWT est disponible mais vous po
 
 En ce qui concerne les droits c'est la bibliothèque [role-acl](https://github.com/tensult/role-acl) qui est utilisée
 
-[Strategies D'authentification](/packages/strategies/README.md)
+### Authentification ###
+
+[JWT](/packages/strategies/strategy-jwt/README.md)
+
+### Rights ###
 
 [Access Control List](/packages/acl/README.md)
 

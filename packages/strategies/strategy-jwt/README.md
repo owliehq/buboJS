@@ -1,7 +1,6 @@
 # JWT Auth #
 
-[Back To Authentification Menu](../README.md)
-[Back To Main Menu](../../../README.md)
+[Back To Main Menu](../../../README.md#authentification)
 
 ## JWT Global Middleware ##
 
@@ -61,6 +60,4 @@ export class UsersController {
   @AuthMiddleware()
   [DefaultActions.GET_ONE]() {}
 ```
-
-[Back To Authentification](../README.md)
-[Back to Main Menu](../../../README.md)
+[Back to Main Menu](../../../README.md#authentification)
