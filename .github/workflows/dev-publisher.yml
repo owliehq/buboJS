@@ -50,6 +50,5 @@ jobs:
         working-directory: 'packages/${{ inputs.package_name }}'
 
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          GH_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
           VERSION: ""
