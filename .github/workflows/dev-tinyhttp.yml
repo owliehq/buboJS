@@ -1,0 +1,15 @@
+name: Publish TinyHttp package for develop
+
+on:
+  push:
+    branches:
+      - develop
+    paths:
+      - "packages/tinyhttp/**"
+jobs:
+  build:
+    uses: ./.github/workflows/dev-publisher.yml
+    with:
+      package_name: tinyhttp
+    secrets:
+      npm_token: ${{ secrets.NPM_TOKEN}}

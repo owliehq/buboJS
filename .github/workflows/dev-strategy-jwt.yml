@@ -1,0 +1,15 @@
+name: Publish API package for develop
+
+on:
+  push:
+    branches:
+      - develop
+    paths:
+      - "packages/strategies/strategy-jwt/**"
+jobs:
+  build:
+    uses: ./.github/workflows/dev-publisher.yml
+    with:
+      package_name: strategies/strategy-jwt
+    secrets:
+      npm_token: ${{ secrets.NPM_TOKEN}}

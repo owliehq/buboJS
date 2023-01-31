@@ -1,0 +1,15 @@
+name: Publish Sequelize package for develop
+
+on:
+  push:
+    branches:
+      - develop
+    paths:
+      - "packages/sequelize/**"
+jobs:
+  build:
+    uses: ./.github/workflows/dev-publisher.yml
+    with:
+      package_name: sequelize
+    secrets:
+      npm_token: ${{ secrets.NPM_TOKEN}}

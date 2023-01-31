@@ -1,15 +1,15 @@
-name: Publish uploader Package
+name: Publish uploader-firebase Package
 
 on:
   push:
     branches:
       - main
     paths:
-      - 'packages/uploader/**'
+      - 'packages/providers/uploader-firebase/**'
 jobs:
   build:
     uses: ./.github/workflows/package_publisher.yml
     with:
-      package_name: uploader
+      package_name: providers/uploader-firebase
     secrets:
       npm_token: ${{ secrets.NPM_TOKEN}}

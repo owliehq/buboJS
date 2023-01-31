@@ -1,0 +1,15 @@
+name: Publish ACL package for develop
+
+on:
+  push:
+    branches:
+      - develop
+    paths:
+      - "packages/acl/**"
+jobs:
+  build:
+    uses: ./.github/workflows/dev-publisher.yml
+    with:
+      package_name: acl
+    secrets:
+      npm_token: ${{ secrets.NPM_TOKEN}}

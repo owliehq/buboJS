@@ -1,0 +1,15 @@
+name: Publish Swagger package for develop
+
+on:
+  push:
+    branches:
+      - develop
+    paths:
+      - "packages/swagger/**"
+jobs:
+  build:
+    uses: ./.github/workflows/dev-publisher.yml
+    with:
+      package_name: swagger
+    secrets:
+      npm_token: ${{ secrets.NPM_TOKEN}}
