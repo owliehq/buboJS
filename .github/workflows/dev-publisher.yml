@@ -37,8 +37,7 @@ jobs:
         working-directory: 'packages/${{ inputs.package_name }}'
 
       - run: | 
-          VERSION = $(grep version package.json | awk -F: '{ print $2 }' | sed 's/[",]//g')
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "VERSION=$(grep version package.json | awk -F: '{ print $2 }' | sed 's/[",]//g')" >> $GITHUB_ENV
         name: get package version base
         working-directory: 'packages/${{ inputs.package_name }}'
 
@@ -53,3 +52,4 @@ jobs:
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GH_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
+          VERSION: ""
