@@ -2,14 +2,14 @@
 
 [Back to Main Menu](../../README.md#rights)
 
-le Set Acl (Access Control List) permet de définir les droits de chaque type d'utilisateur, il est basé sur la bibliothèque [role-acl](https://github.com/tensult/role-acl)
-Le Set fournit par bubo se compose de 2 fonctions et 2 middlewares 
+the Acl Set (Access Control List) allows to define the rights of each type of user, it is based on the library [role-acl](https://github.com/tensult/role-acl)
+The Set provided by bubo is composed of 2 functions and 2 middlewares 
 
 ## Acl ##
 
-Ce décorateur se place sur une classe controller, il permet d'assigner l'ensemble des règles utilisables sur le controlleur en question
+This decorator is placed on a controller class, it allows to assign all the rules that can be used on the controller in question
 
-Exemple d'objet de configuration
+Example of a configuration object
 
 ```ts
 
@@ -47,9 +47,9 @@ export const userRights: Array<Omit<Right, 'resource'>> = [
 ]
 ```
 
-On définit les actions possibles pour chaque role, les attributs auquel ils ont accès (cela peut servir par exemple pour les attributs de sequelize) ainsi que les conditions particulières à remplir (ici par exemple un utilisateur classique ne peut accéder qu'a lui meme et pas aux autres)
+We define the possible actions for each role, the attributes to which they have access (this can be used for example for the attributes of sequelize) as well as the particular conditions to be fulfilled (here for example a classic user can only access himself and not the others)
 
-Sur le controlleur :
+On the controller:
 
 ```ts
 import {Controller } from '@bubojs/api'
@@ -67,7 +67,7 @@ export class UsersController {
 
 ## CheckAcl ##
 
-Ce décorateur se met sur une route afin d'activer le middleware de validation des droits pour celle-ci, si la route n'est pas définit dans les droits alors la route est systématiquement refusée
+This decorator is put on a route in order to activate the rights validation middleware for it, if the route is not defined in the rights then the route is systematically refused
 
 ```ts
 import { Controller, DefaultActions } from '@bubojs/api'
@@ -132,14 +132,14 @@ export class UsersController {
 }
 ```
 
-On voit ici un exemple d'utilisation des Attributs, une fois le middleware Acl passé req obtient un champ permission qui permet d'avoir les informations sur les droits de l'utilisateur et de les utiliser plus loin
+This decorator is put on a route in order to activate the rights validation middleware for it, if the route is not defined in the rights then the route is systematically refused
 
 ## AclManager ##
 
-Deux fonctions sont disponibles sur AclManager:
+Two functions are available on AclManager:
 
-__AclManager.applyRights__ qui doit etre appelée pour appliquée les droits dans le manager, idéalement juste après le démarrage du serveur une fois que toutes les controlleurs sont enregistrés
+__AclManager.applyRights__ which must be called to apply the rights in the manager, ideally just after the server startup once all controllers are registered
 
-__AclManager.roleCallback__ permet de redefinir le getter de roles pour un utilisateur, par defaut il va récupérer le champ "role"
+__AclManager.roleCallback__ allows to redefine the role getter for a user, by default it will retrieve the "role" field
 
 [Back to Main Menu](../../README.md#rights)
