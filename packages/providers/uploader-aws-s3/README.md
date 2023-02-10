@@ -1,12 +1,12 @@
 # Amazon S3
 
-[Back To Main Menu](../../../README.md#validateur-de-route)
+[Back To Main Menu](../../../README.md#files-managers)
 
-Cet uploader permet d'utiliser Firebase Storage
+This uploader allows you to use AWS S3 protocol.
 
-## Instance de Storage
+## Storage Instance
 
-déclaration d'une instance d'un client [AWS S3 version 3](https://www.npmjs.com/package/@aws-sdk/client-s3)
+declaration of a client instance [AWS S3 version 3](https://www.npmjs.com/package/@aws-sdk/client-s3)
 
 ```ts
 import { S3 } from '@aws-sdk/client-s3';
@@ -28,9 +28,9 @@ export const uploader = new S3Uploader({
 });
 ```
 
-## Exemple d'un contrôleur qui utilise l'uploader
+## Example of a controller using the uploader
 
-Cet exemple utilise les 3 fonctions de l'uploader S3.
+This example uses the 3 functions of the S3 uploader.
 
 ```ts
 import { uploader } from './config'
@@ -87,30 +87,30 @@ class TestController {
 
 ### buildUploadEndpoint
 
-Pour enregistrer un fichier, on utilise la fonction __buildUploadEndpoint__ en tant que middleware de la route. Le fichier est envoyé à l'aide du client S3 sur les serveurs AWS. Une fois le fichier en ligne, on remplace le fichier dans l'objet body par le nom du fichier avec son extension de fichier.
-Il est possible de rajouter ces options:
+To save a file, the __buildUploadEndpoint__ function is used as the middleware of the route. The file is uploaded using the S3 client on the AWS servers. Once the file is online, we replace the file in the body object with the file name with its file extension.
+It is possible to add these options:
 
-* authorizedExtensions => Array\<string> - utilise le mimeType pour détecter l'extension du fichier et n'autorise que ceux parmi le tableau de texte
-* authorizedFileFields => Array\<string> - vérifie si les fichiers sont parmi les champs du body autorisés
+* authorizedExtensions => Array\<string> - uses the mimeType to detect the file extension and only allows those among the text array.
+* authorizedFileFields => Array\<string> - checks if the files are among the authorized body fields
 
 ### buildDownloadEndpoint
 
-La fonction permet de créer une route de téléchargement de fichier, on utilise l'option rawHandler dans notre route custom pour pouvoir passer le constructeur du endpoint de téléchargement
+The function allows to create a file download route, we use the rawHandler option in our custom route to be able to pass the constructor of the download endpoint
 
 Options:
 
-* retrieveKeyCallback => Function(req: any) => string - fonction qui récupère le nom du fichier dans l'objet req de la requête
-* *optional* filename => string - nom du fichier
-* *optional* contentType => string - contentType de la réponse du header
-* *optional* cache.maxAge => number - option du cache sur le Cache-Control dans le header
+* retrieveKeyCallback => Function(req: any) => string - function that retrieves the file name from the req object of the request
+* *optional* filename => string - name of the file
+* *optional* contentType => string - contentType of the header response
+* *optional* cache.maxAge => number - cache option on the Cache-Control in the header
 
 ### buildDeleteEndpoint
 
-La fonction permet de supprimer le fichier en ligne
+The function allows you to delete the file
 
 Options:
 
-* retrieveKeyCallback => Function(req: any) => string - fonction qui récupère le nom du fichier dans l'objet req de la requête
-* *optional* filename => string - nom du fichier
+* retrieveKeyCallback => Function(req: any) => string - function that retrieves the name of the file from the req object of the request
+* *optional* filename => string - name of the file
 
-[Back To Main Menu](../../../README.md#validateur-de-route)
+[Back To Main Menu](../../../README.md#files-managers)
