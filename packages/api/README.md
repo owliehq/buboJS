@@ -2,20 +2,20 @@
 
 [Back to Main Menu](../../README.md#les-controllers)
 
-Le package API est le coeur de bubo, c'est lui qui crée les route, enregistre les middleware et orchestre le tout, il fournit des decorateurs pour créer aisément des routes via des classes et des fonctions.
+The API package is the heart of bubo, it creates the routes, registers the middleware and orchestrates everything, it provides decorators to easily create routes via classes and functions.
 
-## Création D'un controlleur ##
+## Creating a controller ##
 
-Pour faire un controlleur le fichier qui contient la classe doit finir par "Controller.ts", une recherche est faite dans les noms de fichier du projet pour trouver les différents controlleurs
+To make a controller the file that contains the class must end with "Controller.ts", a search is made in the project file names to find the different controllers
 
-Ensuite la class Controller doit etre décorée par un
+Then the Controller class must be decorated with a
 
 ```ts
 @Controller() 
 ```
 
-Cela entrainera la creation d'une sub route, le nom de cette subroute sera le nom de la classe controller sans le controller à la fin, ecrit en snake case et le tout mis au pluriel
-le decorateur prend un objet d'options optionnel en paramètre qui contient deux champs :
+This will result in the creation of a sub route, the name of this sub route will be the name of the controller class without the controller at the end, written in snake case and all pluralized
+the decorator takes an optional options object as parameter which contains two fields:
 
 ```ts
 export interface ControllerParams {
@@ -24,14 +24,14 @@ export interface ControllerParams {
 }
 ```
 
-__repository__ permet de définir un repository qui permettra de générer des routes automatiquement
-__overrideRouteName__ permet lui de définir un autre nom de route que celui généré automatiquement
+__repository__ allows to define a repository which will allow to generate routes automatically
+__overrideRouteName__ allows to define another route name than the one generated automatically
 
-## Ajout d'une route automatique ##
+## Adding an automatic route ##
 
-Pour construire une route automatique il faut fournir au controller un repository (actuellement uniquement [sequelize](packages/sequelize/README.md) est disponible)
+To build an automatic route you need to provide the controller with a repository (currently only [sequelize](packages/sequelize/README.md) is available)
 
-Le repository
+The repository
 
 ```ts
 
@@ -46,7 +46,7 @@ class MyRepository extends SequelizeBaseRepository<SqlzModel> {
 export const myRepositoryInstance = new MyRepository()
 ```
 
-Le controller
+The controller
 
 ```ts
 import { Controller, DefaultActions, BeforeMiddleware, Post, Get, BodyFormat, Body } from '@bubojs/api'
@@ -56,7 +56,7 @@ import { myRepositoryInstance } from './MyRepository'
 class DropController {}
 ```
 
-Par mesure de securité aucune route automatique n'est construite par defaut, il faut activer celles dont vous avez besoin, pour cela il faut definir une par une les route en créant un champ dans le controller par ce bias :
+For security reasons no automatic route is built by default, you have to activate the ones you need, for that you have to define one by one the routes by creating a field in the controller with this bias:
 
 ```ts
 import { Controller, DefaultActions, BeforeMiddleware, Post, Get, BodyFormat, Body } from '@bubojs/api'
@@ -74,8 +74,8 @@ class BaseController
 }
 ```
 
-Ces routes créent une requete directe à la base de donnée, vous pouvez ajouter des options à cette requete via nos middleware dédiés (voir plus loin), ou ajouter vos propres options en les passant dans req.$sequelize ( ⚠️ attention à l'interaction entre plusieurs middlewares d'options)
-Nous avons donc les routes suivantes :
+These routes create a direct request to the database, you can add options to this request via our dedicated middleware (see below), or add your own options by passing them in req.$sequelize ( ⚠️ beware of the interaction between several options middlewares)
+So we have the following routes:
 
 - __POST__ /base/
 - __PUT__ /base/:id
@@ -83,9 +83,9 @@ Nous avons donc les routes suivantes :
 - __GET__ /base/
 - __DELETE__ /base/:id
 
-## Ajout d'une route custom ##
+## Adding a custom route ##
 
-Une route custom s'ajoute via un decorateur :
+A custom route is added via a decorator:
 
 ```ts
 import { Controller, DefaultActions, BeforeMiddleware, Post, Get, BodyFormat, Body } from '@bubojs/api'
@@ -100,12 +100,12 @@ class TestController
 }
 ```
 
-nous venons de créer une route qui renvoie __hello_world__ sur __address:port/test/hello_world__
+we have just created a route that returns __hello_world__ on __address:port/test/hello_world__
 
-### Passer des paramètres sur les routes custom ###
+### Passing parameters on custom routes ###
 
-Pour passer des paramètres a vos fonctions sur les routes customs nous avons developpé des decorateurs permettant d'extraire les données de __req.query__, __req.params__, __req.body__ à l'aide de respectivement __@Query('fieldName')__, __@Params('paramName')__, __@Body('fieldName')__
-exemple :
+To pass parameters to your functions on custom routes we have developed decorators to extract data from __req.query__, __req.params__, __req.body__ using respectively __@Query('fieldName')__, __@Params('paramName')__, __@Body('fieldName')__
+example:
 
 ```ts
 import { Controller, Post, Get, Body, Query } from '@bubojs/api'
@@ -119,21 +119,21 @@ class MyController
 }
 ```
 
-renverra __hello bubo__ sur le Get __{{api}}/drop/hello_world?username=bubo__
+will return __hello bubo__ on the Get __{{api}}/drop/hello_world?username=bubo__
 
-### Modifier le parser ###
+### Modify the parser ###
 
-Par defaut le parser des routes est sur __AUTO__ il va accepter tout les formats qu'il est capable de parser (RAW, TEXT, JSON, URL_ENCODED)
-mais vous pouvez aussi forcer un format, les options sont :
+By default the route parser is set to __AUTO__ it will accept all formats it is able to parse (RAW, TEXT, JSON, URL_ENCODED)
+but you can also force a format, the options are:
 
 - RAW
 - TEXT
 - JSON
-- AUTO (parse avec la meilleure méthode indentifiée)
-- SKIP (permet de ne pas parser le body dans le cas ou vous voulez mettre votre propre parser dans les middlewares)
+- AUTO (parse with the best identified method)
+- SKIP (does not parse the body in case you want to put your own parser in the middleware)
 - URL_ENCODED
 
-exemple:
+example:
 
 ```ts
 import { Controller, Post, Body, BodyFormat } from '@bubojs/api'
@@ -147,13 +147,13 @@ class MyController
 }
 ```
 
-Dans ce cas la route refusera tout ce qui n'est pas au format JSON
+In this case the route will refuse anything that is not in JSON format
 
-### Handler Brut ###
+### Raw Handler ###
 
-Quand vous construisez une route custom l'api buboJs va wrapper votre fonction pour récupérer son résultat et le stocker dans req.result, cela va permettre d'appeler d'autre middleware après afin d'effectuer des operation de formatage par exemple.
-Vous pouvez cependant definir vous même le handler et gérer directement l'appel des middleware suivant (ou non), pour cela vous aller fournir au decorateur de la route custom non pas la fonction que vous voulez exectuter mais un constructeur du handler que vous voulez appeler, il faut aussi activer l'option __{rawHandler : true}__ dans le decorateur de la route
-exemple :
+When you build a custom route the buboJs api will wrap your function to retrieve its result and store it in req.result, this will allow you to call other middleware afterwards to perform formatting operations for example.
+You can however define yourself the handler and manage directly the call of the following middleware (or not), for that you will provide to the decorator of the custom route not the function you want to execute but a constructor of the handler you want to call, it is also necessary to activate the option __{rawHandler : true}__ in the decorator of the route
+example:
 
 ```ts
 import { Controller, Post, Body, BodyFormat } from '@bubojs/api'
