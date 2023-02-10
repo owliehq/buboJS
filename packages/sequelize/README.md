@@ -1,22 +1,22 @@
 # Middlewares Sequelize #
 
-[Back to Main Menu](../../README.md)
+[Back to Main Menu](../../README.md#database-management)
 
 ## Attributes ##
 
-Le décorateur __@SequelizeAttributes__ permet 3 choses :
+The __@SequelizeAttributes__ decorator allows 3 things:
 
-- Définir des champs masqués pour tous les utilisateurs
-- Définir des champs masqués en fonction de l'utilisateur courant
-- Permettre au client de demander des champs particuliers dans sa requete au lieu de tout récupérer
+- Define hidden fields for all users
+- Define hidden fields based on the current user
+- Allow the client to request particular fields in its request instead of retrieving everything
 
-Le décorateur prend 3 paramètres :
+The decorator takes 3 parameters:
 
-- Le Modèle associé (permet de récupérer les différents champs)
-- Un getter sur les Attributs Interdis  (()=>Array<string>|undefined)
-- Un getter sur les Attributs Autorisés ((req:any)=> Array<string>|undefined)
+- The associated Model (allows to retrieve the different fields)
+- A getter on the Interdis Attributes (()=>Array<string>|undefined)
+- A getter on the Authorized Attributes ((req:any)=> Array<string>|undefined)
 
-exemple:
+example:
 
 ```ts
 import { Controller, DefaultActions, Post, Body } from '@bubojs/api'
@@ -44,24 +44,24 @@ export class UsersController {
   [DefaultActions.GET_ONE]() {}
 ```
 
-Dans cet exemple sur la route getOne des utilisateurs on a la configuration suivante:
+In this example on the getOne route of the users we have the following configuration:
 
-- Aucun utilisateur ne peux avoir accès au champ password, cela permet d'etre sur qu'une donnée ne sort pas du serveur quelque soit les droits de l'utilisateur
-- On récupère les données disponibles par utilisateur dans __req.permission.attributes__ (__req.permission__ est remplit par le __@RoleMiddleware__)
-- Le client peut faire passer dans la query un champ __$attributes__ qui sera lu et peut permettre de selectionner les champs voulus, s'il ne sont pas dans une des listes d'exclusion ils seront ajoutés, si rien n'est précisé par le client tout est retourné
+- No user can have access to the password field, this allows to be sure that a data does not go out of the server whatever the user rights are
+- We get the available data per user in __req.permission.attributes__ (__req.permission__ is filled by the __@RoleMiddleware__)
+- The client can pass in the query a __$attributes__ field which will be read and can allow to select the desired fields, if they are not in one of the exclusion lists they will be added, if nothing is specified by the client everything is returned
 
 ## Populate ##
 
-L'option populate permet d'authoriser le client d'aggréger d'autres modèles liés au premier dans la base de donnée et ainsi retourner ces données supplémentaires en une seule requete sans avoir à refaire une autre requete
+The populate option allows the client to aggregate other models related to the first one in the database and return these additional data in a single query without having to make another query
 
-le decorateur prend deux parametres:
+the decorator takes two parameters:
 
-- le modele associé, cela permet de recupérer les associations possibles
-- les chemins authorisés entre les Modèles
+- the associated Model, this allows to retrieve the possible associations
+- the authorized paths between the Models
 
-exemple :
+example:
 
-Modèle __User__
+Model __User__
 
 ```ts
 import { Column, Default, Model, Table, HasOne } from 'sequelize-typescript'
@@ -90,7 +90,7 @@ export class User extends Model {
   declare avatar: CircularHelper<Avatar>
 ```
 
-Modèle __Basket__
+Model __Basket__
 
 ```ts
 import { Model, Column, DataType, HasMany, HasOne, ForeignKey, Table, BelongsTo } from 'sequelize-typescript'
@@ -121,7 +121,7 @@ declare products: Array<CircularHelper<Product>>
 }
 ```
 
-Modèle __Product__
+Model __Product__
 
 ```ts
 import { Model, Column, DataType, HasMany, HasOne, ForeignKey, Table, BelongsTo } from 'sequelize-typescript'
@@ -172,4 +172,4 @@ export class UsersController {
 }
 ```
 
-[Back To Main Menu](../../README.md#gestion-des-bases-de-données)
+[Back To Main Menu](../../README.md#database-management)
