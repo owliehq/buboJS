@@ -28,22 +28,23 @@ Jest run all \*.test.ts files in packages/\* dir
 yarn test
 ```
 
-## Présentation ##
+## Presentation ##
 
-BuboJs est une bibliothèque permettant de construire rapidement et efficacement une API Rest, il est basé sur NodeJS, ecrit entierement en Typescript et utilisant les ESModules.
-Principales Features:
+BuboJs is a library to build quickly and efficiently a Rest API, it is based on NodeJS, written entirely in Typescript and using ESModules.
+Main Features:
 
-- Construction automatique de routes avec un lien direct avec la base de données (PostGres)
-- Outils de Gestion des roles intégré
-- Outils d'upload et Download de fichier (firebase)
-- Outils de Validations des Routes
+- Automatic route building with a direct link to the database (PostGres)
+- Integrated role management tools
+- File upload and download tools (firebase)
+- Route validation tools
 
-## Démarrer le serveur ##
+## Start the server ##
 
-Pour mettre en marche le serveur vous devez instancier un HttpAdapter (actuellement seul tinyhttp est disponible)
-Ensuite pour effectivement démarrer le serveur vous devez passer cette instance ainsi que les options dont vous avez besoin à la fonction __app.initHttpModule()__
+To start the server you must instantiate an HttpAdapter (currently only tinyhttp is available)
+Then to actually start the server you have to pass this instance and the options you need to the 
+__app.initHttpModule()__
 
-exemple:
+example:
 
 ```ts
 import { TinyHttpAdapter } from '@bubojs/tinyhttp'
@@ -70,27 +71,27 @@ export const startServer = () => {
 
 ```
 
-## Les Controllers ##
+## Controllers ##
 
 [Api](packages/api/README.md)
 
-## Validateur  de route ##
+## Route validator ##
 
 [Fastest Validator](packages/validation/README.md)
 
-## Upload de fichier ##
+## Files managers ##
 
 [Firebase](packages/providers/uploader-firebase/README.md)
 
 [Amazon S3](packages/providers/uploader-aws-s3/README.md)
 
-## Authentification et droits ##
+## Authentication and rights ##
 
-Pour gérer l'authentification actuellement seul JWT est disponible mais vous pouvez ajouter votre système d'authentification et d'autres seront ajoutés par la suite
+To manage authentication currently only JWT is available but you can add your authentication system and others will be added later
 
-En ce qui concerne les droits c'est la bibliothèque [role-acl](https://github.com/tensult/role-acl) qui est utilisée
+For the rights, the library [role-acl](https://github.com/tensult/role-acl) is used
 
-### Authentification ###
+### Authentication ###
 
 [JWT](/packages/strategies/strategy-jwt/README.md)
 
@@ -98,20 +99,20 @@ En ce qui concerne les droits c'est la bibliothèque [role-acl](https://github.c
 
 [Access Control List](/packages/acl/README.md)
 
-## Gestion des Bases de Données ##
+## Database management ##
 
 [Sequelize](packages/sequelize/README.md)
 
 ## Middleware customs ##
 
-Vous pouvez définir vos propres middlewares, ils peuvent ^etre appelés avant ou après l'exécution de la route, pour les middlewares qui s'exécutent après la route il n'y a pas besoin d'envoyer le resultat, cela peut etre fait automatiquement car bubo ajoute de lui meme un dernier middleware qui renvoi ce que se trouve dans __req.result__
+You can define your own middlewares, they can be called before or after the execution of the route, for the middlewares that run after the route there is no need to send the result, this can be done automatically because bubo adds itself a last middleware that returns what is in __req.result__
 
-Les middlewares sont exécutés dans le meme ordre que celui d'ajout dans le code (celui le plus haut au-dessus de la route sera exécuté en premier)
+The middlewares are executed in the same order as they are added in the code (the highest one above the route will be executed first)
 
 ### Before Middleware ###
 
-TODO trouver exemple
+TODO
 
-### After Middleware ###
+### After Middleware
 
-TODO Trouver exemple
+TODO
