@@ -1,17 +1,17 @@
 # JWT Auth #
 
-[Back To Main Menu](../../../README.md#authentification)
+[Back To Main Menu](../../../README.md#authentication-and-rights)
 
 ## JWT Global Middleware ##
 
-Le middleware JwtAuth cherche un token dans le champ __Authorisation__ de la requete, s'il existe et est bien formaté le middleware remplira le champ req.user avec l'utilisateur identifié
+The JwtAuth middleware looks for a token in the __Authorization__ field of the request, if it exists and is well formatted the middleware will fill the req.user field with the identified user
 
-le builder de middleware prend deux arguments :
+the middleware builder takes two arguments :
 
-- le secret token jwt
-- Une fonction qui permet de recupérer l'utilisateur grace à l'id contenu dans le token
+- the secret token jwt
+- A function that allows to retrieve the user thanks to the id contained in the token
 
-le middleware peut etre appliqué sur tous l'ensemble des routes:
+the middleware can be applied on all routes:
 
 ```ts
 import { TinyHttpAdapter } from '@bubojs/tinyhttp'
@@ -46,7 +46,7 @@ export const startServer = () => {
 
 ## AuthMiddleware ##
 
-le decorateur AuthMiddleware permet de vérifier la présence du champ __user__ dans req et renvoyer une erreur 401 si ce n'est pas le cas, le decorateur se place sur la route que vous voulez protéger:
+the AuthMiddleware decorator checks the presence of the __user__ field in req and returns a 401 error if it is not the case, the decorator is placed on the route you want to protect:
 
 ```ts
 import { Controller, DefaultActions} from '@bubojs/api'
@@ -60,4 +60,4 @@ export class UsersController {
   @AuthMiddleware()
   [DefaultActions.GET_ONE]() {}
 ```
-[Back to Main Menu](../../../README.md#authentification)
+[Back to Main Menu](../../../README.md#authentication-and-rights)
