@@ -1,12 +1,12 @@
 # Fastest Validator #
 
-[Back to Main Menu](.././../README.md#validateur-de-route)
+[Back to Main Menu](.././../README.md#route-validator)
 
-Ce middleware de validation de route est construit autours de [fatestValidator](https://github.com/icebob/fastest-validator) n'hesitez pas à regarder la documentation pour en savoir plus
+This route validation middleware is built around [fatestValidator](https://github.com/icebob/fastest-validator) feel free to look at the documentation to learn more
 
-## schema de validation ##
+## validation scheme ##
 
-Vous pouvez utiliser le typage fournit par FastestValidator<Type> que permet de créer un schéma typé pour fastest ex :
+You can use the typing provided by FastestValidator<Type> which allows you to create a typed schema for fastest ex :
 
 ```ts
 const userCreateValidations: FastestValidator<User> = {
@@ -36,9 +36,9 @@ const userCreateValidations: FastestValidator<User> = {
   }
 ```
 
-## Ajout du schéma à la route ##
+## Adding the schema to the route ##
 
-une fois le schéma créé il faut l'ajouter sur la route à valider, il y a un decorateur pour cela :
+once the schema is created, it must be added to the route to be validated, there is a decorator for that:
 
 ```ts
 import { Body, Controller, Post } from '@bubojs/api'
@@ -54,6 +54,6 @@ class AuthController {
 }
 ```
 
-ainsi le schéma s'ajoute à la route
+so the scheme is added to the route
 
-[Back to Main Menu](.././../README.md#validateur-de-route)
+[Back to Main Menu](.././../README.md#route-validator)
