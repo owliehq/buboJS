@@ -1,12 +1,12 @@
 # Firebase #
 
-[Back To Main Menu](../../../README.md#upload-de-fichier)
+[Back To Main Menu](../../../README.md#files-managers)
 
-Cet uploader permet d'utiliser Firebase Storage
+This uploader allows you to use Firebase Storage
 
-## Instance de Storage ##
+## Storage Instance ##
 
-declaration d'une instance de storage (une seule par projet necessaire mais vous pouvez en ajouter autant que de besoin)
+declaration of a storage instance (only one per project needed but you can add as many as you need)
 
 ```ts
 import { FirebaseInstance } from '../bubo.middlewares/uploader/Firebase'
@@ -19,7 +19,7 @@ export const firebase = new FirebaseInstance({
 })
 ```
 
-## Placer l'uploader sur une route ##
+## Place the uploader on a route ##
 
 ```ts
 import { Upload } from '@bubojs/uploader-firebase'
@@ -43,26 +43,26 @@ class TestController {
 
 ```
 
-le Middleware Upload prend arguments :
+the Upload Middleware takes arguments :
 
-1. l'instance de storage qui fournit les fonctions necessaires à l'accès au stockage
-2. une liste d'options propres au storage:
-    - folder permet de definir un dossier virtuel pour stocker les données
-    - keepName permet de garder le nom d'origine du fichier ou d'en generer un avec nanoid
-    - preserveExtension permet de conserver l'extension d'origine du fichier ou de ne pas mettre d'extension
-3. le troisième argument permet de definir les noms de champs autorisés, si d'autres sont fournis la requete est refusée et une erreur est levée
-4. le quatrieme argument definit la liste des extensions autorisées, si une extension n'est pas conforme la requete est refusée et part en erreur
+1. the storage instance that provides the functions needed to access the storage
+2. a list of storage specific options:
+    - folder allows to define a virtual folder to store the data
+    - keepName allows to keep the original name of the file or to generate one with nanoid
+    - preserveExtension allows to keep the original extension of the file or not to set an extension
+3. the third argument allows to define the authorized field names, if others are provided the request is refused and an error is raised
+4. the fourth argument defines the list of allowed extensions, if an extension is not conform the request is refused and an error is raised
 
-une fois l'upload fait la clef de firebase du fichier uploadé est stocké dans le champ qui contenait le fichier dans le req.body, les autres champs sont copiés simplement dans le req.body
+once the upload is done the firebase key of the uploaded file is stored in the field that contained the file in the req.body, the other fields are simply copied in the req.body
 
-## Download le fichier ##
+## Download the file ##
 
-l'instance de l'uploader (firebase ici) prevoit une route de download, on utilise l'option rawHandler dans notre route custom pour pouvoir passer le constructeur du endpoint de telechargement
-on renvoie ensuite depuis notre fonction builder le resultat de firebaseInstance.buildDownloadEndpoint.
+the uploader instance (firebase here) provides a download route, we use the rawHandler option in our custom route to pass the constructor of the download endpoint
+then we return from our builder function the result of firebaseInstance.buildDownloadEndpoint.
 
-La fonction prends deux parametres :
--> le cache avec maxAge qui est envoyé au header de reponse lors du telechargement
--> retrieveKeyCallback qui definit la fonction permettant de recupérer la clef firebase en fonction de ce qui est passé dans la requete
+The function takes two parameters:
+-> the cache with maxAge that is sent to the response header during the download
+-> retrieveKeyCallback which defines the function to retrieve the firebase key based on what is passed in the request
 
 ```ts
 @Get(':id/image', { rawHandler: true, bodyFormat: BodyFormat.AUTO })
@@ -77,4 +77,4 @@ La fonction prends deux parametres :
   }
 ```
 
-[Back To Main Menu](../../../README.md#upload-de-fichier)
+[Back To Main Menu](../../../README.md#files-managers)
