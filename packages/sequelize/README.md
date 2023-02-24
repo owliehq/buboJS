@@ -47,7 +47,7 @@ export class UsersController {
 In this example on the getOne route of the users we have the following configuration:
 
 - No user can have access to the password field, this allows to be sure that a data does not go out of the server whatever the user rights are
-- We get the available data per user in __req.permission.attributes__ (__req.permission__ is filled by the __@RoleMiddleware__)
+- We get the available data per user in __req.permission.attributes__ (__req.permission__ is filled by the __@CheckAcl__)
 - The client can pass in the query a __$attributes__ field which will be read and can allow to select the desired fields, if they are not in one of the exclusion lists they will be added, if nothing is specified by the client everything is returned
 
 ## Populate ##
