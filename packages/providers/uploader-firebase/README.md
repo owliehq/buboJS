@@ -1,10 +1,18 @@
-# Firebase #
+<p align="center">
+  <a href="https://github.com/owliehq/buboJS/tree/develop">
+    <img src="https://owlie.xyz/bubo/bubo-js.png">
+  </a>
+</p>
+
+## Firebase ##
+
+[![uploader-firebase](https://img.shields.io/npm/v/@bubojs/uploader-firebase?label=uploader-firebase)](https://www.npmjs.com/package/@bubojs/uploader-firebase)
 
 [Back To Main Menu](../../../README.md#files-managers)
 
 This uploader allows you to use Firebase Storage
 
-## Storage Instance ##
+### Storage Instance ###
 
 declaration of a storage instance (only one per project needed but you can add as many as you need)
 
@@ -19,7 +27,7 @@ export const firebase = new FirebaseInstance({
 })
 ```
 
-## Place the uploader on a route ##
+### Place the uploader on a route ###
 
 ```ts
 import { Upload } from '@bubojs/uploader-firebase'
@@ -55,7 +63,7 @@ the Upload Middleware takes arguments :
 
 once the upload is done the firebase key of the uploaded file is stored in the field that contained the file in the req.body, the other fields are simply copied in the req.body
 
-## Download the file ##
+### Download the file ###
 
 the uploader instance (firebase here) provides a download route, we use the rawHandler option in our custom route to pass the constructor of the download endpoint
 then we return from our builder function the result of firebaseInstance.buildDownloadEndpoint.
@@ -78,3 +86,11 @@ The function takes two parameters:
 ```
 
 [Back To Main Menu](../../../README.md#files-managers)
+
+## Editor ##
+
+<p>
+  <a href="https://www.owlie.xyz">
+    <img style="border-radius:50%" width="100" height="100" src="https://www.owlie.xyz/bubo/owlielogo.png">
+  </a>
+</p>

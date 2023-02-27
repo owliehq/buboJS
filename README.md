@@ -4,7 +4,21 @@
   </a>
 </p>
 
-[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/license/mit/) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/) [![Version](https://img.shields.io/npm/v/@bubojs/api/latest.svg)](https://www.npmjs.com/package/@bubojs/api) [![semantic-release: angular](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/license/mit/) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/) [![semantic-release: angular](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
+
+[![api version](https://img.shields.io/npm/v/@bubojs/api?label=api)](https://www.npmjs.com/package/@bubojs/api)
+[![tinyHttp](https://img.shields.io/npm/v/@bubojs/tinyhttp?label=tinyhttp)]()
+[![sequelize](https://img.shields.io/npm/v/@bubojs/sequelize?label=sequelize)](https://www.npmjs.com/package/@bubojs/sequelize)
+[![validation](https://img.shields.io/npm/v/@bubojs/validation?label=validation)](https://www.npmjs.com/package/@bubojs/validation)
+[![http error](https://img.shields.io/npm/v/@bubojs/http-errors?label=http-errors)]()
+[![acl](https://img.shields.io/npm/v/@bubojs/acl?label=acl)](https://www.npmjs.com/package/@bubojs/acl)
+[![uploader firebase](https://img.shields.io/npm/v/@bubojs/uploader-firebase?label=uploader-firebase)](https://www.npmjs.com/package/@bubojs/uploader-firebase)
+[![uploader S3](https://img.shields.io/npm/v/@bubojs/uploader-aws-s3?label=uploader-aws-s3)](https://www.npmjs.com/package/@bubojs/uploader-aws-s3)
+[![jwt auth](https://img.shields.io/npm/v/@bubojs/strategy-jwt?label=strategy-jwt)](https://www.npmjs.com/package/@bubojs/strategy-jwt)
+[![swagger](https://img.shields.io/npm/v/@bubojs/swagger?label=swagger)](https://www.npmjs.com/package/@bubojs/swagger)
+
+
+
 
 BuboJs is a library to build quickly and efficiently a Rest API, it is based on NodeJS, written entirely in Typescript and using ESModules.
 Main Features:
