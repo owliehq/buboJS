@@ -1,4 +1,4 @@
-import { BuboRepository, Controller, DefaultActions, Get } from '../'
+import { BuboRepository, Controller, DefaultActions, Get } from '../src'
 import { MetadataManager } from '../src/MetadataManager'
 
 describe('controllers decorator', () => {
@@ -45,6 +45,10 @@ describe('controllers decorator', () => {
     async findAll(...any: any[]): Promise<Type[]> {
       return ['findAll'] as unknown as Promise<Type[]>
     }
+
+    requestOptions(routeType) {
+      return req => []
+    }
   }
 
   class DefaultActionsRepository extends DBDefaultActionsRepository<string> {
@@ -53,7 +57,7 @@ describe('controllers decorator', () => {
     }
   }
 
-  @Controller('decorator', { repository: new DefaultActionsRepository() })
+  @Controller({ repository: new DefaultActionsRepository(), overrideRouteName: 'decorator' })
   class ControllerDefaultRoutesTest {
     [DefaultActions.GET_ONE]() {}
 
@@ -96,7 +100,7 @@ describe('controller default and custom routes', () => {
   const CONTROLLER_NAME = 'ControllerDefaultAndCustomRoutesTest'
   const ROUTE_TEST_NAME = 'routeTest'
 
-  @Controller('decorator')
+  @Controller({ overrideRouteName: 'decorator' })
   class ControllerDefaultAndCustomRoutesTest {
     [DefaultActions.GET_ONE]() {}
 

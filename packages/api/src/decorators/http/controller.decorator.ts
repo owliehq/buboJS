@@ -7,9 +7,9 @@ import { default as pluralize } from 'pluralize'
 
 /**
  * Controller decorator
- * @param controllerName controller's name
  * @param params controller's params
  * @param params.repository optional repository used for default routes
+ * @param params.overrideRouteName optional string used to overriding route name
  * @returns
  */
 export const Controller =

@@ -33,7 +33,7 @@ beforeAll(async () => {
       email: randEmail(),
       password: randPassword()
     }
-    await User.create(userData)
+    await repository.create(userData)
   }
 })
 

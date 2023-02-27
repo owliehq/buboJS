@@ -26,7 +26,7 @@ describe('inject decorator', () => {
     }
   }
 
-  @Controller('classBasicInjectedTests')
+  @Controller({ overrideRouteName: 'classBasicInjectedTests' })
   class ClassBasicInjectedTest {
     @Inject('BasicServiceInjected') public basicServiceInjected: ObjectType<BasicServiceInjected>
     @Inject public anotherBasicServiceInjected: AnotherBasicServiceInjected

@@ -1,7 +1,6 @@
 import { Column, HasMany, Model, Table } from 'sequelize-typescript'
-import { Project, Task, UserProject } from './models'
 import { CircularHelper } from '../TypeUtils'
-import { InferAttributes, InferCreationAttributes } from 'sequelize'
+import { Task, UserProject } from './models'
 
 @Table({
   tableName: 'user',

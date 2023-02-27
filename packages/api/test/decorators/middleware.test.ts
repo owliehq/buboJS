@@ -6,7 +6,7 @@ describe('controllers decorator', () => {
   const CONTROLLER_NAME = 'MiddlewareDecoratorTest'
   const ROUTE_TEST_NAME = 'routeTest'
 
-  @Controller('middlewares')
+  @Controller({ overrideRouteName: 'middlewares' })
   class MiddlewareDecoratorTest {
     @BeforeMiddleware((req: any, res: any, next: Function): void => {
       next()

@@ -6,7 +6,7 @@ describe('controllers decorator', () => {
   const GET_ROUTE_NAME = 'testGet'
   const POST_ROUTE_NAME = 'testPost'
 
-  @Controller('routes')
+  @Controller({ overrideRouteName: 'routes' })
   class ControllerRoutesDecoratorTest {
     @Get()
     public testGet() {}

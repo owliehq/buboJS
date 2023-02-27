@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Params, Post, Put } from '@bubojs/api'
 
-@Controller('tasks')
+@Controller({ overrideRouteName: 'tasks' })
 export class TaskController {
   @Get('/')
   getTasks() {
@@ -13,12 +13,12 @@ export class TaskController {
   }
 
   @Post('/')
-  createTask(@Body body: any) {
+  createTask(@Body() body: any) {
     return { id: 2, status: 'created' }
   }
 
   @Put('/:id')
-  modifyTask(@Body body: any) {
+  modifyTask(@Body() body: any) {
     return { id: 2, status: 'modified' }
   }
 

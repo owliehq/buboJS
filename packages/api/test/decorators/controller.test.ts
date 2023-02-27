@@ -4,7 +4,7 @@ import { MetadataManager } from '../../src/MetadataManager'
 describe('controllers decorator', () => {
   const CONTROLLER_NAME = 'ControllerDecoratorTest'
 
-  @Controller('decorator')
+  @Controller({ overrideRouteName: 'decorator' })
   class ControllerDecoratorTest {
     @Get('/')
     public routeTest() {}
