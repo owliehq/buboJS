@@ -1,10 +1,18 @@
-# Amazon S3
+<p align="center">
+  <a href="https://github.com/owliehq/buboJS/tree/develop">
+    <img src="https://owlie.xyz/bubo/bubo-js.png">
+  </a>
+</p>
+
+## Amazon S3 ##
+
+[![uploader s3](https://img.shields.io/npm/v/@bubojs/uploader-aws-s3?label=uploader-aws-s3)](https://www.npmjs.com/package/@bubojs/uploader-aws-s3)
 
 [Back To Main Menu](../../../README.md#files-managers)
 
 This uploader allows you to use AWS S3 protocol.
 
-## Storage Instance
+### Storage Instance ###
 
 declaration of a client instance [AWS S3 version 3](https://www.npmjs.com/package/@aws-sdk/client-s3)
 
@@ -28,7 +36,7 @@ export const uploader = new S3Uploader({
 });
 ```
 
-## Example of a controller using the uploader
+### Example of a controller using the uploader ###
 
 This example uses the 3 functions of the S3 uploader.
 
@@ -85,7 +93,7 @@ class TestController {
   }
 ```
 
-### buildUploadEndpoint
+#### buildUploadEndpoint ####
 
 To save a file, the __buildUploadEndpoint__ function is used as the middleware of the route. The file is uploaded using the S3 client on the AWS servers. Once the file is online, we replace the file in the body object with the file name with its file extension.
 It is possible to add these options:
@@ -93,7 +101,7 @@ It is possible to add these options:
 * authorizedExtensions => Array\<string> - uses the mimeType to detect the file extension and only allows those among the text array.
 * authorizedFileFields => Array\<string> - checks if the files are among the authorized body fields
 
-### buildDownloadEndpoint
+#### buildDownloadEndpoint ####
 
 The function allows to create a file download route, we use the rawHandler option in our custom route to be able to pass the constructor of the download endpoint
 
@@ -104,7 +112,7 @@ Options:
 * *optional* contentType => string - contentType of the header response
 * *optional* cache.maxAge => number - cache option on the Cache-Control in the header
 
-### buildDeleteEndpoint
+#### buildDeleteEndpoint ####
 
 The function allows you to delete the file
 
@@ -114,3 +122,11 @@ Options:
 * *optional* filename => string - name of the file
 
 [Back To Main Menu](../../../README.md#files-managers)
+
+## Editor ##
+
+<p>
+  <a href="https://www.owlie.xyz">
+    <img style="border-radius:50%" width="100" height="100" src="https://www.owlie.xyz/bubo/owlielogo.png">
+  </a>
+</p>

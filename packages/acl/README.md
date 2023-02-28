@@ -1,11 +1,19 @@
-# Acl Middleware #
+<p align="center">
+  <a href="https://www.owlie.xyz">
+    <img src="https://owlie.xyz/bubo/bubo-js.png">
+  </a>
+</p>
+
+## Acl Middleware ##
 
 [Back to Main Menu](../../README.md#rights)
 
 the Acl Set (Access Control List) allows to define the rights of each type of user, it is based on the library [role-acl](https://github.com/tensult/role-acl)
-The Set provided by bubo is composed of 2 functions and 2 middlewares 
+The Set provided by bubo is composed of 2 functions and 2 middlewares
 
-## Acl ##
+[![acl](https://img.shields.io/npm/v/@bubojs/acl?label=acl)](https://www.npmjs.com/package/@bubojs/acl)
+
+### Acl ###
 
 This decorator is placed on a controller class, it allows to assign all the rules that can be used on the controller in question
 
@@ -65,7 +73,7 @@ export class UsersController {
 }
 ```
 
-## CheckAcl ##
+### CheckAcl ###
 
 This decorator is put on a route in order to activate the rights validation middleware for it, if the route is not defined in the rights then the route is systematically refused
 
@@ -134,7 +142,7 @@ export class UsersController {
 
 This decorator is put on a route in order to activate the rights validation middleware for it, if the route is not defined in the rights then the route is systematically refused
 
-## AclManager ##
+### AclManager ###
 
 Two functions are available on AclManager:
 
@@ -143,3 +151,11 @@ __AclManager.applyRights__ which must be called to apply the rights in the manag
 __AclManager.roleCallback__ allows to redefine the role getter for a user, by default it will retrieve the "role" field
 
 [Back to Main Menu](../../README.md#rights)
+
+## Editor ##
+
+<p>
+  <a href="https://www.owlie.xyz">
+    <img style="border-radius:50%" width="100" height="100" src="https://www.owlie.xyz/bubo/owlielogo.png">
+  </a>
+</p>

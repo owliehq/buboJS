@@ -1,10 +1,18 @@
-# Api #
+<p align="center">
+  <a href="https://github.com/owliehq/buboJS/tree/develop">
+    <img src="https://owlie.xyz/bubo/bubo-js.png">
+  </a>
+</p>
+
+## Api ##
+
+[![api version](https://img.shields.io/npm/v/@bubojs/api?label=api)](https://www.npmjs.com/package/@bubojs/api) 
 
 [Back to Main Menu](../../README.md#les-controllers)
 
 The API package is the heart of bubo, it creates the routes, registers the middleware and orchestrates everything, it provides decorators to easily create routes via classes and functions.
 
-## Creating a controller ##
+### Creating a controller ###
 
 To make a controller the file that contains the class must end with "Controller.ts", a search is made in the project file names to find the different controllers
 
@@ -27,7 +35,7 @@ export interface ControllerParams {
 __repository__ allows to define a repository which will allow to generate routes automatically
 __overrideRouteName__ allows to define another route name than the one generated automatically
 
-## Adding an automatic route ##
+### Adding an automatic route ###
 
 To build an automatic route you need to provide the controller with a repository (currently only [sequelize](packages/sequelize/README.md) is available)
 
@@ -83,7 +91,7 @@ So we have the following routes:
 - __GET__ /base/
 - __DELETE__ /base/:id
 
-## Adding a custom route ##
+### Adding a custom route ###
 
 A custom route is added via a decorator:
 
@@ -102,7 +110,7 @@ class TestController
 
 we have just created a route that returns __hello_world__ on __address:port/test/hello_world__
 
-### Passing parameters on custom routes ###
+#### Passing parameters on custom routes ####
 
 To pass parameters to your functions on custom routes we have developed decorators to extract data from __req.query__, __req.params__, __req.body__ using respectively __@Query('fieldName')__, __@Params('paramName')__, __@Body('fieldName')__
 example:
@@ -121,7 +129,7 @@ class MyController
 
 will return __hello bubo__ on the Get __{{api}}/drop/hello_world?username=bubo__
 
-### Modify the parser ###
+#### Modify the parser ####
 
 By default the route parser is set to __AUTO__ it will accept all formats it is able to parse (RAW, TEXT, JSON, URL_ENCODED)
 but you can also force a format, the options are:
@@ -149,7 +157,7 @@ class MyController
 
 In this case the route will refuse anything that is not in JSON format
 
-### Raw Handler ###
+#### Raw Handler ####
 
 When you build a custom route the buboJs api will wrap your function to retrieve its result and store it in req.result, this will allow you to call other middleware afterwards to perform formatting operations for example.
 You can however define yourself the handler and manage directly the call of the following middleware (or not), for that you will provide to the decorator of the custom route not the function you want to execute but a constructor of the handler you want to call, it is also necessary to activate the option __{rawHandler : true}__ in the decorator of the route
@@ -170,3 +178,11 @@ class MyController
 ```
 
 [Back to Main Menu](../../README.md#les-controllers)
+
+## Editor
+
+<p>
+  <a href="https://www.owlie.xyz">
+    <img style="border-radius:50%" width="100" height="100" src="https://www.owlie.xyz/bubo/owlielogo.png">
+  </a>
+</p>

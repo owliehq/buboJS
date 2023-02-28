@@ -1,8 +1,16 @@
-# Middlewares Sequelize #
+<p align="center">
+  <a href="https://github.com/owliehq/buboJS/tree/develop">
+    <img src="https://owlie.xyz/bubo/bubo-js.png">
+  </a>
+</p>
+
+## Middlewares Sequelize ##
+
+[![sequelize](https://img.shields.io/npm/v/@bubojs/sequelize?label=sequelize)](https://www.npmjs.com/package/@bubojs/sequelize)
 
 [Back to Main Menu](../../README.md#database-management)
 
-## Attributes ##
+### Attributes ###
 
 The __@SequelizeAttributes__ decorator allows 3 things:
 
@@ -50,7 +58,7 @@ In this example on the getOne route of the users we have the following configura
 - We get the available data per user in __req.permission.attributes__ (__req.permission__ is filled by the __@CheckAcl__)
 - The client can pass in the query a __$attributes__ field which will be read and can allow to select the desired fields, if they are not in one of the exclusion lists they will be added, if nothing is specified by the client everything is returned
 
-## Populate ##
+### Populate ###
 
 The populate option allows the client to aggregate other models related to the first one in the database and return these additional data in a single query without having to make another query
 
@@ -173,3 +181,11 @@ export class UsersController {
 ```
 
 [Back To Main Menu](../../README.md#database-management)
+
+## Editor ##
+
+<p>
+  <a href="https://www.owlie.xyz">
+    <img style="border-radius:50%" width="100" height="100" src="https://www.owlie.xyz/bubo/owlielogo.png">
+  </a>
+</p>
