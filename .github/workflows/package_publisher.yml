@@ -9,6 +9,8 @@ on:
     secrets:
       npm_token:
         required: true
+      publish_token:
+        required: true
 
 jobs:
   build:
