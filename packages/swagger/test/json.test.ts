@@ -1,6 +1,5 @@
-import { HeaderType, MetadataManager } from '@bubojs/api'
-import { RouteMethod } from '../../api/src/enums'
-import { DocBuilder, MetadataConverter } from '../src'
+import { HeaderType, MetadataManager, RouteMethod } from '@bubojs/api'
+import { DocBuilder, MetadataConverter } from '../src/index'
 import { TaskController } from './mock/TaskController'
 
 let converter: MetadataConverter
@@ -33,7 +32,8 @@ describe('json result', () => {
           description: 'OK',
           content: { 'application/json': {} }
         }
-      }
+      },
+      tags: ['testJSON']
     })
   })
 

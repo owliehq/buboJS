@@ -1,10 +1,8 @@
 import { app } from '@bubojs/api'
-import { TinyHttpAdapter } from '@bubojs/tinyhttp'
+import { TinyHttpAdapter } from '../../src/index'
 import { CarController } from './controller'
 
 export const startServer = async (port: number) => {
   CarController.name
-  await app.initHttpModule(new TinyHttpAdapter())
-
-  return app.listen(3000)
+  return await app.initHttpModule(new TinyHttpAdapter(), { port: 3000 })
 }

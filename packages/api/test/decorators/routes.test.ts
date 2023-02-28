@@ -1,4 +1,4 @@
-import { Controller, Get, Post } from '../../src'
+import { Controller, Get, Post } from '../../src/index'
 import { MetadataManager } from '../../src/MetadataManager'
 
 describe('controllers decorator', () => {

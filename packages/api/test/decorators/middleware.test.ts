@@ -1,6 +1,5 @@
-import { Controller, Get, MiddlewarePosition } from '../../src'
+import { Controller, Get, MiddlewarePosition, MetadataManager } from '../../src/index'
 import { AfterMiddleware, BeforeMiddleware } from '../../src/decorators/http/middleware.decorator'
-import { MetadataManager } from '../../src/MetadataManager'
 
 describe('controllers decorator', () => {
   const CONTROLLER_NAME = 'MiddlewareDecoratorTest'

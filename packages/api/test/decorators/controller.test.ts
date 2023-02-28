@@ -1,5 +1,4 @@
-import { Controller, Get } from '../../src'
-import { MetadataManager } from '../../src/MetadataManager'
+import { Controller, Get, MetadataManager } from '../../src/index'
 
 describe('controllers decorator', () => {
   const CONTROLLER_NAME = 'ControllerDecoratorTest'

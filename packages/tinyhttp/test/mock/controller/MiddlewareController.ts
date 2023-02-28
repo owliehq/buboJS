@@ -1,7 +1,7 @@
 import { Controller, DefaultActions, Get, AfterMiddleware, BeforeMiddleware, Body } from '@bubojs/api'
 import { MiddlewareRepository } from '../repository/MiddlewareRepository'
 
-@Controller('middlewares', { repository: new MiddlewareRepository() })
+@Controller({ overrideRouteName: 'middlewares', repository: new MiddlewareRepository() })
 export class MiddlewareController {
   [DefaultActions.GET_MANY]() {}
 
@@ -15,7 +15,7 @@ export class MiddlewareController {
     next()
   })
   @Get('/beforeMiddleware')
-  sendBeforeMiddleware(@Body body: any) {
+  sendBeforeMiddleware(@Body() body: any) {
     const { test } = body
     return test
   }
@@ -31,7 +31,7 @@ export class MiddlewareController {
     next()
   })
   @Get('/beforeMiddlewares')
-  sendBeforeMiddlewares(@Body body: any) {
+  sendBeforeMiddlewares(@Body() body: any) {
     const { test } = body
     return test
   }
@@ -46,7 +46,7 @@ export class MiddlewareController {
     next()
   })
   @Get('/middlewares')
-  sendMiddlewares(@Body body: any) {
+  sendMiddlewares(@Body() body: any) {
     const { test } = body
     return test + ' content'
   }

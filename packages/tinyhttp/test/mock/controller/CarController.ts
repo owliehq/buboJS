@@ -12,7 +12,7 @@ import {
   ObjectType
 } from '@bubojs/api'
 import { CarsService, WheelsService } from '../services'
-@Controller('cars')
+@Controller({ overrideRouteName: 'cars' })
 export class CarController {
   @Inject('CarsService') public carsService: ObjectType<CarsService>
   @Inject public wheelsService: WheelsService
@@ -73,12 +73,12 @@ export class CarController {
   }
 
   @Post('/:id/wheels', { bodyFormat: BodyFormat.RAW })
-  createWheel(@Body body: any) {
+  createWheel(@Body() body: any) {
     return 'good year ' + body
   }
 
   @Post('/', { bodyFormat: BodyFormat.JSON })
-  createCarJson(@Body body: any) {
+  createCarJson(@Body() body: any) {
     return { ...body, id: 100 }
   }
 }

@@ -1,4 +1,4 @@
-import { app, Controller, Inject, ObjectType, Service } from '../../src'
+import { app, Controller, Inject, ObjectType, Service } from '../../src/index'
 import { MetadataManager } from '../../src/MetadataManager'
 
 beforeAll(() => {

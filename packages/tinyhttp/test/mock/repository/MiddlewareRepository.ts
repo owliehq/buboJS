@@ -1,4 +1,4 @@
-import { BuboRepository } from '@bubojs/api'
+import { BuboRepository, DefaultActions } from '@bubojs/api'
 
 export class DBMiddlewareRepository<Type extends string> implements BuboRepository<Type> {
   private readonly model: any
@@ -40,6 +40,10 @@ export class DBMiddlewareRepository<Type extends string> implements BuboReposito
 
   async findAll(...any: any[]): Promise<Type[]> {
     return ['findAll'] as unknown as Promise<Type[]>
+  }
+
+  requestOptions(routeType: DefaultActions): (req: any) => any {
+    return req => []
   }
 }
 
