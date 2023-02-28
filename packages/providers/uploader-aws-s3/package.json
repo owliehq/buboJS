@@ -1,6 +1,9 @@
 {
   "name": "@bubojs/uploader-aws-s3",
   "version": "0.1.0",
+  "author": "Owlie",
+  "license": "MIT",
+  "module": "Esnext",
   "repository": {
     "type": "git",
     "url": "https://github.com/owliehq/buboJS.git",
@@ -30,9 +33,6 @@
     "busboy": "1.6.0",
     "mime-types": "^2.1.35"
   },
-  "author": "Owlie",
-  "license": "MIT",
-  "module": "Esnext",
   "devDependencies": {
     "@types/busboy": "^1.5.0",
     "@types/mime-types": "^2.1.1",

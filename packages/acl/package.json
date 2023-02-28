@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "type": "module",
+  "module": "Esnext",
   "exports": {
     "./package.json": "./package.json",
     ".": {
@@ -20,8 +22,6 @@
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "type": "module",
-  "module": "Esnext",
   "scripts": {
     "build": "echo 'acl' && rimraf ./dist && tsc -p tsconfig.build.json"
   },

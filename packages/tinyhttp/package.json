@@ -1,6 +1,8 @@
 {
   "name": "@bubojs/tinyhttp",
   "version": "0.1.15",
+  "author": "Owlie",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/owliehq/buboJS.git",

@@ -21,7 +21,7 @@ jobs:
       - uses: actions/setup-node@v3
         name: Install node.js
         with:
-          node-version: '16.x'
+          node-version: '18.x'
           registry-url: 'https://registry.npmjs.org'
 
       - run: yarn set version berry
@@ -36,7 +36,7 @@ jobs:
         name: building packages
         working-directory: 'packages/${{ inputs.package_name}}'
 
-      - run: npm run semantic-release
+      - run: npx semantic-release
         name: 'publishing ${{ inputs.package_name}}'
         working-directory: 'packages/${{ inputs.package_name}}'
         env:

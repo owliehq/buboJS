@@ -3,14 +3,14 @@
   "version": "0.1.0",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "author": "Owlie",
+  "license": "MIT",
   "exports": {
     "./package.json": "./package.json",
     ".": {
       "import": "./dist/index.js"
     }
   },
-  "author": "Owlie",
-  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/owliehq/buboJS.git",

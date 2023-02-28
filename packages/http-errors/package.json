@@ -18,15 +18,15 @@
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
+  "scripts": {
+    "build": "echo 'http-error' && rimraf ./dist && tsc -p tsconfig.build.json"
+  },
   "types": "./dist/index.d.ts",
   "exports": {
     "./package.json": "./package.json",
     ".": {
       "import": "./dist/index.js"
     }
-  },
-  "scripts": {
-    "build": "echo 'http-error' && rimraf ./dist && tsc -p tsconfig.build.json"
   },
   "dependencies": {
     "ts-custom-error": "^3.2.0"
