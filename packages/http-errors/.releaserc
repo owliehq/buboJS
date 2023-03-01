@@ -1,4 +1,7 @@
 {
+  "branches": [
+    "main"
+  ],
   "tagFormat": "http-errors-v${version}",
   "plugins": [
     [
