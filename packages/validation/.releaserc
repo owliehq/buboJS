@@ -1,4 +1,7 @@
 {
+  "branches": [
+    "main"
+  ],
   "tagFormat": "validation-v${version}",
   "plugins": [
     [
