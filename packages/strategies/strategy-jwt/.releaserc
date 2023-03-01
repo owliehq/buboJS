@@ -1,4 +1,7 @@
 {
+  "branches": [
+    "main"
+  ],
   "tagFormat": "strategy-jwt-v${version}",
   "plugins": [
     [
