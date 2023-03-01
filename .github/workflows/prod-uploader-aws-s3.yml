@@ -13,3 +13,4 @@ jobs:
       package_name: providers/uploader-aws-s3
     secrets:
       npm_token: ${{ secrets.NPM_TOKEN}}
+      publish_token: ${{ secrets.PUBLISH_TOKEN}}

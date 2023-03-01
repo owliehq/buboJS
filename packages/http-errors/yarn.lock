@@ -36,9 +36,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bubojs/http-errors@workspace:."
   dependencies:
+    "@semantic-release/commit-analyzer": ^9.0.2
+    "@semantic-release/git": ^10.0.1
+    "@semantic-release/github": ^8.0.7
+    "@semantic-release/npm": ^9.0.2
     "@types/node": ^18.6.4
     rimraf: ^3.0.2
-    semantic-release: ^20.1.1
+    semantic-release: 20.0.4
     ts-custom-error: ^3.2.0
     typescript: ^4.7.4
   languageName: unknown
@@ -474,7 +478,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@semantic-release/github@npm:^8.0.0":
+"@semantic-release/git@npm:^10.0.1":
+  version: 10.0.1
+  resolution: "@semantic-release/git@npm:10.0.1"
+  dependencies:
+    "@semantic-release/error": ^3.0.0
+    aggregate-error: ^3.0.0
+    debug: ^4.0.0
+    dir-glob: ^3.0.0
+    execa: ^5.0.0
+    lodash: ^4.17.4
+    micromatch: ^4.0.0
+    p-reduce: ^2.0.0
+  peerDependencies:
+    semantic-release: ">=18.0.0"
+  checksum: b0a346acaf13d1bbd8d8d895bb0dee025dd6d4742769b5dd875018fff8fcfe0f5414299dbe1ed026e53b8f8b04eeceef49a3d56c5f6506016c656df95d2ced04
+  languageName: node
+  linkType: hard
+
+"@semantic-release/github@npm:^8.0.0, @semantic-release/github@npm:^8.0.7":
   version: 8.0.7
   resolution: "@semantic-release/github@npm:8.0.7"
   dependencies:
@@ -500,7 +522,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@semantic-release/npm@npm:^9.0.0":
+"@semantic-release/npm@npm:^9.0.0, @semantic-release/npm@npm:^9.0.2":
   version: 9.0.2
   resolution: "@semantic-release/npm@npm:9.0.2"
   dependencies:
@@ -1443,23 +1465,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"execa@npm:^7.0.0":
-  version: 7.0.0
-  resolution: "execa@npm:7.0.0"
-  dependencies:
-    cross-spawn: ^7.0.3
-    get-stream: ^6.0.1
-    human-signals: ^4.3.0
-    is-stream: ^3.0.0
-    merge-stream: ^2.0.0
-    npm-run-path: ^5.1.0
-    onetime: ^6.0.0
-    signal-exit: ^3.0.7
-    strip-final-newline: ^3.0.0
-  checksum: be7c7b6d1e5473f628e46888b0cf8279da483c1a6000dd494a2059cc26591ded57ba46be1c9bdde1ec895e7eb8b18911174aba425cd971d41d140a9405da9a02
-  languageName: node
-  linkType: hard
-
 "fast-glob@npm:^3.2.9":
   version: 3.2.12
   resolution: "fast-glob@npm:3.2.12"
@@ -1835,13 +1840,6 @@ __metadata:
   version: 3.0.1
   resolution: "human-signals@npm:3.0.1"
   checksum: f252a7769c8094a5c9dc6772816bdb417b188820b04c8b42d0fc468e03a0ba905b1dd07afabe9385cc83504af1ccc2b985cd1e4aeeeb8e0029896c5af2e6f354
-  languageName: node
-  linkType: hard
-
-"human-signals@npm:^4.3.0":
-  version: 4.3.0
-  resolution: "human-signals@npm:4.3.0"
-  checksum: 662b976b1063a8afb8fd7fa50bde6975997e17ea6ceba2aad54aacf1dc239a2cd7d14d27b3ceca0c6288627f4b45c56c2c89618455ff52cd9377c02d6328cd7c
   languageName: node
   linkType: hard
 
@@ -2592,7 +2590,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"micromatch@npm:^4.0.2, micromatch@npm:^4.0.4":
+"micromatch@npm:^4.0.0, micromatch@npm:^4.0.2, micromatch@npm:^4.0.4":
   version: 4.0.5
   resolution: "micromatch@npm:4.0.5"
   dependencies:
@@ -3286,6 +3284,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"p-reduce@npm:^2.0.0":
+  version: 2.1.0
+  resolution: "p-reduce@npm:2.1.0"
+  checksum: 99b26d36066a921982f25c575e78355824da0787c486e3dd9fc867460e8bf17d5fb3ce98d006b41bdc81ffc0aa99edf5faee53d11fe282a20291fb721b0cb1c7
+  languageName: node
+  linkType: hard
+
 "p-reduce@npm:^3.0.0":
   version: 3.0.0
   resolution: "p-reduce@npm:3.0.0"
@@ -3844,9 +3849,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semantic-release@npm:^20.1.1":
-  version: 20.1.1
-  resolution: "semantic-release@npm:20.1.1"
+"semantic-release@npm:20.0.4":
+  version: 20.0.4
+  resolution: "semantic-release@npm:20.0.4"
   dependencies:
     "@semantic-release/commit-analyzer": ^9.0.2
     "@semantic-release/error": ^3.0.0
@@ -3857,7 +3862,7 @@ __metadata:
     cosmiconfig: ^8.0.0
     debug: ^4.0.0
     env-ci: ^8.0.0
-    execa: ^7.0.0
+    execa: ^6.1.0
     figures: ^5.0.0
     find-versions: ^5.1.0
     get-stream: ^6.0.0
@@ -3878,7 +3883,7 @@ __metadata:
     yargs: ^17.5.1
   bin:
     semantic-release: bin/semantic-release.js
-  checksum: d70209d56e3bd4ad79aa309b8ccf313a10c18b7ed68b0706ec92feecde0f7f13e32cbb24f7cf963751c957639832eb025fcce846ba09a662e00be03c4c352a18
+  checksum: b8cdfae4dfad1dcdcec84452b2736c7419b34950c46e9c8bb4872829d70c044c8ddccf30a449d1ba030f48c66f82559675a6d9bb1681b2e167ecd75e858025b7
   languageName: node
   linkType: hard
 

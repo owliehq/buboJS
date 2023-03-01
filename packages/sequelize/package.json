@@ -29,12 +29,12 @@
     "dist"
   ],
   "dependencies": {
+    "@bubojs/api": "^0.1.0",
+    "@bubojs/http-errors": "^0.1.8",
     "@semantic-release/commit-analyzer": "^9.0.2",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^8.0.7",
     "@semantic-release/npm": "^9.0.2",
-    "@bubojs/api": "^0.1.0",
-    "@bubojs/http-errors": "^0.1.8",
     "sequelize": "^6.0.0",
     "sequelize-typescript": "^2.0.0"
   },

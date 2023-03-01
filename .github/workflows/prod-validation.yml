@@ -13,3 +13,4 @@ jobs:
       package_name: validation
     secrets:
       npm_token: ${{ secrets.NPM_TOKEN}}
+      publish_token: ${{ secrets.PUBLISH_TOKEN}}
