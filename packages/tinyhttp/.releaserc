@@ -1,4 +1,7 @@
 {
+  "branches": [
+    "main"
+  ],
   "tagFormat": "tinyhttp-v${version}",
   "plugins": [
     [
