@@ -1,4 +1,7 @@
 {
+  "branches": [
+    "main"
+  ],
   "tagFormat": "acl-v${version}",
   "plugins": [
     [
