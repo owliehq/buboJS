@@ -4,8 +4,8 @@
   "main": "./dist/index.js",
   "author": "owlie",
   "license": "MIT",
-  "module": "Esnext",
   "type": "module",
+  "module": "Esnext",
   "repository": {
     "type": "git",
     "url": "https://github.com/owliehq/buboJS.git",
