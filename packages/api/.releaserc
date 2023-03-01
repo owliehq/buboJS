@@ -24,7 +24,6 @@
         ]
       }
     ],
-    "@semantic-release/github",
     "@semantic-release/npm",
     [
       "@semantic-release/git",
@@ -34,6 +33,7 @@
         ],
         "message": "chore(release): bump \"@bubojs/api\" to ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
       }
-    ]
+    ],
+    "@semantic-release/github"
   ]
 }
