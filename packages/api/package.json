@@ -1,6 +1,6 @@
 {
   "name": "@bubojs/api",
-  "version": "0.1.35",
+  "version": "1.0.3",
   "author": "Owlie",
   "license": "MIT",
   "repository": {
@@ -24,8 +24,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "echo 'api' && rimraf ./dist && tsc -p tsconfig.build.json",
-    "semantic-release": "semantic-release"
+    "build": "echo 'api' && rimraf ./dist && tsc -p tsconfig.build.json"
   },
   "dependencies": {
     "dot-prop": "^7.2.0",

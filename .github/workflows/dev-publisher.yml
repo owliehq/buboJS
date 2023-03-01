@@ -21,18 +21,14 @@ jobs:
       - uses: actions/setup-node@v3
         name: Install node.js
         with:
-          node-version: '16.x'
+          node-version: '18.x'
           registry-url: 'https://registry.npmjs.org'
 
-      - run: yarn set version berry
-        name: upgrade yarn
-        working-directory: 'packages/${{ inputs.package_name }}'
-
-      - run: yarn
+      - run: npm install
         name: installing packages
         working-directory: 'packages/${{ inputs.package_name }}'
 
-      - run: yarn build
+      - run: npm run build
         name: building packages
         working-directory: 'packages/${{ inputs.package_name }}'
 

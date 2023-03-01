@@ -83,7 +83,6 @@
       "json"
     ]
   },
-  "packageManager": "yarn@3.2.2",
   "dependencies": {
     "http": "^0.0.1-security",
     "https": "^1.0.0"
