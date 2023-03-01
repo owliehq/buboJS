@@ -1,4 +1,7 @@
 {
+  "branches": [
+    "main"
+  ],
   "tagFormat": "sequelize-v${version}",
   "plugins": [
     [

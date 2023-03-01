@@ -1,4 +1,7 @@
 {
+  "branches": [
+    "main"
+  ],
   "tagFormat": "api-v${version}",
   "plugins": [
     [
